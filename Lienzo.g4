@@ -7,10 +7,10 @@ program:
 	;
 
 materiales:
-	MATERIALES '{' (INTEGER_VALUE figura color LLAMADO NOMBRE_PROPIO DE expresion POR expresion ';')* '}'
+	MATERIALES '{' (INTEGER_VALUE tipoFigura color LLAMADO NOMBRE_PROPIO DE expresion POR expresion ';')* '}'
 	;
 
-figura:
+tipoFigura:
 	OVALO
 	| RECTANGULO
 	| TRIANGULO
@@ -42,7 +42,7 @@ tamanoLienzo:
 	;
 
 posicion:
-	POSICION coord DE NOMBRE_PROPIO '=' expresion
+	POSICION coord DE figura '=' expresion
 	;
 
 coord:
@@ -95,7 +95,11 @@ mientrasQue:
 	;
 
 cambioColor:
-	COLOR DE NOMBRE_PROPIO '=' color
+	COLOR DE figura '=' color
+	;
+
+figura:
+	NOMBRE_PROPIO ('[' expresion ']')?
 	;
 
 condicional:
@@ -103,8 +107,9 @@ condicional:
 	;
 
 llamadaFuncion:
-	ID '(' ')'
+	ID '(' (ssexpresion (',' ssexpresion)*)? ')'
 	;
+	
 expresion:
 	termino (('+'|'-') expresion)?
 	;
@@ -130,7 +135,7 @@ funciones:
 	;
 	
 func:
-	(tipo | NADA) ID '(' (tipo (MODIFICABLE)? ID)* ')' '{' (instruccion)* '}'
+	(tipo | NADA) ID '(' (tipo (MODIFICABLE)? ID (',' tipo (MODIFICABLE)? ID)*)? ')' '{' (instruccion)* '}'
 	;
 	
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
@@ -179,5 +184,6 @@ FALSO : 'falso' ;
 MODIFICABLE : 'modificable' ;
 INTEGER_VALUE : [0-9]+ ;
 STRING_VALUE: '"' ~('"')* '"' ;
+
 NOMBRE_PROPIO : [A-Z][A-Za-z]* ;
-ID : [a-z][A-Za-z]+ ;
+ID : [a-z][A-Za-z]*  ;

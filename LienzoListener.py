@@ -35,12 +35,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#figura.
-    def enterFigura(self, ctx:LienzoParser.FiguraContext):
+    # Enter a parse tree produced by LienzoParser#tipoFigura.
+    def enterTipoFigura(self, ctx:LienzoParser.TipoFiguraContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#figura.
-    def exitFigura(self, ctx:LienzoParser.FiguraContext):
+    # Exit a parse tree produced by LienzoParser#tipoFigura.
+    def exitTipoFigura(self, ctx:LienzoParser.TipoFiguraContext):
         pass
 
 
@@ -176,6 +176,15 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#cambioColor.
     def exitCambioColor(self, ctx:LienzoParser.CambioColorContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#figura.
+    def enterFigura(self, ctx:LienzoParser.FiguraContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#figura.
+    def exitFigura(self, ctx:LienzoParser.FiguraContext):
         pass
 
 
