@@ -17,12 +17,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#dibujo.
-    def enterDibujo(self, ctx:LienzoParser.DibujoContext):
+    # Enter a parse tree produced by LienzoParser#program.
+    def enterProgram(self, ctx:LienzoParser.ProgramContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#dibujo.
-    def exitDibujo(self, ctx:LienzoParser.DibujoContext):
+    # Exit a parse tree produced by LienzoParser#program.
+    def exitProgram(self, ctx:LienzoParser.ProgramContext):
         pass
 
 
@@ -185,6 +185,15 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#condicional.
     def exitCondicional(self, ctx:LienzoParser.CondicionalContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#llamadaFuncion.
+    def enterLlamadaFuncion(self, ctx:LienzoParser.LlamadaFuncionContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#llamadaFuncion.
+    def exitLlamadaFuncion(self, ctx:LienzoParser.LlamadaFuncionContext):
         pass
 
 

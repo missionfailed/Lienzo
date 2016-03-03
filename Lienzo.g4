@@ -1,8 +1,8 @@
 grammar Lienzo;
 
-start_rule: dibujo;
+start_rule: program;
 
-dibujo:
+program:
 	DIBUJO '{' materiales escenario funciones animacion '}'
 	;
 
@@ -42,7 +42,7 @@ tamanoLienzo:
 	;
 
 posicion:
-	POSICION coord DE ID '=' expresion
+	POSICION coord DE NOMBRE_PROPIO '=' expresion
 	;
 
 coord:
@@ -64,11 +64,12 @@ instruccion:
 	| cambioColor
 	| posicion
 	| condicional
+	| llamadaFuncion
 	) ';'
 	;
 
 asignacion:
-	ID EQUALS expresion
+	ID '=' ssexpresion
 	;
 
 declaracion:
@@ -82,7 +83,7 @@ tipo:
 	;
 	
 mostrarMensaje:
-	MOSTRAR ID EN expresion ',' expresion
+	MOSTRAR (ID | STRING_VALUE) EN expresion ',' expresion
 	;
 
 dormir:
@@ -90,7 +91,7 @@ dormir:
 	;
 	
 mientrasQue:
-	MIENTRAS QUE '(' expresion ')' '{' (instruccion)* '}'
+	MIENTRAS QUE '(' ssexpresion ')' '{' (instruccion)* '}'
 	;
 
 cambioColor:
@@ -98,9 +99,12 @@ cambioColor:
 	;
 
 condicional:
-	SI '(' expresion ')' '{' (instruccion)* '}' (SINO '{' (instruccion)* '}')?
+	SI '(' ssexpresion ')' '{' (instruccion)* '}' (SINO '{' (instruccion)* '}')?
 	;
 
+llamadaFuncion:
+	ID '(' ')'
+	;
 expresion:
 	termino (('+'|'-') expresion)?
 	;
@@ -110,7 +114,7 @@ termino:
 	;
 
 factor:
-	('!')? (ID | CONSTANTE | '(' expresion ')')
+	('!')? (ID | INTEGER_VALUE | VERDADERO | FALSO | STRING_VALUE | '(' expresion ')')
 	;
 
 sexpresion:
@@ -126,7 +130,7 @@ funciones:
 	;
 	
 func:
-	(tipo | NADA) ID '(' (tipo (MODIFICABLE)? ID)* ')' '{' instruccion '}'
+	(tipo | NADA) ID '(' (tipo (MODIFICABLE)? ID)* ')' '{' (instruccion)* '}'
 	;
 	
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
@@ -172,9 +176,8 @@ MOSTRAR : 'mostrar' ;
 NADA : 'nada' ;
 VERDADERO : 'verdadero' ;
 FALSO : 'falso' ;
-CONSTANTE_BOOLEANA : VERDADERO | FALSO ;
-CONSTANTE : INTEGER_VALUE | CONSTANTE_BOOLEANA ;
 MODIFICABLE : 'modificable' ;
-INTEGER_VALUE: [0-9]+ ;
+INTEGER_VALUE : [0-9]+ ;
+STRING_VALUE: '"' ~('"')* '"' ;
 NOMBRE_PROPIO : [A-Z][A-Za-z]* ;
 ID : [a-z][A-Za-z]+ ;

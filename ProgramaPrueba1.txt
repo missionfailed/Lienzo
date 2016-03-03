@@ -1,39 +1,36 @@
 dibujo {
 	materiales {
 		1 rectangulo verde llamado Izquierdo de 8 por 16;
-		2 circulos verdes llamados Ojos de 3 por 3;
+		4 ovalo verde llamado Ojos de 3 por 3;
 	}
 	
 	escenario {
-		color de lienzo = celeste;
+		color de lienzo = rojo;
 		tamano de lienzo = 30 por 30;
-		
-		posicion de Izquierdo = 1, 1;
+		posicion x de Izquierdo = 1;
+		posicion y de Izquierdo = 1;
 	}
-
+	
+	funciones {
+		nada cambiarBanderaColor() {
+			color de Izquierdo = rojo;
+			mostrar "hola" en 3, 4;
+		}
+	}
+	
 	animacion {
-		color de Ojos(1) = azul;
 		numero coordX = 3;
-		numero coordY = 4;
-		mensaje hola = "hola";
-		mensaje adios = "adios";	
+		mensaje perro = "Hola";
 		condicion mexico = verdadero;
 		mientras que (verdadero) {
 			si (mexico) {
-				cambiarBandera(verde, blanco, rojo);
+				cambiarBandera();
 			}
-			siNo {
-				cambiarBandera(azul, blanco, rojo);
+			sino {
+				cambiarBandera();
 			};
-			mexico = no mexico;
+		
 			dormir 1000;
-		}
-	}
-
-	procedimientos {
-		void cambiarBanderaColor(color C1, color C2, color C3) {
-			color de Izquierdo = C1;
-		}
-
+		};
 	}
 }
