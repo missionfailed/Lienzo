@@ -1,0 +1,39 @@
+dibujo {
+	materiales {
+		1 rectangulo verde llamado Izquierdo de 8 por 16;
+		2 circulos verdes llamados Ojos de 3 por 3;
+	}
+	
+	escenario {
+		color de lienzo = celeste;
+		tamano de lienzo = 30 por 30;
+		
+		posicion de Izquierdo = 1, 1;
+	}
+
+	animacion {
+		color de Ojos(1) = azul;
+		numero coordX = 3;
+		numero coordY = 4;
+		mensaje hola = "hola";
+		mensaje adios = "adios";	
+		condicion mexico = verdadero;
+		mientras que (verdadero) {
+			si (mexico) {
+				cambiarBandera(verde, blanco, rojo);
+			}
+			siNo {
+				cambiarBandera(azul, blanco, rojo);
+			};
+			mexico = no mexico;
+			dormir 1000;
+		}
+	}
+
+	procedimientos {
+		void cambiarBanderaColor(color C1, color C2, color C3) {
+			color de Izquierdo = C1;
+		}
+
+	}
+}
