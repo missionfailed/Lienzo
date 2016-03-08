@@ -5,6 +5,11 @@ if __name__ is not None and "." in __name__:
 else:
     from LienzoParser import LienzoParser
 
+from tables import VarsTable
+
+varsTable = VarsTable()
+
+
 # This class defines a complete listener for a parse tree produced by LienzoParser.
 class LienzoListener(ParseTreeListener):
 
@@ -32,6 +37,15 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#materiales.
     def exitMateriales(self, ctx:LienzoParser.MaterialesContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#material.
+    def enterMaterial(self, ctx:LienzoParser.MaterialContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#material.
+    def exitMaterial(self, ctx:LienzoParser.MaterialContext):
         pass
 
 

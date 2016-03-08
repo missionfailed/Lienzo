@@ -1,13 +1,31 @@
 grammar Lienzo;
 
+options {
+    language=Python3;
+}
+
+@header {
+from tables import VarsTable
+
+varsTable = VarsTable()
+}
+
 start_rule: program;
 
-program:
+program
+    :
 	DIBUJO '{' materiales escenario funciones animacion '}'
 	;
 
 materiales:
-	MATERIALES '{' (INTEGER_VALUE tipoFigura color LLAMADO NOMBRE_PROPIO DE expresion POR expresion ';')* '}'
+	MATERIALES '{' material* '}'
+	;
+
+material:
+	(INTEGER_VALUE tipoFigura color LLAMADO NOMBRE_PROPIO DE expresion POR expresion ';')
+{
+    
+}
 	;
 
 tipoFigura:
@@ -73,7 +91,7 @@ asignacion:
 	;
 
 declaracion:
-	tipo asignacion
+	tipo ID '=' ssexpresion {varsTable.add($ID.text);}
 	;
 
 tipo:
