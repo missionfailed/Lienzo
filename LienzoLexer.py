@@ -4,8 +4,9 @@ from io import StringIO
 
 
 from tables import VarsTable
-
+from tables import FuncsTable
 varsTable = VarsTable()
+funcsTable = FuncsTable()
 
 
 def serializedATN():

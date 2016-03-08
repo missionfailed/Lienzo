@@ -6,8 +6,9 @@ else:
     from LienzoParser import LienzoParser
 
 from tables import VarsTable
-
+from tables import FuncsTable
 varsTable = VarsTable()
+funcsTable = FuncsTable()
 
 
 # This class defines a complete listener for a parse tree produced by LienzoParser.
@@ -280,6 +281,15 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#func.
     def exitFunc(self, ctx:LienzoParser.FuncContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#tipoFunc.
+    def enterTipoFunc(self, ctx:LienzoParser.TipoFuncContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#tipoFunc.
+    def exitTipoFunc(self, ctx:LienzoParser.TipoFuncContext):
         pass
 
 

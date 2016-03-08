@@ -6,8 +6,9 @@ options {
 
 @header {
 from tables import VarsTable
-
+from tables import FuncsTable
 varsTable = VarsTable()
+funcsTable = FuncsTable()
 }
 
 start_rule: program;
@@ -91,7 +92,7 @@ asignacion:
 	;
 
 declaracion:
-	tipo ID '=' ssexpresion {varsTable.add($ID.text);}
+	tipo ID '=' ssexpresion {varsTable.add($ID.text, $tipo.text)}
 	;
 
 tipo:
@@ -153,8 +154,13 @@ funciones:
 	;
 	
 func:
-	(tipo | NADA) ID '(' (tipo (MODIFICABLE)? ID (',' tipo (MODIFICABLE)? ID)*)? ')' '{' (instruccion)* '}'
+	tipoFunc ID {funcsTable.add($ID.text)}
+    '(' (tipo (MODIFICABLE)? ID (',' tipo (MODIFICABLE)? ID)*)? ')' '{' (instruccion)* '}'
 	;
+   
+tipoFunc:
+    tipo | NADA
+    ;
 	
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
 
