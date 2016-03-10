@@ -24,7 +24,7 @@ dibujo {
 	}
 	
 	animacion {
-		numero perro = 3;
+		numero coordX = 3;
 		mensaje coordX = "Hola";
 		condicion mexico = verdadero;
         posicion x de Ojos [ 4 ] = 3;
