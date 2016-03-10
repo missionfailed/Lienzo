@@ -1052,6 +1052,7 @@ class LienzoParser ( Parser ):
 
             global currentFunctionName
             currentFunctionName = "animacion"
+            namespaceTable.addFunction(currentFunctionName, "nada")
 
             self.state = 146
             self.match(LienzoParser.T__0)

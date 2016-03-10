@@ -75,6 +75,7 @@ animacion:
 	ANIMACION {
 global currentFunctionName
 currentFunctionName = "animacion"
+namespaceTable.addFunction(currentFunctionName, "nada")
 } '{' cuerpo '}'
 	;
 
