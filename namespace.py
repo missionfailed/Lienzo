@@ -1,3 +1,5 @@
+import sys
+
 class NamespaceTable:
     
     def __init__(self):
