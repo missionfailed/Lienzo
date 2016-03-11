@@ -6,10 +6,10 @@ else:
     from LienzoParser import LienzoParser
 
 from namespace import NamespaceTable
-import sys
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
+currentParameterList = []
 
 
 # This class defines a complete listener for a parse tree produced by LienzoParser.
@@ -291,15 +291,6 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#tipoFunc.
     def exitTipoFunc(self, ctx:LienzoParser.TipoFuncContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#parametros.
-    def enterParametros(self, ctx:LienzoParser.ParametrosContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#parametros.
-    def exitParametros(self, ctx:LienzoParser.ParametrosContext):
         pass
 
 

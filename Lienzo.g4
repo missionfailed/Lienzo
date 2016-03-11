@@ -4,14 +4,12 @@ options {
     language=Python3;
 }
 
-// tokens section
-
 @header {
 from namespace import NamespaceTable
-import sys
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
+currentParameterList = []
 }
 
 program:
@@ -73,8 +71,9 @@ animacion:
 	ANIMACION {
 global currentFunctionName
 currentFunctionName = "animacion"
-namespaceTable.addFunction("animacion", "nada")
-} '{' cuerpo '}'
+namespaceTable.addFunction("animacion", "nada", [])
+} 
+'{' cuerpo '}'
 	;
 
 cuerpo:
@@ -125,7 +124,7 @@ dormir:
 	;
 	
 mientrasQue:
-	MIENTRAS QUE '(' ssexpresion ')' '{' (instruccion)* '}'
+	MIENTRAS QUE '(' ssexpresion ')' '{' instruccion* '}'
 	;
 
 cambioColor:
@@ -173,27 +172,30 @@ funciones:
 	;
 	
 func:
-	tipoFunc ID {
+	tipoFunc ID '(' (parametro (',' parametro)*)? ')' {
 global currentFunctionName
+global currentParameterList
 currentFunctionName = $ID.text
-if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text):
+if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, currentParameterList):
     print("Error: linea", $ID.line, ": Funcion", $ID.text, "ya fue declarada")
 }
-    '(' parametros ')' '{' cuerpo '}'
+'{' cuerpo '}'
 	;
    
 tipoFunc:
     tipo | NADA
     ;
 
-parametros:
-    (parametro (',' parametro)*)?
-    ;
-
 parametro:
     tipo MODIFICABLE? ID {
-if not namespaceTable.addParameter($ID.text, $tipo.text, $MODIFICABLE.text, currentFunctionName):
-    print("Error: linea", $ID.text, ": Parametro", $ID.text, "ya fue declarado")
+global currentParameterList
+if $ID.text in [parameter[0] for parameter in currentParameterList]:
+    print("Error: linea", $ID.line, ": Parametro", $ID.text, "ya fue declarado")
+else:
+    modificable = False
+    if $MODIFICABLE.text:
+        modificable = True
+    currentParameterList.append(($ID.text, $tipo.text, modificable))
 }
     ;
     

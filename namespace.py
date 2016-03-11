@@ -51,7 +51,7 @@ class NamespaceTable:
 				
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
-    def addFunction(self, nameOfFunction, typeOfFunction, numberOfParameters):	
+    def addFunction(self, nameOfFunction, typeOfFunction, parameterList):	
         if searchFunction(nameOfFunction)
             return False
         else:
@@ -72,19 +72,6 @@ class NamespaceTable:
 				return True;
 			else
 				return False;
-    
-    """metodo que agrega un parametro a la tabla de variables en el ambito de la funcion dada.
-    Regresa True si la operacion fue exitosa, False si no."""
-    def addParameter(self, nameOfParameter, typeOfParameter, mode, nameOfFunction):
-        if nameOfParameter in self.tabla[nameOfFunction]:
-            return False
-        else:
-            self.tabla[nameOfFunction][nameOfParameter] = typeOfParameter
-            #if (mode == None):
-            #    print("parametro", nameOfParameter, "de tipo", typeOfParameter, "por valor agregado en el ambito de", nameOfFunction)
-            #else:
-            #   print("parametro", nameOfParameter, "de tipo", typeOfParameter, "por referencia agregado en el ambito de", nameOfFunction)
-            return True
     
     """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
     def variableExists(self, nameOfVariable, nameOfFunction):
