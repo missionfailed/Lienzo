@@ -8,16 +8,14 @@ options {
 
 @header {
 from namespace import NamespaceTable
-
+import sys
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
 }
 
-start_rule: program;
-
 program:
-	DIBUJO '{' materiales escenario funciones animacion '}'
+	DIBUJO '{' materiales escenario funciones animacion '}' EOF
 	;
 
 materiales:
@@ -75,7 +73,7 @@ animacion:
 	ANIMACION {
 global currentFunctionName
 currentFunctionName = "animacion"
-namespaceTable.addFunction(currentFunctionName, "nada")
+namespaceTable.addFunction("animacion", "nada")
 } '{' cuerpo '}'
 	;
 
@@ -84,7 +82,11 @@ cuerpo:
     ;
 
 declaracion:
-	tipo ID '=' ssexpresion ';' {namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)}
+	tipo ID '=' ssexpresion ';' 
+{
+if not namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName):
+    print("Error: linea", $ID.line, ": Variable", $ID.text, "ya fue declarada")
+}
 	;
 
 instruccion:
@@ -102,6 +104,10 @@ instruccion:
 
 asignacion:
 	ID '=' ssexpresion
+{
+if not namespaceTable.variableExists($ID.text, currentFunctionName):
+    print("Error: linea", $ID.line, ": Variable", $ID.text, "no ha sido declarada")
+}
 	;
 
 tipo:
@@ -136,6 +142,10 @@ condicional:
 
 llamadaFuncion:
 	ID '(' (ssexpresion (',' ssexpresion)*)? ')'
+{ 
+if not namespaceTable.functionExists($ID.text):
+    print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, "inexistente")
+}
 	;
 	
 expresion:
@@ -166,7 +176,8 @@ func:
 	tipoFunc ID {
 global currentFunctionName
 currentFunctionName = $ID.text
-namespaceTable.addFunction(currentFunctionName, $tipoFunc.text)
+if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text):
+    print("Error: linea", $ID.line, ": Funcion", $ID.text, "ya fue declarada")
 }
     '(' parametros ')' '{' cuerpo '}'
 	;
@@ -181,7 +192,8 @@ parametros:
 
 parametro:
     tipo MODIFICABLE? ID {
-namespaceTable.addParameter($ID.text, $tipo.text, $MODIFICABLE.text, currentFunctionName)
+if not namespaceTable.addParameter($ID.text, $tipo.text, $MODIFICABLE.text, currentFunctionName):
+    print("Error: linea", $ID.text, ": Parametro", $ID.text, "ya fue declarado")
 }
     ;
     

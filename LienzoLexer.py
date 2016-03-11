@@ -4,7 +4,7 @@ from io import StringIO
 
 
 from namespace import NamespaceTable
-
+import sys
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""

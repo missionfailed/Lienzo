@@ -6,7 +6,7 @@ import sys
 
 class DibujoPrinter(LienzoListener):
 	def exitProgram(self, ctx):
-		print("Programa parseado con exito")
+		print("Revision terminada")
 
 def main(argv):
     input = FileStream(argv[1])

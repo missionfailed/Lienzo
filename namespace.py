@@ -1,67 +1,43 @@
-import sys
-
 class NamespaceTable:
     
     def __init__(self):
-        self.tabla = {}
+        self.tabla = {} 
     
-    """metodo que se llama cuando se lee que se esta declarando una funcion en el programa prueba
-    nameOfFunction = nombre de la funcion
-    typeOfFunction = tipo de retorno de la funcion
-    """
+    """Metodo queagrega una funcion a la tabla de funciones. 
+    Regresa True si la operacion fue exitosa, False si no."""
     def addFunction(self, nameOfFunction, typeOfFunction):
         if nameOfFunction in self.tabla:
-            error("Funcion ya existe")
+            return False
         else:
             self.tabla[nameOfFunction] = {}
-            print("funcion", nameOfFunction, "de tipo", typeOfFunction, "agregada")
+            return True
     
-    """metodo que se llama cuando se lee que se esta declarando una variable
-    nameOfFunction es el nombre de la funcion en cuyo cuerpo se esta declarando esa variable"""
+    """Metodo que agrega una variable a la tabla de variables en el ambito de la funcion dada.
+    Regresa True si la operacion fue exitosa, False si no."""
     def addVariable(self, nameOfVariable, typeOfVariable, nameOfFunction):
         if nameOfVariable in self.tabla[nameOfFunction]:
-            error("Variable ya existe")
+            return False
         else:
             self.tabla[nameOfFunction][nameOfVariable] = typeOfVariable
-            print("variable", nameOfVariable, "de tipo", typeOfVariable, "agregada en el ambito de", nameOfFunction)
+            return True
     
-    """metodo que se llama cuando se lee que una funcion recibe parametros
-    si es por referencia, mode vale 'referencia'
-    nameOfFunction es el nombre de la funcion a la que pertenece el parametro"""
+    """metodo que agrega un parametro a la tabla de variables en el ambito de la funcion dada.
+    Regresa True si la operacion fue exitosa, False si no."""
     def addParameter(self, nameOfParameter, typeOfParameter, mode, nameOfFunction):
         if nameOfParameter in self.tabla[nameOfFunction]:
-            error("Variable ya existe")
+            return False
         else:
             self.tabla[nameOfFunction][nameOfParameter] = typeOfParameter
-            if (mode == None):
-                print("parametro", nameOfParameter, "de tipo", typeOfParameter, "por valor agregado en el ambito de", nameOfFunction)
-            else:
-                print("parametro", nameOfParameter, "de tipo", typeOfParameter, "por referencia agregado en el ambito de", nameOfFunction)
-   
-
-"""class VariablesTable:
+            #if (mode == None):
+            #    print("parametro", nameOfParameter, "de tipo", typeOfParameter, "por valor agregado en el ambito de", nameOfFunction)
+            #else:
+            #   print("parametro", nameOfParameter, "de tipo", typeOfParameter, "por referencia agregado en el ambito de", nameOfFunction)
+            return True
     
-    def __init__(self):
-        self.lista = []
+    """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
+    def variableExists(self, nameOfVariable, nameOfFunction):
+        return nameOfVariable in self.tabla[nameOfFunction]
     
-    def add(self, nameOfVariable, typeOfVariable):
-        if nameOfVariable in self.lista:
-            error("YA FUE DECLARADA")
-        else:
-            self.lista.append(nameOfVariable)
-            print("variable added", nameOfVariable, ", type: ", typeOfVariable)
-            
-class FunctionsTable:
-
-    def __init__(self):
-        self.lista = []
-    
-    def add(self, nameOfFunction, typeOfFunction):
-        if nameOfFunction in self.lista:
-            error("YA FUE DECLARADA")
-        else:
-            self.lista.append(nameOfFunction)
-            print("function added", nameOfFunction, ", type: ", typeOfFunction)
-    
-    
-"""        
+    """Regresa True si la funcion ya fue definida (si ya existe dentro de la tabla de funciones)"""
+    def functionExists(self, nameOfFunction):
+        return nameOfFunction in self.tabla

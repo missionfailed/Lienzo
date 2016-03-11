@@ -6,7 +6,7 @@ else:
     from LienzoParser import LienzoParser
 
 from namespace import NamespaceTable
-
+import sys
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
@@ -14,15 +14,6 @@ currentFunctionName = ""
 
 # This class defines a complete listener for a parse tree produced by LienzoParser.
 class LienzoListener(ParseTreeListener):
-
-    # Enter a parse tree produced by LienzoParser#start_rule.
-    def enterStart_rule(self, ctx:LienzoParser.Start_ruleContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#start_rule.
-    def exitStart_rule(self, ctx:LienzoParser.Start_ruleContext):
-        pass
-
 
     # Enter a parse tree produced by LienzoParser#program.
     def enterProgram(self, ctx:LienzoParser.ProgramContext):
