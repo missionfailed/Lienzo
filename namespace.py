@@ -20,13 +20,11 @@ class Function:
         self.variables.append(auxiliar)
 
     def searchVariable(self,variablename):
-        if variablename in self.variables:
-            return True
-        else:
-            return False
+        for f in self.variables:
+            if variablename==f.name:
+                return True
+        return False
 		
-		
-
 class NamespaceTable:
     
     def __init__(self):
@@ -62,10 +60,7 @@ class NamespaceTable:
     """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
     def variableExists(self, nameOfVariable, nameOfFunction):
         if self.functionExists(nameOfFunction):
-            if self.tabla[nameOfFunction].searchVariable(nameOfVariable):
-                return False
-            else:
-                return True
+            return self.tabla[nameOfFunction].searchVariable(nameOfVariable)
         else:
             return False
 	
