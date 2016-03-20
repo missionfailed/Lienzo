@@ -16,28 +16,27 @@ dibujo {
 			color de Izquierdo = rojo;
 			mostrar "hola" en 3, 4;
 		}
-		
-		nada unaFuncion() {
-			color de Izquierdo = rojo;
-			mostrar "hola" en 3, 4;
-		}
+        
+        mensaje wow(numero modificable a, numero b) {
+            mostrar "ciao" en 4,3;
+        }
 	}
     
 	animacion {
-		numero perro = 3;
-		mensaje perro = "Hola";
-		condicion mexico = verdadero;
-        blabla();
-        coco = 4;
-        posicion x de Ojos [ 4 ] = 3;
-		mientras que (verdadero) {
-			si (mexico) {
-				cambiarBandera(1, 2, 3);
+        numero perro = 3;
+        mensaje equis = "equis";
+		condicion mexico = !(verdadero | falso);
+        condicion dos = !falso & verdadero;
+        wow(2, 4);
+        perro = 4 * 3 / 6 + 9;
+        dos = "perro" == "hola" == falso;
+		mientras que (mexico) {
+			si (dos & (1 == 1)) {
+				unaFuncion(1, 2, 3);
 			}
 			sino {
-				cambiarBandera();
+				unaFuncion();
 			};
-		
 			dormir 1000;
 		};
 	}

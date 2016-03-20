@@ -6,10 +6,66 @@ else:
     from LienzoParser import LienzoParser
 
 from namespace import NamespaceTable
+from collections import defaultdict
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
 currentParameterList = []
+currentArgumentList = []
+
+CONDICION = "condicion"
+MENSAJE = "mensaje"
+NUMERO = "numero"
+
+cubo = {}
+cubo[CONDICION] = {}
+cubo[MENSAJE] = {}
+cubo[NUMERO] = {}
+
+# Condiciones
+cubo[CONDICION]['+'] = defaultdict(lambda: None, {})
+cubo[CONDICION]['-'] = defaultdict(lambda: None, {})
+cubo[CONDICION]['*'] = defaultdict(lambda: None, {})
+cubo[CONDICION]['/'] = defaultdict(lambda: None, {})
+cubo[CONDICION]['%'] = defaultdict(lambda: None, {})
+cubo[CONDICION]['<'] = defaultdict(lambda: None, {})
+cubo[CONDICION]['>'] = defaultdict(lambda: None, {})
+cubo[CONDICION]['<='] = defaultdict(lambda: None, {})
+cubo[CONDICION]['>='] = defaultdict(lambda: None, {})
+cubo[CONDICION]['=='] = defaultdict(lambda: None, {CONDICION : CONDICION})
+cubo[CONDICION]['!='] = defaultdict(lambda: None, {CONDICION : CONDICION})
+cubo[CONDICION]['&'] = defaultdict(lambda: None, {CONDICION : CONDICION})
+cubo[CONDICION]['|'] = defaultdict(lambda: None, {CONDICION : CONDICION})
+
+# Mensajes
+cubo[MENSAJE]['+'] = defaultdict(lambda: None, {MENSAJE : MENSAJE})
+cubo[MENSAJE]['-'] = defaultdict(lambda: None, {})
+cubo[MENSAJE]['*'] = defaultdict(lambda: None, {})
+cubo[MENSAJE]['/'] = defaultdict(lambda: None, {})
+cubo[MENSAJE]['%'] = defaultdict(lambda: None, {})
+cubo[MENSAJE]['<'] = defaultdict(lambda: None, {MENSAJE : CONDICION})
+cubo[MENSAJE]['>'] = defaultdict(lambda: None, {MENSAJE : CONDICION})
+cubo[MENSAJE]['<='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
+cubo[MENSAJE]['>='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
+cubo[MENSAJE]['=='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
+cubo[MENSAJE]['!='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
+cubo[MENSAJE]['&'] = defaultdict(lambda: None, {})
+cubo[MENSAJE]['|'] = defaultdict(lambda: None, {})
+
+# Numero
+cubo[NUMERO]['+'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['-'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['/'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['%'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['>'] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['<='] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['>='] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['=='] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['&'] = defaultdict(lambda: None, {})
+cubo[NUMERO]['|'] = defaultdict(lambda: None, {})
 
 
 # This class defines a complete listener for a parse tree produced by LienzoParser.
@@ -222,6 +278,24 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LienzoParser#ss_expresion.
+    def enterSs_expresion(self, ctx:LienzoParser.Ss_expresionContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#ss_expresion.
+    def exitSs_expresion(self, ctx:LienzoParser.Ss_expresionContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#s_expresion.
+    def enterS_expresion(self, ctx:LienzoParser.S_expresionContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#s_expresion.
+    def exitS_expresion(self, ctx:LienzoParser.S_expresionContext):
+        pass
+
+
     # Enter a parse tree produced by LienzoParser#expresion.
     def enterExpresion(self, ctx:LienzoParser.ExpresionContext):
         pass
@@ -249,21 +323,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#sexpresion.
-    def enterSexpresion(self, ctx:LienzoParser.SexpresionContext):
+    # Enter a parse tree produced by LienzoParser#factor_aux.
+    def enterFactor_aux(self, ctx:LienzoParser.Factor_auxContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#sexpresion.
-    def exitSexpresion(self, ctx:LienzoParser.SexpresionContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#ssexpresion.
-    def enterSsexpresion(self, ctx:LienzoParser.SsexpresionContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#ssexpresion.
-    def exitSsexpresion(self, ctx:LienzoParser.SsexpresionContext):
+    # Exit a parse tree produced by LienzoParser#factor_aux.
+    def exitFactor_aux(self, ctx:LienzoParser.Factor_auxContext):
         pass
 
 
