@@ -7,11 +7,19 @@ options {
 @header {
 from namespace import NamespaceTable
 from collections import defaultdict
+from MemoryRegister import MemoryRegisters
+from cuadruplos import Cuadruplos
+
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
 currentParameterList = []
 currentArgumentList = []
+
+memoryregisters = MemoryRegisters()
+cuadruplos = Cuadruplos()
+
+diccionario_ids = {}
 
 CONDICION = "condicion"
 MENSAJE = "mensaje"
@@ -124,7 +132,8 @@ animacion:
 	ANIMACION {
 global currentFunctionName
 currentFunctionName = "animacion"
-namespaceTable.addFunction("animacion", "nada", [])
+namespaceTable.addFunction(currentFunctionName, "nada", [])
+memoryregisters.newFunction(currentFunctionName)
 } 
 '{' cuerpo '}'
 	;
@@ -144,6 +153,7 @@ if $ss_expresion.type != $tipo.text:
     print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", $tipo.text)
 else:
     namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
+    memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
 }
 	;
 
@@ -168,6 +178,9 @@ if not idType:
     print("Error: linea", $ID.line, ": Variable", $ID.text, "no ha sido declarada")
 elif $ss_expresion.type != idType:
     print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", idType)
+else:
+    idcontent = memoryregisters.getMemoryRegister($ID.text)
+    cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
 }
 	;
 
@@ -232,76 +245,128 @@ else:
 }
 	;
 
-ss_expresion returns [type]:
-    s_exp1=s_expresion {$type = $s_exp1.type}
+ss_expresion returns [type,valor]:
+    s_exp1=s_expresion 
+{
+$type = $s_exp1.type
+$valor = $s_exp2.valor
+}
     (op=('&' | '|') s_exp2=s_expresion
 {
 $type = cubo[$type][$op.text][$s_exp2.type]
 if not type:
     print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $s_exp2.type)
+else:
+    $valor = cuadruplos.addCuadruplo($op.text,$valor,$s_exp2.valor)
 }
     )*
 	;
     
-s_expresion returns [type]:
-	exp1=expresion {$type = $exp1.type} 
+s_expresion returns [type,valor]:
+	exp1=expresion 
+{
+$type = $exp1.type
+$valor = $exp1.valor
+} 
     (
     (op=('==' | '!=' | '>' | '<' | '>=' | '<=') exp2=expresion)
 {
 $type = cubo[$type][$op.text][$exp2.type]
 if not type:
     print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $exp2.type)
-}
+else:
+    $valor = cuadruplos.addCuadruplo($op.text,$valor,$exp2.valor)
+}       
     )*
 	;
 	
-expresion returns [type]:
-	term1=termino {$type = $term1.type}
+expresion returns [type,valor]:
+	term1=termino 
+{
+$type = $term1.type
+$valor = $term1.valor
+}
     (
     (op=('+'|'-') term2=termino)
 {
 type = cubo[$type][$op.text][$term2.type]
 if not type:
     print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $term2.type)
+else:
+    $valor = cuadruplos.addCuadruplo($op.text,$valor,$term2.valor)
+    
 }
     )*
 	;
 
-termino returns [type]:
-	factor1=factor {$type = $factor1.type}
+termino returns [type,valor]:
+	factor1=factor 
+{
+$type = $factor1.type
+$valor = $factor1.valor
+}
     (op=('*'|'/'|'%') factor2=factor
 {
 type = cubo[$type][$op.text][$factor2.type]
 if not type:
     print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $factor2.type)
+else:
+    $valor = cuadruplos.addCuadruplo($op.text,$valor,$factor2.valor)
 }
     )*
 	;
 
-factor returns [type]:
+factor returns [type,valor]:
     (neg='!'? factor_aux)
 {
 $type = $factor_aux.type
 if $neg.text and $factor_aux.type != CONDICION:
     print("Error: linea", $neg.line, ": operador", $neg.text, "no puede ser aplicado a", $factor_aux.type)
     $type = None
+else:
+    if $neg.text:
+        $valor = cuadruplos.addCuadruplo($neg.text,$factor_aux.valor,None)
+    else:
+        $valor = $factor_aux.valor
 } |
     ('-'? NUMERIC_CONSTANT {$type = NUMERO}) |
-    STRING_CONSTANT {$type = MENSAJE}
+    STRING_CONSTANT 
+{
+$type = MENSAJE
+$valor = $STRING_CONSTANT.text
+}
 	;
 
-factor_aux returns[type]:
+factor_aux returns[type,valor]:
     ID
 {
 $type = namespaceTable.getVariableType($ID.text, currentFunctionName)
-} | CONDITION_CONSTANT {$type = CONDICION}
+
+if $type:
+    $valor = memoryregisters.getMemoryRegister()
+else:
+    $valor = None
+
+} | CONDITION_CONSTANT 
+{
+$type = CONDICION
+$valor = $CONDITION_CONSTANT.text
+}
 | llamadaFuncion
 {
 functionType = $llamadaFuncion.type
 $type = functionType if functionType != "nada" else None
+if functionType:
+    $valor = MemoryRegister()
+else:
+    $valor = None
 } | '(' ss_expresion ')'
 {
 $type = $ss_expresion.type
+if $type:
+    $valor = $ss_expresion.value
+else:
+    $valor = None
 }
     ;
 	
@@ -316,6 +381,8 @@ global currentParameterList
 currentFunctionName = $ID.text
 if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, currentParameterList):
     print("Error: linea", $ID.line, ": Funcion", $ID.text, "ya fue declarada")
+else:
+    memoryregisters.newFunction(currentFunctionName)
 currentParameterList = []
 }
 '{' cuerpo '}'
