@@ -24,6 +24,12 @@ class Function:
             if variablename==f.name:
                 return True
         return False
+    
+    def getType(self,variablename)
+        for f in self.variables:
+            if variablename==f.name:
+                return f.type
+        return "None"        
 		
 class NamespaceTable:
     
@@ -70,4 +76,16 @@ class NamespaceTable:
             return True
         else:
             return False
+
+    def getVariableType(self, nameOfVariable, nameOfFunction):
+        if self.variableExists(nameOfVariable,nameOfFunction)
+            return self.tabla[nameOfFunction].getType(nameOfVariable)
+        else:
+            return "Doesn't exist"
+            
+    def getFunctionType(self, nameOfFunction):
+        if self.functionExists(nameOfFunction):
+            return self.tabla[nameOfFunction].type
+        else
+            return "Doesn't exist"
     
