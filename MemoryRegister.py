@@ -3,5 +3,10 @@ class MemoryRegister:
     def __init__():
         content = None
     
-    def assign(self, c):
+    def write(self, c):
         content = c
+        
+    def read(self):
+        return content
+    
+    
