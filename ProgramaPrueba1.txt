@@ -13,7 +13,7 @@ dibujo {
 	
 	funciones {
         nada wow() {
-            numero n = -3;
+            numero n = 3;
             escribir "Perro" en 13,4;
         }
 	}
@@ -26,5 +26,6 @@ dibujo {
         perro = -4-3.7;
         perro = perro;
         leer equis;
+        wow(3);
 	}
 }
