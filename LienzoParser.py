@@ -6,6 +6,7 @@ from io import StringIO
 
 from namespace import NamespaceTable
 from collections import defaultdict
+from MemoryRegister import MemoryRegisters
 from cuadruplos import Cuadruplos
 
 
@@ -14,7 +15,9 @@ currentFunctionName = ""
 currentParameterList = []
 currentArgumentList = []
 
+memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
+
 diccionario_ids = {}
 
 CONDICION = "condicion"
@@ -1099,7 +1102,7 @@ class LienzoParser ( Parser ):
             global currentFunctionName
             currentFunctionName = "animacion"
             namespaceTable.addFunction(currentFunctionName, "nada", [])
-            cuadruplos.newFunction(currentFunctionName)
+            memoryregisters.newFunction(currentFunctionName)
 
             self.state = 141
             self.match(LienzoParser.T__0)
@@ -1243,7 +1246,7 @@ class LienzoParser ( Parser ):
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Variable", (None if localctx._ID is None else localctx._ID.text), "es de tipo", (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))))
             else:
                 namespaceTable.addVariable((None if localctx._ID is None else localctx._ID.text), (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))), currentFunctionName)
-                cuadruplos.createMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
+                memoryregisters.createMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1413,7 +1416,7 @@ class LienzoParser ( Parser ):
             elif localctx._ss_expresion.type != idType:
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Variable", (None if localctx._ID is None else localctx._ID.text), "es de tipo", idType)
             else:
-                idcontent = cuadruplos.getMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
+                idcontent = memoryregisters.getMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
                 cuadruplos.addCuadruplo('=', localctx._ss_expresion.valor,None,idcontent)
 
         except RecognitionException as re:
@@ -2435,7 +2438,7 @@ class LienzoParser ( Parser ):
                 localctx.type = namespaceTable.getVariableType((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
 
                 if localctx.type:
-                    localctx.valor = cuadruplos.getMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
+                    localctx.valor = memoryregisters.getMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
                 else:
                     localctx.valor = None
 
@@ -2634,7 +2637,7 @@ class LienzoParser ( Parser ):
             if not namespaceTable.addFunction(currentFunctionName, (None if localctx._tipoFunc is None else self._input.getText((localctx._tipoFunc.start,localctx._tipoFunc.stop))), currentParameterList):
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Funcion", (None if localctx._ID is None else localctx._ID.text), "ya fue declarada")
             else:
-                cuadruplos.newFunction(currentFunctionName)
+                memoryregisters.newFunction(currentFunctionName)
             currentParameterList = []
 
             self.state = 365
