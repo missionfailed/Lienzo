@@ -9,7 +9,7 @@ class MemoryRegisters:
     def createMemoryRegister(self, nameOfVariable, nameOfFunction):
         registers[nameOfFunction][nameOfVariable] = MemoryRegister()
     
-    def getMemoryRegister(self, nameOfVariable, nameOfVariable):
+    def getMemoryRegister(self, nameOfVariable, nameOfFunction):
         return registers[nameOfFunction][nameOfVariable]
         
 class MemoryRegister:
