@@ -7,7 +7,6 @@ options {
 @header {
 from namespace import NamespaceTable
 from collections import defaultdict
-from MemoryRegister import MemoryRegisters
 from cuadruplos import Cuadruplos
 
 
@@ -16,9 +15,7 @@ currentFunctionName = ""
 currentParameterList = []
 currentArgumentList = []
 
-memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
-
 diccionario_ids = {}
 
 CONDICION = "condicion"
@@ -133,7 +130,7 @@ animacion:
 global currentFunctionName
 currentFunctionName = "animacion"
 namespaceTable.addFunction(currentFunctionName, "nada", [])
-memoryregisters.newFunction(currentFunctionName)
+cuadruplos.newFunction(currentFunctionName)
 } 
 '{' cuerpo '}'
 	;
@@ -153,7 +150,7 @@ if $ss_expresion.type != $tipo.text:
     print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", $tipo.text)
 else:
     namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
-    memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
+    cuadruplos.createMemoryRegister($ID.text, currentFunctionName)
 }
 	;
 
@@ -179,7 +176,7 @@ if not idType:
 elif $ss_expresion.type != idType:
     print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", idType)
 else:
-    idcontent = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
+    idcontent = cuadruplos.getMemoryRegister($ID.text, currentFunctionName)
     cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
 }
 	;
@@ -343,7 +340,7 @@ factor_aux returns[type,valor]:
 $type = namespaceTable.getVariableType($ID.text, currentFunctionName)
 
 if $type:
-    $valor = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
+    $valor = cuadruplos.getMemoryRegister($ID.text, currentFunctionName)
 else:
     $valor = None
 
@@ -382,7 +379,7 @@ currentFunctionName = $ID.text
 if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, currentParameterList):
     print("Error: linea", $ID.line, ": Funcion", $ID.text, "ya fue declarada")
 else:
-    memoryregisters.newFunction(currentFunctionName)
+    cuadruplos.newFunction(currentFunctionName)
 currentParameterList = []
 }
 '{' cuerpo '}'
