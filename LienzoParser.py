@@ -9,7 +9,6 @@ from collections import defaultdict
 from MemoryRegister import MemoryRegisters
 from cuadruplos import Cuadruplos
 
-
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
 currentParameterList = []

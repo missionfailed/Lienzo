@@ -8,5 +8,6 @@ class Cuadruplos:
         if not t:
             t = MemoryRegister()
         self.listaCuadruplos.append((operator, op1, op2, t))
+        print((operator, op1, op2, t))
         return t
         
