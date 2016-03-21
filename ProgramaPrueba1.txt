@@ -25,5 +25,6 @@ dibujo {
         condicion dos = falso;
         perro = -4-3.7;
         perro = perro;
+        leer equis;
 	}
 }

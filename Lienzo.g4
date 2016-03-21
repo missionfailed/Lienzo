@@ -171,8 +171,17 @@ instruccion:
         | posicion
         | condicional
         | llamadaFuncion
+        | lectura
 	) ';'
 	;
+    
+lectura:
+    LEER ID
+{
+idcontent=memoryregisters.getMemoryRegister($ID.text,currentFunctionName)
+cuadruplos.addCuadruplo(LEER,None,None,idcontent)
+}    
+    ;
 
 asignacion:
 	ID '=' ss_expresion
@@ -459,6 +468,7 @@ QUE : 'que' ;
 SI : 'si' ;
 SINO : 'sino' ;
 MENSAJE : 'mensaje' ;
+LEER : 'leer';
 CONDICION : 'condicion' ;
 NUMERO : 'numero' ;
 FUNCIONES : 'funciones' ;

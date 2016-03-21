@@ -208,6 +208,15 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LienzoParser#lectura.
+    def enterLectura(self, ctx:LienzoParser.LecturaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#lectura.
+    def exitLectura(self, ctx:LienzoParser.LecturaContext):
+        pass
+
+
     # Enter a parse tree produced by LienzoParser#asignacion.
     def enterAsignacion(self, ctx:LienzoParser.AsignacionContext):
         pass
