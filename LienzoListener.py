@@ -8,7 +8,7 @@ else:
 from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
-from cuadruplos import Cuadruplos
+from cuadruplos import *
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
@@ -17,8 +17,6 @@ currentArgumentList = []
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
-
-diccionario_ids = {}
 
 CONDICION = "condicion"
 MENSAJE = "mensaje"

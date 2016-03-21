@@ -1,5 +1,7 @@
 from MemoryRegister import *
 
+PRINT = "PRINT"
+
 class Cuadruplos:
     def __init__(self):
         self.listaCuadruplos = []

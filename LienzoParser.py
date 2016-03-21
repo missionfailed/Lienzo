@@ -7,7 +7,7 @@ from io import StringIO
 from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
-from cuadruplos import Cuadruplos
+from cuadruplos import *
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
@@ -16,8 +16,6 @@ currentArgumentList = []
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
-
-diccionario_ids = {}
 
 CONDICION = "condicion"
 MENSAJE = "mensaje"
@@ -81,8 +79,8 @@ def num(s):
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3H")
-        buf.write("\u017f\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3G")
+        buf.write("\u0180\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
@@ -98,158 +96,158 @@ def serializedATN():
         buf.write("\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3")
         buf.write("\17\3\17\3\17\3\17\3\17\3\17\5\17\u00b0\n\17\3\17\3\17")
         buf.write("\3\20\3\20\3\20\3\20\3\20\3\21\3\21\3\22\3\22\3\22\3\22")
-        buf.write("\3\22\3\22\3\22\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24")
-        buf.write("\3\24\3\24\3\24\7\24\u00cd\n\24\f\24\16\24\u00d0\13\24")
-        buf.write("\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\26\3\26\3\26")
-        buf.write("\3\26\3\26\5\26\u00df\n\26\3\27\3\27\3\27\3\27\3\27\3")
-        buf.write("\27\3\27\7\27\u00e8\n\27\f\27\16\27\u00eb\13\27\3\27\3")
-        buf.write("\27\3\27\3\27\7\27\u00f1\n\27\f\27\16\27\u00f4\13\27\3")
-        buf.write("\27\5\27\u00f7\n\27\3\30\3\30\3\30\3\30\3\30\3\30\3\30")
-        buf.write("\3\30\7\30\u0101\n\30\f\30\16\30\u0104\13\30\5\30\u0106")
-        buf.write("\n\30\3\30\3\30\3\30\3\31\3\31\3\31\3\31\3\31\3\31\7\31")
-        buf.write("\u0111\n\31\f\31\16\31\u0114\13\31\3\32\3\32\3\32\3\32")
-        buf.write("\3\32\3\32\3\32\7\32\u011d\n\32\f\32\16\32\u0120\13\32")
-        buf.write("\3\33\3\33\3\33\3\33\3\33\3\33\3\33\7\33\u0129\n\33\f")
-        buf.write("\33\16\33\u012c\13\33\3\34\3\34\3\34\3\34\3\34\3\34\7")
-        buf.write("\34\u0134\n\34\f\34\16\34\u0137\13\34\3\35\5\35\u013a")
-        buf.write("\n\35\3\35\3\35\3\35\3\35\3\35\5\35\u0141\n\35\3\35\3")
-        buf.write("\35\3\35\3\35\5\35\u0147\n\35\3\36\3\36\3\36\3\36\3\36")
-        buf.write("\3\36\3\36\3\36\3\36\3\36\3\36\3\36\5\36\u0155\n\36\3")
-        buf.write("\37\3\37\3\37\7\37\u015a\n\37\f\37\16\37\u015d\13\37\3")
-        buf.write("\37\3\37\3 \3 \3 \3 \3 \3 \7 \u0167\n \f \16 \u016a\13")
-        buf.write(" \5 \u016c\n \3 \3 \3 \3 \3 \3 \3!\3!\5!\u0176\n!\3\"")
-        buf.write("\3\"\5\"\u017a\n\"\3\"\3\"\3\"\3\"\2\2#\2\4\6\b\n\f\16")
+        buf.write("\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\24\3\24\3\24\3\24")
+        buf.write("\3\24\3\24\3\24\3\24\7\24\u00ce\n\24\f\24\16\24\u00d1")
+        buf.write("\13\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\26\3")
+        buf.write("\26\3\26\3\26\3\26\5\26\u00e0\n\26\3\27\3\27\3\27\3\27")
+        buf.write("\3\27\3\27\3\27\7\27\u00e9\n\27\f\27\16\27\u00ec\13\27")
+        buf.write("\3\27\3\27\3\27\3\27\7\27\u00f2\n\27\f\27\16\27\u00f5")
+        buf.write("\13\27\3\27\5\27\u00f8\n\27\3\30\3\30\3\30\3\30\3\30\3")
+        buf.write("\30\3\30\3\30\7\30\u0102\n\30\f\30\16\30\u0105\13\30\5")
+        buf.write("\30\u0107\n\30\3\30\3\30\3\30\3\31\3\31\3\31\3\31\3\31")
+        buf.write("\3\31\7\31\u0112\n\31\f\31\16\31\u0115\13\31\3\32\3\32")
+        buf.write("\3\32\3\32\3\32\3\32\3\32\7\32\u011e\n\32\f\32\16\32\u0121")
+        buf.write("\13\32\3\33\3\33\3\33\3\33\3\33\3\33\3\33\7\33\u012a\n")
+        buf.write("\33\f\33\16\33\u012d\13\33\3\34\3\34\3\34\3\34\3\34\3")
+        buf.write("\34\7\34\u0135\n\34\f\34\16\34\u0138\13\34\3\35\5\35\u013b")
+        buf.write("\n\35\3\35\3\35\3\35\3\35\3\35\5\35\u0142\n\35\3\35\3")
+        buf.write("\35\3\35\3\35\5\35\u0148\n\35\3\36\3\36\3\36\3\36\3\36")
+        buf.write("\3\36\3\36\3\36\3\36\3\36\3\36\3\36\5\36\u0156\n\36\3")
+        buf.write("\37\3\37\3\37\7\37\u015b\n\37\f\37\16\37\u015e\13\37\3")
+        buf.write("\37\3\37\3 \3 \3 \3 \3 \3 \7 \u0168\n \f \16 \u016b\13")
+        buf.write(" \5 \u016d\n \3 \3 \3 \3 \3 \3 \3!\3!\5!\u0177\n!\3\"")
+        buf.write("\3\"\5\"\u017b\n\"\3\"\3\"\3\"\3\"\2\2#\2\4\6\b\n\f\16")
         buf.write("\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@B\2")
-        buf.write("\13\3\2\36 \3\2!*\3\2\63\64\3\2;=\4\2FFHH\3\2\13\f\3\2")
-        buf.write("\r\22\3\2\23\24\3\2\25\27\u017f\2D\3\2\2\2\4M\3\2\2\2")
-        buf.write("\6W\3\2\2\2\bb\3\2\2\2\nd\3\2\2\2\ff\3\2\2\2\16v\3\2\2")
-        buf.write("\2\20|\3\2\2\2\22\u0084\3\2\2\2\24\u008b\3\2\2\2\26\u008d")
-        buf.write("\3\2\2\2\30\u0096\3\2\2\2\32\u009f\3\2\2\2\34\u00af\3")
-        buf.write("\2\2\2\36\u00b3\3\2\2\2 \u00b8\3\2\2\2\"\u00ba\3\2\2\2")
-        buf.write("$\u00c1\3\2\2\2&\u00c4\3\2\2\2(\u00d3\3\2\2\2*\u00d9\3")
-        buf.write("\2\2\2,\u00e0\3\2\2\2.\u00f8\3\2\2\2\60\u010a\3\2\2\2")
-        buf.write("\62\u0115\3\2\2\2\64\u0121\3\2\2\2\66\u012d\3\2\2\28\u0146")
-        buf.write("\3\2\2\2:\u0154\3\2\2\2<\u0156\3\2\2\2>\u0160\3\2\2\2")
-        buf.write("@\u0175\3\2\2\2B\u0177\3\2\2\2DE\7\32\2\2EF\7\3\2\2FG")
-        buf.write("\5\4\3\2GH\5\f\7\2HI\5<\37\2IJ\5\26\f\2JK\7\4\2\2KL\7")
-        buf.write("\2\2\3L\3\3\2\2\2MN\7\33\2\2NR\7\3\2\2OQ\5\6\4\2PO\3\2")
-        buf.write("\2\2QT\3\2\2\2RP\3\2\2\2RS\3\2\2\2SU\3\2\2\2TR\3\2\2\2")
-        buf.write("UV\7\4\2\2V\5\3\2\2\2WX\7E\2\2XY\5\b\5\2YZ\5\n\6\2Z[\7")
-        buf.write("\34\2\2[\\\7G\2\2\\]\7\35\2\2]^\5\64\33\2^_\7\60\2\2_")
-        buf.write("`\5\64\33\2`a\7\5\2\2a\7\3\2\2\2bc\t\2\2\2c\t\3\2\2\2")
-        buf.write("de\t\3\2\2e\13\3\2\2\2fg\7+\2\2gh\7\3\2\2hi\5\16\b\2i")
-        buf.write("j\7\5\2\2jk\5\20\t\2kq\7\5\2\2lm\5\22\n\2mn\7\5\2\2np")
-        buf.write("\3\2\2\2ol\3\2\2\2ps\3\2\2\2qo\3\2\2\2qr\3\2\2\2rt\3\2")
-        buf.write("\2\2sq\3\2\2\2tu\7\4\2\2u\r\3\2\2\2vw\7,\2\2wx\7\35\2")
-        buf.write("\2xy\7-\2\2yz\7.\2\2z{\5\n\6\2{\17\3\2\2\2|}\7/\2\2}~")
-        buf.write("\7\35\2\2~\177\7-\2\2\177\u0080\7.\2\2\u0080\u0081\5\64")
-        buf.write("\33\2\u0081\u0082\7\60\2\2\u0082\u0083\5\64\33\2\u0083")
-        buf.write("\21\3\2\2\2\u0084\u0085\7\62\2\2\u0085\u0086\5\24\13\2")
-        buf.write("\u0086\u0087\7\35\2\2\u0087\u0088\5*\26\2\u0088\u0089")
-        buf.write("\7.\2\2\u0089\u008a\5\64\33\2\u008a\23\3\2\2\2\u008b\u008c")
-        buf.write("\t\4\2\2\u008c\25\3\2\2\2\u008d\u008e\7\65\2\2\u008e\u008f")
-        buf.write("\b\f\1\2\u008f\u0090\7\3\2\2\u0090\u0091\5\30\r\2\u0091")
-        buf.write("\u0092\7\4\2\2\u0092\27\3\2\2\2\u0093\u0095\5\32\16\2")
-        buf.write("\u0094\u0093\3\2\2\2\u0095\u0098\3\2\2\2\u0096\u0094\3")
-        buf.write("\2\2\2\u0096\u0097\3\2\2\2\u0097\u009c\3\2\2\2\u0098\u0096")
-        buf.write("\3\2\2\2\u0099\u009b\5\34\17\2\u009a\u0099\3\2\2\2\u009b")
-        buf.write("\u009e\3\2\2\2\u009c\u009a\3\2\2\2\u009c\u009d\3\2\2\2")
-        buf.write("\u009d\31\3\2\2\2\u009e\u009c\3\2\2\2\u009f\u00a0\5 \21")
-        buf.write("\2\u00a0\u00a1\7H\2\2\u00a1\u00a2\b\16\1\2\u00a2\u00a3")
-        buf.write("\7.\2\2\u00a3\u00a4\5\60\31\2\u00a4\u00a5\7\5\2\2\u00a5")
-        buf.write("\u00a6\b\16\1\2\u00a6\33\3\2\2\2\u00a7\u00b0\5\36\20\2")
-        buf.write("\u00a8\u00b0\5\"\22\2\u00a9\u00b0\5$\23\2\u00aa\u00b0")
-        buf.write("\5&\24\2\u00ab\u00b0\5(\25\2\u00ac\u00b0\5\22\n\2\u00ad")
-        buf.write("\u00b0\5,\27\2\u00ae\u00b0\5.\30\2\u00af\u00a7\3\2\2\2")
-        buf.write("\u00af\u00a8\3\2\2\2\u00af\u00a9\3\2\2\2\u00af\u00aa\3")
-        buf.write("\2\2\2\u00af\u00ab\3\2\2\2\u00af\u00ac\3\2\2\2\u00af\u00ad")
-        buf.write("\3\2\2\2\u00af\u00ae\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1")
-        buf.write("\u00b2\7\5\2\2\u00b2\35\3\2\2\2\u00b3\u00b4\7H\2\2\u00b4")
-        buf.write("\u00b5\7.\2\2\u00b5\u00b6\5\60\31\2\u00b6\u00b7\b\20\1")
-        buf.write("\2\u00b7\37\3\2\2\2\u00b8\u00b9\t\5\2\2\u00b9!\3\2\2\2")
-        buf.write("\u00ba\u00bb\7?\2\2\u00bb\u00bc\t\6\2\2\u00bc\u00bd\7")
-        buf.write("\61\2\2\u00bd\u00be\5\64\33\2\u00be\u00bf\7\6\2\2\u00bf")
-        buf.write("\u00c0\5\64\33\2\u00c0#\3\2\2\2\u00c1\u00c2\7\66\2\2\u00c2")
-        buf.write("\u00c3\5\64\33\2\u00c3%\3\2\2\2\u00c4\u00c5\7\67\2\2\u00c5")
-        buf.write("\u00c6\78\2\2\u00c6\u00c7\7\7\2\2\u00c7\u00c8\5\60\31")
-        buf.write("\2\u00c8\u00c9\7\b\2\2\u00c9\u00ca\b\24\1\2\u00ca\u00ce")
-        buf.write("\7\3\2\2\u00cb\u00cd\5\34\17\2\u00cc\u00cb\3\2\2\2\u00cd")
-        buf.write("\u00d0\3\2\2\2\u00ce\u00cc\3\2\2\2\u00ce\u00cf\3\2\2\2")
-        buf.write("\u00cf\u00d1\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d1\u00d2\7")
-        buf.write("\4\2\2\u00d2\'\3\2\2\2\u00d3\u00d4\7,\2\2\u00d4\u00d5")
-        buf.write("\7\35\2\2\u00d5\u00d6\5*\26\2\u00d6\u00d7\7.\2\2\u00d7")
-        buf.write("\u00d8\5\n\6\2\u00d8)\3\2\2\2\u00d9\u00de\7G\2\2\u00da")
-        buf.write("\u00db\7\t\2\2\u00db\u00dc\5\64\33\2\u00dc\u00dd\7\n\2")
-        buf.write("\2\u00dd\u00df\3\2\2\2\u00de\u00da\3\2\2\2\u00de\u00df")
-        buf.write("\3\2\2\2\u00df+\3\2\2\2\u00e0\u00e1\79\2\2\u00e1\u00e2")
-        buf.write("\7\7\2\2\u00e2\u00e3\5\60\31\2\u00e3\u00e4\7\b\2\2\u00e4")
-        buf.write("\u00e5\b\27\1\2\u00e5\u00e9\7\3\2\2\u00e6\u00e8\5\34\17")
-        buf.write("\2\u00e7\u00e6\3\2\2\2\u00e8\u00eb\3\2\2\2\u00e9\u00e7")
-        buf.write("\3\2\2\2\u00e9\u00ea\3\2\2\2\u00ea\u00ec\3\2\2\2\u00eb")
-        buf.write("\u00e9\3\2\2\2\u00ec\u00f6\7\4\2\2\u00ed\u00ee\7:\2\2")
-        buf.write("\u00ee\u00f2\7\3\2\2\u00ef\u00f1\5\34\17\2\u00f0\u00ef")
-        buf.write("\3\2\2\2\u00f1\u00f4\3\2\2\2\u00f2\u00f0\3\2\2\2\u00f2")
-        buf.write("\u00f3\3\2\2\2\u00f3\u00f5\3\2\2\2\u00f4\u00f2\3\2\2\2")
-        buf.write("\u00f5\u00f7\7\4\2\2\u00f6\u00ed\3\2\2\2\u00f6\u00f7\3")
-        buf.write("\2\2\2\u00f7-\3\2\2\2\u00f8\u00f9\7H\2\2\u00f9\u0105\7")
-        buf.write("\7\2\2\u00fa\u00fb\5\60\31\2\u00fb\u0102\b\30\1\2\u00fc")
-        buf.write("\u00fd\7\6\2\2\u00fd\u00fe\5\60\31\2\u00fe\u00ff\b\30")
-        buf.write("\1\2\u00ff\u0101\3\2\2\2\u0100\u00fc\3\2\2\2\u0101\u0104")
-        buf.write("\3\2\2\2\u0102\u0100\3\2\2\2\u0102\u0103\3\2\2\2\u0103")
-        buf.write("\u0106\3\2\2\2\u0104\u0102\3\2\2\2\u0105\u00fa\3\2\2\2")
-        buf.write("\u0105\u0106\3\2\2\2\u0106\u0107\3\2\2\2\u0107\u0108\7")
-        buf.write("\b\2\2\u0108\u0109\b\30\1\2\u0109/\3\2\2\2\u010a\u010b")
-        buf.write("\5\62\32\2\u010b\u0112\b\31\1\2\u010c\u010d\t\7\2\2\u010d")
-        buf.write("\u010e\5\62\32\2\u010e\u010f\b\31\1\2\u010f\u0111\3\2")
-        buf.write("\2\2\u0110\u010c\3\2\2\2\u0111\u0114\3\2\2\2\u0112\u0110")
-        buf.write("\3\2\2\2\u0112\u0113\3\2\2\2\u0113\61\3\2\2\2\u0114\u0112")
-        buf.write("\3\2\2\2\u0115\u0116\5\64\33\2\u0116\u011e\b\32\1\2\u0117")
-        buf.write("\u0118\t\b\2\2\u0118\u0119\5\64\33\2\u0119\u011a\3\2\2")
-        buf.write("\2\u011a\u011b\b\32\1\2\u011b\u011d\3\2\2\2\u011c\u0117")
-        buf.write("\3\2\2\2\u011d\u0120\3\2\2\2\u011e\u011c\3\2\2\2\u011e")
-        buf.write("\u011f\3\2\2\2\u011f\63\3\2\2\2\u0120\u011e\3\2\2\2\u0121")
-        buf.write("\u0122\5\66\34\2\u0122\u012a\b\33\1\2\u0123\u0124\t\t")
-        buf.write("\2\2\u0124\u0125\5\66\34\2\u0125\u0126\3\2\2\2\u0126\u0127")
-        buf.write("\b\33\1\2\u0127\u0129\3\2\2\2\u0128\u0123\3\2\2\2\u0129")
-        buf.write("\u012c\3\2\2\2\u012a\u0128\3\2\2\2\u012a\u012b\3\2\2\2")
-        buf.write("\u012b\65\3\2\2\2\u012c\u012a\3\2\2\2\u012d\u012e\58\35")
-        buf.write("\2\u012e\u0135\b\34\1\2\u012f\u0130\t\n\2\2\u0130\u0131")
-        buf.write("\58\35\2\u0131\u0132\b\34\1\2\u0132\u0134\3\2\2\2\u0133")
-        buf.write("\u012f\3\2\2\2\u0134\u0137\3\2\2\2\u0135\u0133\3\2\2\2")
-        buf.write("\u0135\u0136\3\2\2\2\u0136\67\3\2\2\2\u0137\u0135\3\2")
-        buf.write("\2\2\u0138\u013a\7\30\2\2\u0139\u0138\3\2\2\2\u0139\u013a")
-        buf.write("\3\2\2\2\u013a\u013b\3\2\2\2\u013b\u013c\5:\36\2\u013c")
-        buf.write("\u013d\3\2\2\2\u013d\u013e\b\35\1\2\u013e\u0147\3\2\2")
-        buf.write("\2\u013f\u0141\7\24\2\2\u0140\u013f\3\2\2\2\u0140\u0141")
-        buf.write("\3\2\2\2\u0141\u0142\3\2\2\2\u0142\u0143\7E\2\2\u0143")
-        buf.write("\u0147\b\35\1\2\u0144\u0145\7F\2\2\u0145\u0147\b\35\1")
-        buf.write("\2\u0146\u0139\3\2\2\2\u0146\u0140\3\2\2\2\u0146\u0144")
-        buf.write("\3\2\2\2\u01479\3\2\2\2\u0148\u0149\7H\2\2\u0149\u0155")
-        buf.write("\b\36\1\2\u014a\u014b\7A\2\2\u014b\u0155\b\36\1\2\u014c")
-        buf.write("\u014d\5.\30\2\u014d\u014e\b\36\1\2\u014e\u0155\3\2\2")
-        buf.write("\2\u014f\u0150\7\7\2\2\u0150\u0151\5\60\31\2\u0151\u0152")
-        buf.write("\7\b\2\2\u0152\u0153\b\36\1\2\u0153\u0155\3\2\2\2\u0154")
-        buf.write("\u0148\3\2\2\2\u0154\u014a\3\2\2\2\u0154\u014c\3\2\2\2")
-        buf.write("\u0154\u014f\3\2\2\2\u0155;\3\2\2\2\u0156\u0157\7>\2\2")
-        buf.write("\u0157\u015b\7\3\2\2\u0158\u015a\5> \2\u0159\u0158\3\2")
-        buf.write("\2\2\u015a\u015d\3\2\2\2\u015b\u0159\3\2\2\2\u015b\u015c")
-        buf.write("\3\2\2\2\u015c\u015e\3\2\2\2\u015d\u015b\3\2\2\2\u015e")
-        buf.write("\u015f\7\4\2\2\u015f=\3\2\2\2\u0160\u0161\5@!\2\u0161")
-        buf.write("\u0162\7H\2\2\u0162\u016b\7\7\2\2\u0163\u0168\5B\"\2\u0164")
-        buf.write("\u0165\7\6\2\2\u0165\u0167\5B\"\2\u0166\u0164\3\2\2\2")
-        buf.write("\u0167\u016a\3\2\2\2\u0168\u0166\3\2\2\2\u0168\u0169\3")
-        buf.write("\2\2\2\u0169\u016c\3\2\2\2\u016a\u0168\3\2\2\2\u016b\u0163")
-        buf.write("\3\2\2\2\u016b\u016c\3\2\2\2\u016c\u016d\3\2\2\2\u016d")
-        buf.write("\u016e\7\b\2\2\u016e\u016f\b \1\2\u016f\u0170\7\3\2\2")
-        buf.write("\u0170\u0171\5\30\r\2\u0171\u0172\7\4\2\2\u0172?\3\2\2")
-        buf.write("\2\u0173\u0176\5 \21\2\u0174\u0176\7@\2\2\u0175\u0173")
-        buf.write("\3\2\2\2\u0175\u0174\3\2\2\2\u0176A\3\2\2\2\u0177\u0179")
-        buf.write("\5 \21\2\u0178\u017a\7D\2\2\u0179\u0178\3\2\2\2\u0179")
-        buf.write("\u017a\3\2\2\2\u017a\u017b\3\2\2\2\u017b\u017c\7H\2\2")
-        buf.write("\u017c\u017d\b\"\1\2\u017dC\3\2\2\2\33Rq\u0096\u009c\u00af")
-        buf.write("\u00ce\u00de\u00e9\u00f2\u00f6\u0102\u0105\u0112\u011e")
-        buf.write("\u012a\u0135\u0139\u0140\u0146\u0154\u015b\u0168\u016b")
-        buf.write("\u0175\u0179")
+        buf.write("\n\3\2\36 \3\2!*\3\2\63\64\3\2;=\3\2\13\f\3\2\r\22\3\2")
+        buf.write("\23\24\3\2\25\27\u0180\2D\3\2\2\2\4M\3\2\2\2\6W\3\2\2")
+        buf.write("\2\bb\3\2\2\2\nd\3\2\2\2\ff\3\2\2\2\16v\3\2\2\2\20|\3")
+        buf.write("\2\2\2\22\u0084\3\2\2\2\24\u008b\3\2\2\2\26\u008d\3\2")
+        buf.write("\2\2\30\u0096\3\2\2\2\32\u009f\3\2\2\2\34\u00af\3\2\2")
+        buf.write("\2\36\u00b3\3\2\2\2 \u00b8\3\2\2\2\"\u00ba\3\2\2\2$\u00c2")
+        buf.write("\3\2\2\2&\u00c5\3\2\2\2(\u00d4\3\2\2\2*\u00da\3\2\2\2")
+        buf.write(",\u00e1\3\2\2\2.\u00f9\3\2\2\2\60\u010b\3\2\2\2\62\u0116")
+        buf.write("\3\2\2\2\64\u0122\3\2\2\2\66\u012e\3\2\2\28\u0147\3\2")
+        buf.write("\2\2:\u0155\3\2\2\2<\u0157\3\2\2\2>\u0161\3\2\2\2@\u0176")
+        buf.write("\3\2\2\2B\u0178\3\2\2\2DE\7\32\2\2EF\7\3\2\2FG\5\4\3\2")
+        buf.write("GH\5\f\7\2HI\5<\37\2IJ\5\26\f\2JK\7\4\2\2KL\7\2\2\3L\3")
+        buf.write("\3\2\2\2MN\7\33\2\2NR\7\3\2\2OQ\5\6\4\2PO\3\2\2\2QT\3")
+        buf.write("\2\2\2RP\3\2\2\2RS\3\2\2\2SU\3\2\2\2TR\3\2\2\2UV\7\4\2")
+        buf.write("\2V\5\3\2\2\2WX\7E\2\2XY\5\b\5\2YZ\5\n\6\2Z[\7\34\2\2")
+        buf.write("[\\\7G\2\2\\]\7\35\2\2]^\5\64\33\2^_\7\60\2\2_`\5\64\33")
+        buf.write("\2`a\7\5\2\2a\7\3\2\2\2bc\t\2\2\2c\t\3\2\2\2de\t\3\2\2")
+        buf.write("e\13\3\2\2\2fg\7+\2\2gh\7\3\2\2hi\5\16\b\2ij\7\5\2\2j")
+        buf.write("k\5\20\t\2kq\7\5\2\2lm\5\22\n\2mn\7\5\2\2np\3\2\2\2ol")
+        buf.write("\3\2\2\2ps\3\2\2\2qo\3\2\2\2qr\3\2\2\2rt\3\2\2\2sq\3\2")
+        buf.write("\2\2tu\7\4\2\2u\r\3\2\2\2vw\7,\2\2wx\7\35\2\2xy\7-\2\2")
+        buf.write("yz\7.\2\2z{\5\n\6\2{\17\3\2\2\2|}\7/\2\2}~\7\35\2\2~\177")
+        buf.write("\7-\2\2\177\u0080\7.\2\2\u0080\u0081\5\64\33\2\u0081\u0082")
+        buf.write("\7\60\2\2\u0082\u0083\5\64\33\2\u0083\21\3\2\2\2\u0084")
+        buf.write("\u0085\7\62\2\2\u0085\u0086\5\24\13\2\u0086\u0087\7\35")
+        buf.write("\2\2\u0087\u0088\5*\26\2\u0088\u0089\7.\2\2\u0089\u008a")
+        buf.write("\5\64\33\2\u008a\23\3\2\2\2\u008b\u008c\t\4\2\2\u008c")
+        buf.write("\25\3\2\2\2\u008d\u008e\7\65\2\2\u008e\u008f\b\f\1\2\u008f")
+        buf.write("\u0090\7\3\2\2\u0090\u0091\5\30\r\2\u0091\u0092\7\4\2")
+        buf.write("\2\u0092\27\3\2\2\2\u0093\u0095\5\32\16\2\u0094\u0093")
+        buf.write("\3\2\2\2\u0095\u0098\3\2\2\2\u0096\u0094\3\2\2\2\u0096")
+        buf.write("\u0097\3\2\2\2\u0097\u009c\3\2\2\2\u0098\u0096\3\2\2\2")
+        buf.write("\u0099\u009b\5\34\17\2\u009a\u0099\3\2\2\2\u009b\u009e")
+        buf.write("\3\2\2\2\u009c\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d")
+        buf.write("\31\3\2\2\2\u009e\u009c\3\2\2\2\u009f\u00a0\5 \21\2\u00a0")
+        buf.write("\u00a1\7G\2\2\u00a1\u00a2\b\16\1\2\u00a2\u00a3\7.\2\2")
+        buf.write("\u00a3\u00a4\5\60\31\2\u00a4\u00a5\7\5\2\2\u00a5\u00a6")
+        buf.write("\b\16\1\2\u00a6\33\3\2\2\2\u00a7\u00b0\5\36\20\2\u00a8")
+        buf.write("\u00b0\5\"\22\2\u00a9\u00b0\5$\23\2\u00aa\u00b0\5&\24")
+        buf.write("\2\u00ab\u00b0\5(\25\2\u00ac\u00b0\5\22\n\2\u00ad\u00b0")
+        buf.write("\5,\27\2\u00ae\u00b0\5.\30\2\u00af\u00a7\3\2\2\2\u00af")
+        buf.write("\u00a8\3\2\2\2\u00af\u00a9\3\2\2\2\u00af\u00aa\3\2\2\2")
+        buf.write("\u00af\u00ab\3\2\2\2\u00af\u00ac\3\2\2\2\u00af\u00ad\3")
+        buf.write("\2\2\2\u00af\u00ae\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2")
+        buf.write("\7\5\2\2\u00b2\35\3\2\2\2\u00b3\u00b4\7G\2\2\u00b4\u00b5")
+        buf.write("\7.\2\2\u00b5\u00b6\5\60\31\2\u00b6\u00b7\b\20\1\2\u00b7")
+        buf.write("\37\3\2\2\2\u00b8\u00b9\t\5\2\2\u00b9!\3\2\2\2\u00ba\u00bb")
+        buf.write("\7?\2\2\u00bb\u00bc\5\60\31\2\u00bc\u00bd\7\61\2\2\u00bd")
+        buf.write("\u00be\5\64\33\2\u00be\u00bf\7\6\2\2\u00bf\u00c0\5\64")
+        buf.write("\33\2\u00c0\u00c1\b\22\1\2\u00c1#\3\2\2\2\u00c2\u00c3")
+        buf.write("\7\66\2\2\u00c3\u00c4\5\64\33\2\u00c4%\3\2\2\2\u00c5\u00c6")
+        buf.write("\7\67\2\2\u00c6\u00c7\78\2\2\u00c7\u00c8\7\7\2\2\u00c8")
+        buf.write("\u00c9\5\60\31\2\u00c9\u00ca\7\b\2\2\u00ca\u00cb\b\24")
+        buf.write("\1\2\u00cb\u00cf\7\3\2\2\u00cc\u00ce\5\34\17\2\u00cd\u00cc")
+        buf.write("\3\2\2\2\u00ce\u00d1\3\2\2\2\u00cf\u00cd\3\2\2\2\u00cf")
+        buf.write("\u00d0\3\2\2\2\u00d0\u00d2\3\2\2\2\u00d1\u00cf\3\2\2\2")
+        buf.write("\u00d2\u00d3\7\4\2\2\u00d3\'\3\2\2\2\u00d4\u00d5\7,\2")
+        buf.write("\2\u00d5\u00d6\7\35\2\2\u00d6\u00d7\5*\26\2\u00d7\u00d8")
+        buf.write("\7.\2\2\u00d8\u00d9\5\n\6\2\u00d9)\3\2\2\2\u00da\u00df")
+        buf.write("\7G\2\2\u00db\u00dc\7\t\2\2\u00dc\u00dd\5\64\33\2\u00dd")
+        buf.write("\u00de\7\n\2\2\u00de\u00e0\3\2\2\2\u00df\u00db\3\2\2\2")
+        buf.write("\u00df\u00e0\3\2\2\2\u00e0+\3\2\2\2\u00e1\u00e2\79\2\2")
+        buf.write("\u00e2\u00e3\7\7\2\2\u00e3\u00e4\5\60\31\2\u00e4\u00e5")
+        buf.write("\7\b\2\2\u00e5\u00e6\b\27\1\2\u00e6\u00ea\7\3\2\2\u00e7")
+        buf.write("\u00e9\5\34\17\2\u00e8\u00e7\3\2\2\2\u00e9\u00ec\3\2\2")
+        buf.write("\2\u00ea\u00e8\3\2\2\2\u00ea\u00eb\3\2\2\2\u00eb\u00ed")
+        buf.write("\3\2\2\2\u00ec\u00ea\3\2\2\2\u00ed\u00f7\7\4\2\2\u00ee")
+        buf.write("\u00ef\7:\2\2\u00ef\u00f3\7\3\2\2\u00f0\u00f2\5\34\17")
+        buf.write("\2\u00f1\u00f0\3\2\2\2\u00f2\u00f5\3\2\2\2\u00f3\u00f1")
+        buf.write("\3\2\2\2\u00f3\u00f4\3\2\2\2\u00f4\u00f6\3\2\2\2\u00f5")
+        buf.write("\u00f3\3\2\2\2\u00f6\u00f8\7\4\2\2\u00f7\u00ee\3\2\2\2")
+        buf.write("\u00f7\u00f8\3\2\2\2\u00f8-\3\2\2\2\u00f9\u00fa\7G\2\2")
+        buf.write("\u00fa\u0106\7\7\2\2\u00fb\u00fc\5\60\31\2\u00fc\u0103")
+        buf.write("\b\30\1\2\u00fd\u00fe\7\6\2\2\u00fe\u00ff\5\60\31\2\u00ff")
+        buf.write("\u0100\b\30\1\2\u0100\u0102\3\2\2\2\u0101\u00fd\3\2\2")
+        buf.write("\2\u0102\u0105\3\2\2\2\u0103\u0101\3\2\2\2\u0103\u0104")
+        buf.write("\3\2\2\2\u0104\u0107\3\2\2\2\u0105\u0103\3\2\2\2\u0106")
+        buf.write("\u00fb\3\2\2\2\u0106\u0107\3\2\2\2\u0107\u0108\3\2\2\2")
+        buf.write("\u0108\u0109\7\b\2\2\u0109\u010a\b\30\1\2\u010a/\3\2\2")
+        buf.write("\2\u010b\u010c\5\62\32\2\u010c\u0113\b\31\1\2\u010d\u010e")
+        buf.write("\t\6\2\2\u010e\u010f\5\62\32\2\u010f\u0110\b\31\1\2\u0110")
+        buf.write("\u0112\3\2\2\2\u0111\u010d\3\2\2\2\u0112\u0115\3\2\2\2")
+        buf.write("\u0113\u0111\3\2\2\2\u0113\u0114\3\2\2\2\u0114\61\3\2")
+        buf.write("\2\2\u0115\u0113\3\2\2\2\u0116\u0117\5\64\33\2\u0117\u011f")
+        buf.write("\b\32\1\2\u0118\u0119\t\7\2\2\u0119\u011a\5\64\33\2\u011a")
+        buf.write("\u011b\3\2\2\2\u011b\u011c\b\32\1\2\u011c\u011e\3\2\2")
+        buf.write("\2\u011d\u0118\3\2\2\2\u011e\u0121\3\2\2\2\u011f\u011d")
+        buf.write("\3\2\2\2\u011f\u0120\3\2\2\2\u0120\63\3\2\2\2\u0121\u011f")
+        buf.write("\3\2\2\2\u0122\u0123\5\66\34\2\u0123\u012b\b\33\1\2\u0124")
+        buf.write("\u0125\t\b\2\2\u0125\u0126\5\66\34\2\u0126\u0127\3\2\2")
+        buf.write("\2\u0127\u0128\b\33\1\2\u0128\u012a\3\2\2\2\u0129\u0124")
+        buf.write("\3\2\2\2\u012a\u012d\3\2\2\2\u012b\u0129\3\2\2\2\u012b")
+        buf.write("\u012c\3\2\2\2\u012c\65\3\2\2\2\u012d\u012b\3\2\2\2\u012e")
+        buf.write("\u012f\58\35\2\u012f\u0136\b\34\1\2\u0130\u0131\t\t\2")
+        buf.write("\2\u0131\u0132\58\35\2\u0132\u0133\b\34\1\2\u0133\u0135")
+        buf.write("\3\2\2\2\u0134\u0130\3\2\2\2\u0135\u0138\3\2\2\2\u0136")
+        buf.write("\u0134\3\2\2\2\u0136\u0137\3\2\2\2\u0137\67\3\2\2\2\u0138")
+        buf.write("\u0136\3\2\2\2\u0139\u013b\7\30\2\2\u013a\u0139\3\2\2")
+        buf.write("\2\u013a\u013b\3\2\2\2\u013b\u013c\3\2\2\2\u013c\u013d")
+        buf.write("\5:\36\2\u013d\u013e\3\2\2\2\u013e\u013f\b\35\1\2\u013f")
+        buf.write("\u0148\3\2\2\2\u0140\u0142\7\24\2\2\u0141\u0140\3\2\2")
+        buf.write("\2\u0141\u0142\3\2\2\2\u0142\u0143\3\2\2\2\u0143\u0144")
+        buf.write("\7E\2\2\u0144\u0148\b\35\1\2\u0145\u0146\7F\2\2\u0146")
+        buf.write("\u0148\b\35\1\2\u0147\u013a\3\2\2\2\u0147\u0141\3\2\2")
+        buf.write("\2\u0147\u0145\3\2\2\2\u01489\3\2\2\2\u0149\u014a\7G\2")
+        buf.write("\2\u014a\u0156\b\36\1\2\u014b\u014c\7A\2\2\u014c\u0156")
+        buf.write("\b\36\1\2\u014d\u014e\5.\30\2\u014e\u014f\b\36\1\2\u014f")
+        buf.write("\u0156\3\2\2\2\u0150\u0151\7\7\2\2\u0151\u0152\5\60\31")
+        buf.write("\2\u0152\u0153\7\b\2\2\u0153\u0154\b\36\1\2\u0154\u0156")
+        buf.write("\3\2\2\2\u0155\u0149\3\2\2\2\u0155\u014b\3\2\2\2\u0155")
+        buf.write("\u014d\3\2\2\2\u0155\u0150\3\2\2\2\u0156;\3\2\2\2\u0157")
+        buf.write("\u0158\7>\2\2\u0158\u015c\7\3\2\2\u0159\u015b\5> \2\u015a")
+        buf.write("\u0159\3\2\2\2\u015b\u015e\3\2\2\2\u015c\u015a\3\2\2\2")
+        buf.write("\u015c\u015d\3\2\2\2\u015d\u015f\3\2\2\2\u015e\u015c\3")
+        buf.write("\2\2\2\u015f\u0160\7\4\2\2\u0160=\3\2\2\2\u0161\u0162")
+        buf.write("\5@!\2\u0162\u0163\7G\2\2\u0163\u016c\7\7\2\2\u0164\u0169")
+        buf.write("\5B\"\2\u0165\u0166\7\6\2\2\u0166\u0168\5B\"\2\u0167\u0165")
+        buf.write("\3\2\2\2\u0168\u016b\3\2\2\2\u0169\u0167\3\2\2\2\u0169")
+        buf.write("\u016a\3\2\2\2\u016a\u016d\3\2\2\2\u016b\u0169\3\2\2\2")
+        buf.write("\u016c\u0164\3\2\2\2\u016c\u016d\3\2\2\2\u016d\u016e\3")
+        buf.write("\2\2\2\u016e\u016f\7\b\2\2\u016f\u0170\b \1\2\u0170\u0171")
+        buf.write("\7\3\2\2\u0171\u0172\5\30\r\2\u0172\u0173\7\4\2\2\u0173")
+        buf.write("?\3\2\2\2\u0174\u0177\5 \21\2\u0175\u0177\7@\2\2\u0176")
+        buf.write("\u0174\3\2\2\2\u0176\u0175\3\2\2\2\u0177A\3\2\2\2\u0178")
+        buf.write("\u017a\5 \21\2\u0179\u017b\7D\2\2\u017a\u0179\3\2\2\2")
+        buf.write("\u017a\u017b\3\2\2\2\u017b\u017c\3\2\2\2\u017c\u017d\7")
+        buf.write("G\2\2\u017d\u017e\b\"\1\2\u017eC\3\2\2\2\33Rq\u0096\u009c")
+        buf.write("\u00af\u00cf\u00df\u00ea\u00f3\u00f7\u0103\u0106\u0113")
+        buf.write("\u011f\u012b\u0136\u013a\u0141\u0147\u0155\u015c\u0169")
+        buf.write("\u016c\u0176\u017a")
         return buf.getvalue()
 
 
@@ -274,7 +272,7 @@ class LienzoParser ( Parser ):
                      "'por'", "'en'", "'posicion'", "'x'", "'y'", "'animacion'", 
                      "'dormir'", "'mientras'", "'que'", "'si'", "'sino'", 
                      "'mensaje'", "'condicion'", "'numero'", "'funciones'", 
-                     "'mostrar'", "'nada'", "<INVALID>", "'verdadero'", 
+                     "'escribir'", "'nada'", "<INVALID>", "'verdadero'", 
                      "'falso'", "'modificable'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
@@ -289,9 +287,9 @@ class LienzoParser ( Parser ):
                       "ESCENARIO", "COLOR", "LIENZO", "EQUALS", "TAMANO", 
                       "POR", "EN", "POSICION", "X", "Y", "ANIMACION", "DORMIR", 
                       "MIENTRAS", "QUE", "SI", "SINO", "MENSAJE", "CONDICION", 
-                      "NUMERO", "FUNCIONES", "MOSTRAR", "NADA", "CONDITION_CONSTANT", 
+                      "NUMERO", "FUNCIONES", "ESCRIBIR", "NADA", "CONDITION_CONSTANT", 
                       "VERDADERO", "FALSO", "MODIFICABLE", "NUMERIC_CONSTANT", 
-                      "STRING_CONSTANT", "NOMBRE_PROPIO", "ID" ]
+                      "STRING_CONSTANT", "ID" ]
 
     RULE_program = 0
     RULE_materiales = 1
@@ -397,7 +395,7 @@ class LienzoParser ( Parser ):
     CONDICION=58
     NUMERO=59
     FUNCIONES=60
-    MOSTRAR=61
+    ESCRIBIR=61
     NADA=62
     CONDITION_CONSTANT=63
     VERDADERO=64
@@ -405,8 +403,7 @@ class LienzoParser ( Parser ):
     MODIFICABLE=66
     NUMERIC_CONSTANT=67
     STRING_CONSTANT=68
-    NOMBRE_PROPIO=69
-    ID=70
+    ID=69
 
     def __init__(self, input:TokenStream):
         super().__init__(input)
@@ -569,8 +566,8 @@ class LienzoParser ( Parser ):
         def LLAMADO(self):
             return self.getToken(LienzoParser.LLAMADO, 0)
 
-        def NOMBRE_PROPIO(self):
-            return self.getToken(LienzoParser.NOMBRE_PROPIO, 0)
+        def ID(self):
+            return self.getToken(LienzoParser.ID, 0)
 
         def DE(self):
             return self.getToken(LienzoParser.DE, 0)
@@ -614,7 +611,7 @@ class LienzoParser ( Parser ):
             self.state = 88
             self.match(LienzoParser.LLAMADO)
             self.state = 89
-            self.match(LienzoParser.NOMBRE_PROPIO)
+            self.match(LienzoParser.ID)
             self.state = 90
             self.match(LienzoParser.DE)
             self.state = 91
@@ -1177,7 +1174,7 @@ class LienzoParser ( Parser ):
             self.state = 154
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.MOSTRAR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
+            while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.ESCRIBIR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
                 self.state = 151
                 self.instruccion()
                 self.state = 156
@@ -1488,9 +1485,14 @@ class LienzoParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self._ss_expresion = None # Ss_expresionContext
 
-        def MOSTRAR(self):
-            return self.getToken(LienzoParser.MOSTRAR, 0)
+        def ESCRIBIR(self):
+            return self.getToken(LienzoParser.ESCRIBIR, 0)
+
+        def ss_expresion(self):
+            return self.getTypedRuleContext(LienzoParser.Ss_expresionContext,0)
+
 
         def EN(self):
             return self.getToken(LienzoParser.EN, 0)
@@ -1501,12 +1503,6 @@ class LienzoParser ( Parser ):
             else:
                 return self.getTypedRuleContext(LienzoParser.ExpresionContext,i)
 
-
-        def ID(self):
-            return self.getToken(LienzoParser.ID, 0)
-
-        def STRING_CONSTANT(self):
-            return self.getToken(LienzoParser.STRING_CONSTANT, 0)
 
         def getRuleIndex(self):
             return LienzoParser.RULE_mostrarMensaje
@@ -1526,17 +1522,12 @@ class LienzoParser ( Parser ):
 
         localctx = LienzoParser.MostrarMensajeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 32, self.RULE_mostrarMensaje)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 184
-            self.match(LienzoParser.MOSTRAR)
+            self.match(LienzoParser.ESCRIBIR)
             self.state = 185
-            _la = self._input.LA(1)
-            if not(_la==LienzoParser.STRING_CONSTANT or _la==LienzoParser.ID):
-                self._errHandler.recoverInline(self)
-            else:
-                self.consume()
+            localctx._ss_expresion = self.ss_expresion()
             self.state = 186
             self.match(LienzoParser.EN)
             self.state = 187
@@ -1545,6 +1536,12 @@ class LienzoParser ( Parser ):
             self.match(LienzoParser.T__3)
             self.state = 189
             self.expresion()
+
+            if localctx._ss_expresion.type == MENSAJE:
+                cuadruplos.addCuadruplo(PRINT, localctx._ss_expresion.valor, None)
+            else:
+                print("Error: linea", (None if localctx._ss_expresion is None else localctx._ss_expresion.start).line, ": solo se pueden imprimir mensajes")
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1586,9 +1583,9 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_dormir)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 191
-            self.match(LienzoParser.DORMIR)
             self.state = 192
+            self.match(LienzoParser.DORMIR)
+            self.state = 193
             self.expresion()
         except RecognitionException as re:
             localctx.exception = re
@@ -1643,33 +1640,33 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 194
-            self.match(LienzoParser.MIENTRAS)
             self.state = 195
-            self.match(LienzoParser.QUE)
+            self.match(LienzoParser.MIENTRAS)
             self.state = 196
-            self.match(LienzoParser.T__4)
+            self.match(LienzoParser.QUE)
             self.state = 197
-            localctx._ss_expresion = self.ss_expresion()
+            self.match(LienzoParser.T__4)
             self.state = 198
+            localctx._ss_expresion = self.ss_expresion()
+            self.state = 199
             self.match(LienzoParser.T__5)
 
             if localctx._ss_expresion.type != CONDICION:
                 print("Error: linea", (None if localctx._ss_expresion is None else localctx._ss_expresion.start).line, ": el estatuto 'mientras que' necesita una condicion")
 
-            self.state = 200
+            self.state = 201
             self.match(LienzoParser.T__0)
-            self.state = 204
+            self.state = 205
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.MOSTRAR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
-                self.state = 201
+            while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.ESCRIBIR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
+                self.state = 202
                 self.instruccion()
-                self.state = 206
+                self.state = 207
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 207
+            self.state = 208
             self.match(LienzoParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1719,15 +1716,15 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_cambioColor)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 209
-            self.match(LienzoParser.COLOR)
             self.state = 210
-            self.match(LienzoParser.DE)
+            self.match(LienzoParser.COLOR)
             self.state = 211
-            self.figura()
+            self.match(LienzoParser.DE)
             self.state = 212
-            self.match(LienzoParser.EQUALS)
+            self.figura()
             self.state = 213
+            self.match(LienzoParser.EQUALS)
+            self.state = 214
             self.color()
         except RecognitionException as re:
             localctx.exception = re
@@ -1743,8 +1740,8 @@ class LienzoParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NOMBRE_PROPIO(self):
-            return self.getToken(LienzoParser.NOMBRE_PROPIO, 0)
+        def ID(self):
+            return self.getToken(LienzoParser.ID, 0)
 
         def expresion(self):
             return self.getTypedRuleContext(LienzoParser.ExpresionContext,0)
@@ -1771,16 +1768,16 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 215
-            self.match(LienzoParser.NOMBRE_PROPIO)
-            self.state = 220
+            self.state = 216
+            self.match(LienzoParser.ID)
+            self.state = 221
             _la = self._input.LA(1)
             if _la==LienzoParser.T__6:
-                self.state = 216
-                self.match(LienzoParser.T__6)
                 self.state = 217
-                self.expresion()
+                self.match(LienzoParser.T__6)
                 self.state = 218
+                self.expresion()
+                self.state = 219
                 self.match(LienzoParser.T__7)
 
 
@@ -1837,50 +1834,50 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 222
-            self.match(LienzoParser.SI)
             self.state = 223
-            self.match(LienzoParser.T__4)
+            self.match(LienzoParser.SI)
             self.state = 224
-            localctx._ss_expresion = self.ss_expresion()
+            self.match(LienzoParser.T__4)
             self.state = 225
+            localctx._ss_expresion = self.ss_expresion()
+            self.state = 226
             self.match(LienzoParser.T__5)
 
             if localctx._ss_expresion.type != CONDICION:
                 print("Error: linea", (None if localctx._ss_expresion is None else localctx._ss_expresion.start).line, ": el estatuto 'si' necesita una condicion")
 
-            self.state = 227
+            self.state = 228
             self.match(LienzoParser.T__0)
-            self.state = 231
+            self.state = 232
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.MOSTRAR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
-                self.state = 228
+            while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.ESCRIBIR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
+                self.state = 229
                 self.instruccion()
-                self.state = 233
+                self.state = 234
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 234
+            self.state = 235
             self.match(LienzoParser.T__1)
-            self.state = 244
+            self.state = 245
             _la = self._input.LA(1)
             if _la==LienzoParser.SINO:
-                self.state = 235
-                self.match(LienzoParser.SINO)
                 self.state = 236
+                self.match(LienzoParser.SINO)
+                self.state = 237
                 self.match(LienzoParser.T__0)
-                self.state = 240
+                self.state = 241
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.MOSTRAR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
-                    self.state = 237
+                while ((((_la - 42)) & ~0x3f) == 0 and ((1 << (_la - 42)) & ((1 << (LienzoParser.COLOR - 42)) | (1 << (LienzoParser.POSICION - 42)) | (1 << (LienzoParser.DORMIR - 42)) | (1 << (LienzoParser.MIENTRAS - 42)) | (1 << (LienzoParser.SI - 42)) | (1 << (LienzoParser.ESCRIBIR - 42)) | (1 << (LienzoParser.ID - 42)))) != 0):
+                    self.state = 238
                     self.instruccion()
-                    self.state = 242
+                    self.state = 243
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                self.state = 243
+                self.state = 244
                 self.match(LienzoParser.T__1)
 
 
@@ -1933,37 +1930,37 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 246
-            localctx._ID = self.match(LienzoParser.ID)
             self.state = 247
+            localctx._ID = self.match(LienzoParser.ID)
+            self.state = 248
             self.match(LienzoParser.T__4)
-            self.state = 259
+            self.state = 260
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__4) | (1 << LienzoParser.T__17) | (1 << LienzoParser.T__21) | (1 << LienzoParser.CONDITION_CONSTANT))) != 0) or ((((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & ((1 << (LienzoParser.NUMERIC_CONSTANT - 67)) | (1 << (LienzoParser.STRING_CONSTANT - 67)) | (1 << (LienzoParser.ID - 67)))) != 0):
-                self.state = 248
+                self.state = 249
                 localctx.ss_exp1 = self.ss_expresion()
 
                 global currentArgumentList
                 currentArgumentList.append(((None if localctx.ss_exp1 is None else self._input.getText((localctx.ss_exp1.start,localctx.ss_exp1.stop))), localctx.ss_exp1.type))
 
-                self.state = 256
+                self.state = 257
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==LienzoParser.T__3:
-                    self.state = 250
-                    self.match(LienzoParser.T__3)
                     self.state = 251
+                    self.match(LienzoParser.T__3)
+                    self.state = 252
                     localctx.ss_exp2 = self.ss_expresion()
 
                     currentArgumentList.append(((None if localctx.ss_exp2 is None else self._input.getText((localctx.ss_exp2.start,localctx.ss_exp2.stop))), localctx.ss_exp2.type))
 
-                    self.state = 258
+                    self.state = 259
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
 
 
-            self.state = 261
+            self.state = 262
             self.match(LienzoParser.T__5)
 
             functionType = namespaceTable.getFunctionType((None if localctx._ID is None else localctx._ID.text))
@@ -2019,24 +2016,24 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 264
+            self.state = 265
             localctx.s_exp1 = self.s_expresion()
 
             localctx.type = localctx.s_exp1.type
             localctx.valor = localctx.s_exp1.valor
 
-            self.state = 272
+            self.state = 273
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==LienzoParser.T__8 or _la==LienzoParser.T__9:
-                self.state = 266
+                self.state = 267
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not(_la==LienzoParser.T__8 or _la==LienzoParser.T__9):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self.consume()
-                self.state = 267
+                self.state = 268
                 localctx.s_exp2 = self.s_expresion()
 
                 localctx.type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.s_exp2.type]
@@ -2045,7 +2042,7 @@ class LienzoParser ( Parser ):
                 else:
                     localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.s_exp2.valor)
 
-                self.state = 274
+                self.state = 275
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2096,24 +2093,24 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 275
+            self.state = 276
             localctx.exp1 = self.expresion()
 
             localctx.type = localctx.exp1.type
             localctx.valor = localctx.exp1.valor
 
-            self.state = 284
+            self.state = 285
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__10) | (1 << LienzoParser.T__11) | (1 << LienzoParser.T__12) | (1 << LienzoParser.T__13) | (1 << LienzoParser.T__14) | (1 << LienzoParser.T__15))) != 0):
-                self.state = 277
+                self.state = 278
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__10) | (1 << LienzoParser.T__11) | (1 << LienzoParser.T__12) | (1 << LienzoParser.T__13) | (1 << LienzoParser.T__14) | (1 << LienzoParser.T__15))) != 0)):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self.consume()
-                self.state = 278
+                self.state = 279
                 localctx.exp2 = self.expresion()
 
                 localctx.type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.exp2.type]
@@ -2122,7 +2119,7 @@ class LienzoParser ( Parser ):
                 else:
                     localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.exp2.valor)
 
-                self.state = 286
+                self.state = 287
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2173,24 +2170,24 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 287
+            self.state = 288
             localctx.term1 = self.termino()
 
             localctx.type = localctx.term1.type
             localctx.valor = localctx.term1.valor
 
-            self.state = 296
+            self.state = 297
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==LienzoParser.T__16 or _la==LienzoParser.T__17:
-                self.state = 289
+                self.state = 290
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not(_la==LienzoParser.T__16 or _la==LienzoParser.T__17):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self.consume()
-                self.state = 290
+                self.state = 291
                 localctx.term2 = self.termino()
 
                 type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.term2.type]
@@ -2200,7 +2197,7 @@ class LienzoParser ( Parser ):
                     localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.term2.valor)
                     
 
-                self.state = 298
+                self.state = 299
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2251,24 +2248,24 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 299
+            self.state = 300
             localctx.factor1 = self.factor()
 
             localctx.type = localctx.factor1.type
             localctx.valor = localctx.factor1.valor
 
-            self.state = 307
+            self.state = 308
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__18) | (1 << LienzoParser.T__19) | (1 << LienzoParser.T__20))) != 0):
-                self.state = 301
+                self.state = 302
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__18) | (1 << LienzoParser.T__19) | (1 << LienzoParser.T__20))) != 0)):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self.consume()
-                self.state = 302
+                self.state = 303
                 localctx.factor2 = self.factor()
 
                 type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.factor2.type]
@@ -2277,7 +2274,7 @@ class LienzoParser ( Parser ):
                 else:
                     localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.factor2.valor)
 
-                self.state = 309
+                self.state = 310
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2331,18 +2328,18 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 54, self.RULE_factor)
         self._la = 0 # Token type
         try:
-            self.state = 324
+            self.state = 325
             token = self._input.LA(1)
             if token in [LienzoParser.T__4, LienzoParser.T__21, LienzoParser.CONDITION_CONSTANT, LienzoParser.ID]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 311
+                self.state = 312
                 _la = self._input.LA(1)
                 if _la==LienzoParser.T__21:
-                    self.state = 310
+                    self.state = 311
                     localctx.neg = self.match(LienzoParser.T__21)
 
 
-                self.state = 313
+                self.state = 314
                 localctx._factor_aux = self.factor_aux()
 
                 localctx.type = localctx._factor_aux.type
@@ -2358,31 +2355,31 @@ class LienzoParser ( Parser ):
 
             elif token in [LienzoParser.T__17, LienzoParser.NUMERIC_CONSTANT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 318
+                self.state = 319
                 _la = self._input.LA(1)
                 if _la==LienzoParser.T__17:
-                    self.state = 317
+                    self.state = 318
                     localctx.neg = self.match(LienzoParser.T__17)
 
 
-                self.state = 320
+                self.state = 321
                 localctx._NUMERIC_CONSTANT = self.match(LienzoParser.NUMERIC_CONSTANT)
 
                 localctx.type = NUMERO
 
                 if (None if localctx.neg is None else localctx.neg.text):
-                    localctx.valor = cuadruplos.addCuadruplo((None if localctx.neg is None else localctx.neg.text),(None if localctx._NUMERIC_CONSTANT is None else localctx._NUMERIC_CONSTANT.text),None)
+                    localctx.valor = cuadruplos.addCuadruplo((None if localctx.neg is None else localctx.neg.text),num((None if localctx._NUMERIC_CONSTANT is None else localctx._NUMERIC_CONSTANT.text)),None)
                 else:
                     localctx.valor = num((None if localctx._NUMERIC_CONSTANT is None else localctx._NUMERIC_CONSTANT.text))
 
 
             elif token in [LienzoParser.STRING_CONSTANT]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 322
+                self.state = 323
                 localctx._STRING_CONSTANT = self.match(LienzoParser.STRING_CONSTANT)
 
                 localctx.type = MENSAJE
-                localctx.valor = (None if localctx._STRING_CONSTANT is None else localctx._STRING_CONSTANT.text)
+                localctx.valor = (None if localctx._STRING_CONSTANT is None else localctx._STRING_CONSTANT.text)[1:-1]
 
 
             else:
@@ -2441,12 +2438,12 @@ class LienzoParser ( Parser ):
         localctx = LienzoParser.Factor_auxContext(self, self._ctx, self.state)
         self.enterRule(localctx, 56, self.RULE_factor_aux)
         try:
-            self.state = 338
+            self.state = 339
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 326
+                self.state = 327
                 localctx._ID = self.match(LienzoParser.ID)
 
                 localctx.type = namespaceTable.getVariableType((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
@@ -2461,17 +2458,17 @@ class LienzoParser ( Parser ):
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 328
+                self.state = 329
                 localctx._CONDITION_CONSTANT = self.match(LienzoParser.CONDITION_CONSTANT)
 
                 localctx.type = CONDICION
-                localctx.valor = (None if localctx._CONDITION_CONSTANT is None else localctx._CONDITION_CONSTANT.text)
+                localctx.valor = True if (None if localctx._CONDITION_CONSTANT is None else localctx._CONDITION_CONSTANT.text) == 'verdadero' else False
 
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 330
+                self.state = 331
                 localctx._llamadaFuncion = self.llamadaFuncion()
 
                 functionType = localctx._llamadaFuncion.type
@@ -2485,11 +2482,11 @@ class LienzoParser ( Parser ):
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 333
-                self.match(LienzoParser.T__4)
                 self.state = 334
-                localctx._ss_expresion = self.ss_expresion()
+                self.match(LienzoParser.T__4)
                 self.state = 335
+                localctx._ss_expresion = self.ss_expresion()
+                self.state = 336
                 self.match(LienzoParser.T__5)
 
                 localctx.type = localctx._ss_expresion.type
@@ -2546,21 +2543,21 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 340
-            self.match(LienzoParser.FUNCIONES)
             self.state = 341
+            self.match(LienzoParser.FUNCIONES)
+            self.state = 342
             self.match(LienzoParser.T__0)
-            self.state = 345
+            self.state = 346
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.MENSAJE) | (1 << LienzoParser.CONDICION) | (1 << LienzoParser.NUMERO) | (1 << LienzoParser.NADA))) != 0):
-                self.state = 342
+                self.state = 343
                 self.func()
-                self.state = 347
+                self.state = 348
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 348
+            self.state = 349
             self.match(LienzoParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -2617,32 +2614,32 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 350
-            localctx._tipoFunc = self.tipoFunc()
             self.state = 351
-            localctx._ID = self.match(LienzoParser.ID)
+            localctx._tipoFunc = self.tipoFunc()
             self.state = 352
+            localctx._ID = self.match(LienzoParser.ID)
+            self.state = 353
             self.match(LienzoParser.T__4)
-            self.state = 361
+            self.state = 362
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.MENSAJE) | (1 << LienzoParser.CONDICION) | (1 << LienzoParser.NUMERO))) != 0):
-                self.state = 353
+                self.state = 354
                 self.parametro()
-                self.state = 358
+                self.state = 359
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==LienzoParser.T__3:
-                    self.state = 354
-                    self.match(LienzoParser.T__3)
                     self.state = 355
+                    self.match(LienzoParser.T__3)
+                    self.state = 356
                     self.parametro()
-                    self.state = 360
+                    self.state = 361
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
 
 
-            self.state = 363
+            self.state = 364
             self.match(LienzoParser.T__5)
 
             global currentFunctionName
@@ -2654,11 +2651,11 @@ class LienzoParser ( Parser ):
                 memoryregisters.newFunction(currentFunctionName)
             currentParameterList = []
 
-            self.state = 365
-            self.match(LienzoParser.T__0)
             self.state = 366
-            self.cuerpo()
+            self.match(LienzoParser.T__0)
             self.state = 367
+            self.cuerpo()
+            self.state = 368
             self.match(LienzoParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -2700,16 +2697,16 @@ class LienzoParser ( Parser ):
         localctx = LienzoParser.TipoFuncContext(self, self._ctx, self.state)
         self.enterRule(localctx, 62, self.RULE_tipoFunc)
         try:
-            self.state = 371
+            self.state = 372
             token = self._input.LA(1)
             if token in [LienzoParser.MENSAJE, LienzoParser.CONDICION, LienzoParser.NUMERO]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 369
+                self.state = 370
                 self.tipo()
 
             elif token in [LienzoParser.NADA]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 370
+                self.state = 371
                 self.match(LienzoParser.NADA)
 
             else:
@@ -2763,16 +2760,16 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 373
+            self.state = 374
             localctx._tipo = self.tipo()
-            self.state = 375
+            self.state = 376
             _la = self._input.LA(1)
             if _la==LienzoParser.MODIFICABLE:
-                self.state = 374
+                self.state = 375
                 localctx._MODIFICABLE = self.match(LienzoParser.MODIFICABLE)
 
 
-            self.state = 377
+            self.state = 378
             localctx._ID = self.match(LienzoParser.ID)
 
             global currentParameterList

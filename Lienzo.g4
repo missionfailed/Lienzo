@@ -8,7 +8,7 @@ options {
 from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
-from cuadruplos import Cuadruplos
+from cuadruplos import *
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
@@ -17,8 +17,6 @@ currentArgumentList = []
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
-
-diccionario_ids = {}
 
 CONDICION = "condicion"
 MENSAJE = "mensaje"
@@ -90,7 +88,7 @@ materiales:
 	;
 
 material:
-	(NUMERIC_CONSTANT tipoFigura color LLAMADO NOMBRE_PROPIO DE expresion POR expresion ';')
+	(NUMERIC_CONSTANT tipoFigura color LLAMADO ID DE expresion POR expresion ';')
 	;
 
 tipoFigura:
@@ -197,7 +195,13 @@ tipo:
 	;
 	
 mostrarMensaje:
-	MOSTRAR (ID | STRING_CONSTANT) EN expresion ',' expresion
+	ESCRIBIR ss_expresion EN expresion ',' expresion
+{
+if $ss_expresion.type == MENSAJE:
+    cuadruplos.addCuadruplo(PRINT, $ss_expresion.valor, None)
+else:
+    print("Error: linea", $ss_expresion.start.line, ": solo se pueden imprimir mensajes")
+}
 	;
 
 dormir:
@@ -218,7 +222,7 @@ cambioColor:
 	;
 
 figura:
-	NOMBRE_PROPIO ('[' expresion ']')?
+	ID ('[' expresion ']')?
 	;
 
 condicional:
@@ -340,14 +344,14 @@ else:
 $type = NUMERO
 
 if $neg.text:
-    $valor = cuadruplos.addCuadruplo($neg.text,$NUMERIC_CONSTANT.text,None)
+    $valor = cuadruplos.addCuadruplo($neg.text,num($NUMERIC_CONSTANT.text),None)
 else:
     $valor = num($NUMERIC_CONSTANT.text)
 }) |
     STRING_CONSTANT 
 {
 $type = MENSAJE
-$valor = $STRING_CONSTANT.text
+$valor = $STRING_CONSTANT.text[1:-1]
 }
 	;
 
@@ -364,7 +368,7 @@ else:
 } | CONDITION_CONSTANT 
 {
 $type = CONDICION
-$valor = $CONDITION_CONSTANT.text
+$valor = True if $CONDITION_CONSTANT.text == 'verdadero' else False
 }
 | llamadaFuncion
 {
@@ -458,13 +462,12 @@ MENSAJE : 'mensaje' ;
 CONDICION : 'condicion' ;
 NUMERO : 'numero' ;
 FUNCIONES : 'funciones' ;
-MOSTRAR : 'mostrar' ;
+ESCRIBIR : 'escribir' ;
 NADA : 'nada' ;
 CONDITION_CONSTANT : VERDADERO | FALSO ;
 VERDADERO : 'verdadero' ;
 FALSO : 'falso' ;
 MODIFICABLE : 'modificable' ;
-NUMERIC_CONSTANT : [0-9]+ ;
+NUMERIC_CONSTANT : [0-9]+('.'[0-9]+)? ;
 STRING_CONSTANT : '"' ~('"')* '"' ;
-NOMBRE_PROPIO : [A-Z][A-Za-z]* ;
-ID : [a-z][A-Za-z]* ;
+ID : [A-Za-z]+ ;
