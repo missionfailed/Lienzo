@@ -244,7 +244,15 @@ if $ss_expresion.type != CONDICION:
 	;
 
 llamadaFuncion returns [type]:
-	ID '(' (ss_exp1=ss_expresion
+	ID 
+{
+functionType = namespaceTable.getFunctionType($ID.text)
+if not functionType:
+    print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, "inexistente")
+else:
+    $type = None if functionType == "nada" else functionType
+}
+    '(' (ss_exp1=ss_expresion
 {
 global currentArgumentList
 currentArgumentList.append(($ss_exp1.text, $ss_exp1.type))
@@ -256,11 +264,8 @@ currentArgumentList.append(($ss_exp2.text, $ss_exp2.type))
 }
     )*)? ')'
 {
-functionType = namespaceTable.getFunctionType($ID.text)
-if functionType and namespaceTable.argumentsAgree($ID.text, currentArgumentList):
-    $type = None if functionType == "nada" else functionType
-else:
-    print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, "inexistente")
+if not namespaceTable.argumentsAgree($ID.text, currentArgumentList):
+    print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, ": argumentos incorrectos")
 }
 	;
 
@@ -373,6 +378,7 @@ if $type:
     $valor = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
 else:
     $valor = None
+    print("Error: linea", $ID.line, ": variable", $ID.text, "no ha sido declarada")
 
 } | CONDITION_CONSTANT 
 {

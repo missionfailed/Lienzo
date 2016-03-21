@@ -12,20 +12,20 @@ dibujo {
 	}
 	
 	funciones {
-        nada wow() {
+        nada wow(mensaje modificable a) {
             numero n = 3;
             escribir "Perro" en 13,4;
         }
 	}
     
 	animacion {
-        numero perro = 3;
+        numero perro = "hola";
         mensaje equis = "equis";
-		condicion mexico = verdadero;
-        condicion dos = falso;
+		condicion mexico = verdadero & falso;
+        condicion dos = !mexico;
         perro = -4-3.7;
         perro = perro;
         leer equis;
-        wow(3);
+        wow(1+2);
 	}
 }

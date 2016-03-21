@@ -1,4 +1,13 @@
+import re
+
 class Variable:
+    ''' Una variable tiene nombre y tipo'''
+    def __init__(self,nameOfVariable,typeOfVariable,ref):
+        self.name=nameOfVariable
+        self.type=typeOfVariable
+        self.reference=ref
+        
+class Parameter:
     ''' Una variable tiene nombre y tipo'''
     def __init__(self,nameOfVariable,typeOfVariable,ref):
         self.name=nameOfVariable
@@ -11,22 +20,30 @@ class Function:
         self.name = nameOfFunction
         self.type = typeOfFunction
         self.variables = []
+        self.parameters = []
         
     def addVariable(self,nameOfVariable,typeOfVariable,ref):
         auxiliar = Variable(nameOfVariable,typeOfVariable,ref)
         self.variables.append(auxiliar)
+    
+    def addParameter(self,nameOfVariable,typeOfVariable,ref):
+        auxiliar = Parameter(nameOfVariable,typeOfVariable,ref)
+        self.parameters.append(auxiliar)
 
     def addVariableObject(self,auxiliar):
         self.variables.append(auxiliar)
+    
+    def addParameterObject(self,auxiliar):
+        self.parameters.append(auxiliar)    
 
     def searchVariable(self,variablename):
-        for f in self.variables:
+        for f in self.variables + self.parameters:
             if variablename==f.name:
-                return True
+                return True               
         return False
     
     def getType(self,variablename):
-        for f in self.variables:
+        for f in self.variables+ self.parameters:
             if variablename==f.name:
                 return f.type
         return None        
@@ -45,7 +62,7 @@ class NamespaceTable:
             auxiliar = Function(nameOfFunction,typeOfFunction)
             "Nombre del parametro, Tipo del parametro, Booleano Referencia True Valor False"
             for item in parameterList:
-                auxiliar.addVariable(item[0],item[1],item[2])
+                auxiliar.addParameter(item[0],item[1],item[2])
             self.tabla[nameOfFunction]=auxiliar
             return True
     
@@ -90,4 +107,18 @@ class NamespaceTable:
             return None
     
     def argumentsAgree(self, nameOfFunction, argumentList):
-        return True
+        tamano = len(argumentList)
+        pattern = re.compile("[A-Za-z]+$")
+        if tamano == len(self.tabla[nameOfFunction].parameters):
+            for i,j in list(zip(self.tabla[nameOfFunction].parameters,argumentList)):
+                if i.type != j[1]:
+                    return False
+                else:
+                    '''Por referencia'''
+                    if i.reference:
+                        "Hacer match para regexp por ref"
+                        if not pattern.match(j[0]):
+                            return False                  
+            return True                
+        else:
+            return False
