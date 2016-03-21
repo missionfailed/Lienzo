@@ -72,6 +72,12 @@ cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : CONDICION})
 cubo[NUMERO]['&'] = defaultdict(lambda: None, {})
 cubo[NUMERO]['|'] = defaultdict(lambda: None, {})
 
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
+
 
 def serializedATN():
     with StringIO() as buf:

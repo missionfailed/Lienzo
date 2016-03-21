@@ -73,6 +73,12 @@ cubo[NUMERO]['=='] = defaultdict(lambda: None, {NUMERO : CONDICION})
 cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : CONDICION})
 cubo[NUMERO]['&'] = defaultdict(lambda: None, {})
 cubo[NUMERO]['|'] = defaultdict(lambda: None, {})
+
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
 }
 
 program:
@@ -152,7 +158,8 @@ if $ss_expresion.type != $tipo.text:
     print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", $tipo.text)
 else:
     namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
-    memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
+    idcontent= memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
+    cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
 }
 	;
 
@@ -328,7 +335,15 @@ else:
     else:
         $valor = $factor_aux.valor
 } |
-    ('-'? NUMERIC_CONSTANT {$type = NUMERO}) |
+    (neg='-'? NUMERIC_CONSTANT 
+{
+$type = NUMERO
+
+if $neg.text:
+    $valor = cuadruplos.addCuadruplo($neg.text,$NUMERIC_CONSTANT.text,None)
+else:
+    $valor = num($NUMERIC_CONSTANT.text)
+}) |
     STRING_CONSTANT 
 {
 $type = MENSAJE

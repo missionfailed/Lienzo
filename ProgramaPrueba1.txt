@@ -12,32 +12,15 @@ dibujo {
 	}
 	
 	funciones {
-		nada unaFuncion(numero modificable a, numero b) {
-			color de Izquierdo = rojo;
-			mostrar "hola" en 3, 4;
-		}
-        
-        mensaje wow(numero modificable a, numero b) {
-            mostrar "ciao" en 4,3;
-        }
+
 	}
     
 	animacion {
         numero perro = 3;
         mensaje equis = "equis";
-		condicion mexico = !(verdadero | falso);
-        condicion dos = !falso & verdadero;
-        wow(2, 4);
-        perro = 4 * 3 / 6 + 9;
-        dos = "perro" == "hola" == falso;
-		mientras que (mexico) {
-			si (dos & (1 == 1)) {
-				unaFuncion(1, 2, 3);
-			}
-			sino {
-				unaFuncion();
-			};
-			dormir 1000;
-		};
+		condicion mexico = verdadero;
+        condicion dos = verdadero;
+        perro = 4+3;
+        perro = perro;
 	}
 }

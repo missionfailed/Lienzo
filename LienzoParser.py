@@ -73,6 +73,12 @@ cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : CONDICION})
 cubo[NUMERO]['&'] = defaultdict(lambda: None, {})
 cubo[NUMERO]['|'] = defaultdict(lambda: None, {})
 
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
+
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3H")
@@ -1245,7 +1251,8 @@ class LienzoParser ( Parser ):
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Variable", (None if localctx._ID is None else localctx._ID.text), "es de tipo", (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))))
             else:
                 namespaceTable.addVariable((None if localctx._ID is None else localctx._ID.text), (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))), currentFunctionName)
-                memoryregisters.createMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
+                idcontent= memoryregisters.createMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
+                cuadruplos.addCuadruplo('=', localctx._ss_expresion.valor,None,idcontent)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2291,6 +2298,7 @@ class LienzoParser ( Parser ):
             self.valor = None
             self.neg = None # Token
             self._factor_aux = None # Factor_auxContext
+            self._NUMERIC_CONSTANT = None # Token
             self._STRING_CONSTANT = None # Token
 
         def factor_aux(self):
@@ -2354,12 +2362,19 @@ class LienzoParser ( Parser ):
                 _la = self._input.LA(1)
                 if _la==LienzoParser.T__17:
                     self.state = 317
-                    self.match(LienzoParser.T__17)
+                    localctx.neg = self.match(LienzoParser.T__17)
 
 
                 self.state = 320
-                self.match(LienzoParser.NUMERIC_CONSTANT)
+                localctx._NUMERIC_CONSTANT = self.match(LienzoParser.NUMERIC_CONSTANT)
+
                 localctx.type = NUMERO
+
+                if (None if localctx.neg is None else localctx.neg.text):
+                    localctx.valor = cuadruplos.addCuadruplo((None if localctx.neg is None else localctx.neg.text),(None if localctx._NUMERIC_CONSTANT is None else localctx._NUMERIC_CONSTANT.text),None)
+                else:
+                    localctx.valor = num((None if localctx._NUMERIC_CONSTANT is None else localctx._NUMERIC_CONSTANT.text))
+
 
             elif token in [LienzoParser.STRING_CONSTANT]:
                 self.enterOuterAlt(localctx, 3)
