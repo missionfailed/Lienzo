@@ -6,11 +6,19 @@ from io import StringIO
 
 from namespace import NamespaceTable
 from collections import defaultdict
+from MemoryRegister import MemoryRegisters
+from cuadruplos import Cuadruplos
+
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
 currentParameterList = []
 currentArgumentList = []
+
+memoryregisters = MemoryRegisters()
+cuadruplos = Cuadruplos()
+
+diccionario_ids = {}
 
 CONDICION = "condicion"
 MENSAJE = "mensaje"
@@ -1093,7 +1101,8 @@ class LienzoParser ( Parser ):
 
             global currentFunctionName
             currentFunctionName = "animacion"
-            namespaceTable.addFunction("animacion", "nada", [])
+            namespaceTable.addFunction(currentFunctionName, "nada", [])
+            memoryregisters.newFunction(currentFunctionName)
 
             self.state = 141
             self.match(LienzoParser.T__0)
@@ -1237,6 +1246,7 @@ class LienzoParser ( Parser ):
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Variable", (None if localctx._ID is None else localctx._ID.text), "es de tipo", (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))))
             else:
                 namespaceTable.addVariable((None if localctx._ID is None else localctx._ID.text), (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))), currentFunctionName)
+                memoryregisters.createMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1405,6 +1415,9 @@ class LienzoParser ( Parser ):
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Variable", (None if localctx._ID is None else localctx._ID.text), "no ha sido declarada")
             elif localctx._ss_expresion.type != idType:
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Variable", (None if localctx._ID is None else localctx._ID.text), "es de tipo", idType)
+            else:
+                idcontent = memoryregisters.getMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
+                cuadruplos.addCuadruplo('=', localctx._ss_expresion.valor,None,idcontent)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1967,6 +1980,7 @@ class LienzoParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type = None
+            self.valor = None
             self.s_exp1 = None # S_expresionContext
             self.op = None # Token
             self.s_exp2 = None # S_expresionContext
@@ -2001,7 +2015,10 @@ class LienzoParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 264
             localctx.s_exp1 = self.s_expresion()
+
             localctx.type = localctx.s_exp1.type
+            localctx.valor = localctx.s_exp1.valor
+
             self.state = 272
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -2019,6 +2036,8 @@ class LienzoParser ( Parser ):
                 localctx.type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.s_exp2.type]
                 if not type:
                     print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.s_exp2.type)
+                else:
+                    localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.s_exp2.valor)
 
                 self.state = 274
                 self._errHandler.sync(self)
@@ -2038,6 +2057,7 @@ class LienzoParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type = None
+            self.valor = None
             self.exp1 = None # ExpresionContext
             self.op = None # Token
             self.exp2 = None # ExpresionContext
@@ -2072,7 +2092,10 @@ class LienzoParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 275
             localctx.exp1 = self.expresion()
+
             localctx.type = localctx.exp1.type
+            localctx.valor = localctx.exp1.valor
+
             self.state = 284
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -2090,6 +2113,8 @@ class LienzoParser ( Parser ):
                 localctx.type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.exp2.type]
                 if not type:
                     print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.exp2.type)
+                else:
+                    localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.exp2.valor)
 
                 self.state = 286
                 self._errHandler.sync(self)
@@ -2109,6 +2134,7 @@ class LienzoParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type = None
+            self.valor = None
             self.term1 = None # TerminoContext
             self.op = None # Token
             self.term2 = None # TerminoContext
@@ -2143,7 +2169,10 @@ class LienzoParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 287
             localctx.term1 = self.termino()
+
             localctx.type = localctx.term1.type
+            localctx.valor = localctx.term1.valor
+
             self.state = 296
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -2161,6 +2190,9 @@ class LienzoParser ( Parser ):
                 type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.term2.type]
                 if not type:
                     print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.term2.type)
+                else:
+                    localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.term2.valor)
+                    
 
                 self.state = 298
                 self._errHandler.sync(self)
@@ -2180,6 +2212,7 @@ class LienzoParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type = None
+            self.valor = None
             self.factor1 = None # FactorContext
             self.op = None # Token
             self.factor2 = None # FactorContext
@@ -2214,7 +2247,10 @@ class LienzoParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 299
             localctx.factor1 = self.factor()
+
             localctx.type = localctx.factor1.type
+            localctx.valor = localctx.factor1.valor
+
             self.state = 307
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -2232,6 +2268,8 @@ class LienzoParser ( Parser ):
                 type = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.factor2.type]
                 if not type:
                     print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.factor2.type)
+                else:
+                    localctx.valor = cuadruplos.addCuadruplo((None if localctx.op is None else localctx.op.text),localctx.valor,localctx.factor2.valor)
 
                 self.state = 309
                 self._errHandler.sync(self)
@@ -2251,8 +2289,10 @@ class LienzoParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type = None
+            self.valor = None
             self.neg = None # Token
             self._factor_aux = None # Factor_auxContext
+            self._STRING_CONSTANT = None # Token
 
         def factor_aux(self):
             return self.getTypedRuleContext(LienzoParser.Factor_auxContext,0)
@@ -2302,6 +2342,11 @@ class LienzoParser ( Parser ):
                 if (None if localctx.neg is None else localctx.neg.text) and localctx._factor_aux.type != CONDICION:
                     print("Error: linea", (0 if localctx.neg is None else localctx.neg.line), ": operador", (None if localctx.neg is None else localctx.neg.text), "no puede ser aplicado a", localctx._factor_aux.type)
                     localctx.type = None
+                else:
+                    if (None if localctx.neg is None else localctx.neg.text):
+                        localctx.valor = cuadruplos.addCuadruplo((None if localctx.neg is None else localctx.neg.text),localctx._factor_aux.valor,None)
+                    else:
+                        localctx.valor = localctx._factor_aux.valor
 
 
             elif token in [LienzoParser.T__17, LienzoParser.NUMERIC_CONSTANT]:
@@ -2320,8 +2365,11 @@ class LienzoParser ( Parser ):
             elif token in [LienzoParser.STRING_CONSTANT]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 322
-                self.match(LienzoParser.STRING_CONSTANT)
+                localctx._STRING_CONSTANT = self.match(LienzoParser.STRING_CONSTANT)
+
                 localctx.type = MENSAJE
+                localctx.valor = (None if localctx._STRING_CONSTANT is None else localctx._STRING_CONSTANT.text)
+
 
             else:
                 raise NoViableAltException(self)
@@ -2340,7 +2388,9 @@ class LienzoParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type = None
+            self.valor = None
             self._ID = None # Token
+            self._CONDITION_CONSTANT = None # Token
             self._llamadaFuncion = None # LlamadaFuncionContext
             self._ss_expresion = None # Ss_expresionContext
 
@@ -2387,13 +2437,22 @@ class LienzoParser ( Parser ):
 
                 localctx.type = namespaceTable.getVariableType((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
 
+                if localctx.type:
+                    localctx.valor = memoryregisters.getMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
+                else:
+                    localctx.valor = None
+
+
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 328
-                self.match(LienzoParser.CONDITION_CONSTANT)
+                localctx._CONDITION_CONSTANT = self.match(LienzoParser.CONDITION_CONSTANT)
+
                 localctx.type = CONDICION
+                localctx.valor = (None if localctx._CONDITION_CONSTANT is None else localctx._CONDITION_CONSTANT.text)
+
                 pass
 
             elif la_ == 3:
@@ -2403,6 +2462,10 @@ class LienzoParser ( Parser ):
 
                 functionType = localctx._llamadaFuncion.type
                 localctx.type = functionType if functionType != "nada" else None
+                if functionType:
+                    pass
+                else:
+                    localctx.valor = None
 
                 pass
 
@@ -2416,6 +2479,10 @@ class LienzoParser ( Parser ):
                 self.match(LienzoParser.T__5)
 
                 localctx.type = localctx._ss_expresion.type
+                if localctx.type:
+                    localctx.valor = localctx._ss_expresion.valor
+                else:
+                    localctx.valor = None
 
                 pass
 
@@ -2569,6 +2636,8 @@ class LienzoParser ( Parser ):
             currentFunctionName = (None if localctx._ID is None else localctx._ID.text)
             if not namespaceTable.addFunction(currentFunctionName, (None if localctx._tipoFunc is None else self._input.getText((localctx._tipoFunc.start,localctx._tipoFunc.stop))), currentParameterList):
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": Funcion", (None if localctx._ID is None else localctx._ID.text), "ya fue declarada")
+            else:
+                memoryregisters.newFunction(currentFunctionName)
             currentParameterList = []
 
             self.state = 365

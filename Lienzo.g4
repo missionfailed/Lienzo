@@ -179,7 +179,7 @@ if not idType:
 elif $ss_expresion.type != idType:
     print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", idType)
 else:
-    idcontent = memoryregisters.getMemoryRegister($ID.text)
+    idcontent = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
     cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
 }
 	;
@@ -249,7 +249,7 @@ ss_expresion returns [type,valor]:
     s_exp1=s_expresion 
 {
 $type = $s_exp1.type
-$valor = $s_exp2.valor
+$valor = $s_exp1.valor
 }
     (op=('&' | '|') s_exp2=s_expresion
 {
@@ -343,7 +343,7 @@ factor_aux returns[type,valor]:
 $type = namespaceTable.getVariableType($ID.text, currentFunctionName)
 
 if $type:
-    $valor = memoryregisters.getMemoryRegister()
+    $valor = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
 else:
     $valor = None
 
@@ -357,14 +357,14 @@ $valor = $CONDITION_CONSTANT.text
 functionType = $llamadaFuncion.type
 $type = functionType if functionType != "nada" else None
 if functionType:
-    $valor = MemoryRegister()
+    pass
 else:
     $valor = None
 } | '(' ss_expresion ')'
 {
 $type = $ss_expresion.type
 if $type:
-    $valor = $ss_expresion.value
+    $valor = $ss_expresion.valor
 else:
     $valor = None
 }

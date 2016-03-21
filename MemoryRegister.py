@@ -1,24 +1,24 @@
 class MemoryRegisters:
     
-    def __init__():
-        registers = {}
+    def __init__(self):
+        self.registers = {}
     
     def newFunction(self, nameOfFunction):
-        registers[nameOfFunction] = {}
+        self.registers[nameOfFunction] = {}
     
     def createMemoryRegister(self, nameOfVariable, nameOfFunction):
-        registers[nameOfFunction][nameOfVariable] = MemoryRegister()
+        self.registers[nameOfFunction][nameOfVariable] = MemoryRegister()
     
     def getMemoryRegister(self, nameOfVariable, nameOfFunction):
-        return registers[nameOfFunction][nameOfVariable]
+        return self.registers[nameOfFunction][nameOfVariable]
         
 class MemoryRegister:
 
     def __init__(self):
-        content = None
+        self.content = None
     
     def write(self, c):
-        content = c
+        self.content = c
         
     def read(self):
-        return content
+        return self.content
