@@ -1,4 +1,4 @@
-from MemoryRegister import MemoryRegisters
+from MemoryRegister import *
 
 class Cuadruplos:
     def __init__(self):
@@ -6,7 +6,7 @@ class Cuadruplos:
     
     def addCuadruplo(self, operator, op1, op2, t=None):
         if not t:
-            t = MemoryRegister()    
+            t = MemoryRegister()
         self.listaCuadruplos.append((operator, op1, op2, t))
         return t
         
