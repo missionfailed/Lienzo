@@ -7,6 +7,7 @@ else:
 
 from namespace import NamespaceTable
 from collections import defaultdict
+from MemoryRegister import MemoryRegisters
 from cuadruplos import Cuadruplos
 
 
@@ -15,7 +16,9 @@ currentFunctionName = ""
 currentParameterList = []
 currentArgumentList = []
 
+memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
+
 diccionario_ids = {}
 
 CONDICION = "condicion"
