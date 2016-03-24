@@ -18,44 +18,44 @@ currentArgumentList = []
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
 
-CONDICION = "condicion"
-MENSAJE = "mensaje"
+BOLEANO = "boleano"
+TEXTO = "texto"
 NUMERO = "numero"
 
 cubo = {}
-cubo[CONDICION] = {}
-cubo[MENSAJE] = {}
+cubo[BOLEANO] = {}
+cubo[TEXTO] = {}
 cubo[NUMERO] = {}
 
-# Condiciones
-cubo[CONDICION]['+'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['-'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['*'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['/'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['%'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['<'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['>'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['<='] = defaultdict(lambda: None, {})
-cubo[CONDICION]['>='] = defaultdict(lambda: None, {})
-cubo[CONDICION]['=='] = defaultdict(lambda: None, {CONDICION : CONDICION})
-cubo[CONDICION]['!='] = defaultdict(lambda: None, {CONDICION : CONDICION})
-cubo[CONDICION]['&'] = defaultdict(lambda: None, {CONDICION : CONDICION})
-cubo[CONDICION]['|'] = defaultdict(lambda: None, {CONDICION : CONDICION})
+# Boleanos
+cubo[BOLEANO]['+'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['-'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['*'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['/'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['%'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['<'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['>'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['<='] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['>='] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['=='] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
+cubo[BOLEANO]['!='] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
+cubo[BOLEANO]['&'] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
+cubo[BOLEANO]['|'] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
 
 # Mensajes
-cubo[MENSAJE]['+'] = defaultdict(lambda: None, {MENSAJE : MENSAJE})
-cubo[MENSAJE]['-'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['*'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['/'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['%'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['<'] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['>'] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['<='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['>='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['=='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['!='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['&'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['|'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['+'] = defaultdict(lambda: None, {TEXTO : TEXTO})
+cubo[TEXTO]['-'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['*'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['/'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['%'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['<'] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['>'] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['<='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['>='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['=='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['!='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['&'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['|'] = defaultdict(lambda: None, {})
 
 # Numero
 cubo[NUMERO]['+'] = defaultdict(lambda: None, {NUMERO : NUMERO})
@@ -63,12 +63,12 @@ cubo[NUMERO]['-'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['/'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['%'] = defaultdict(lambda: None, {NUMERO : NUMERO})
-cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['>'] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['<='] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['>='] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['=='] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['>'] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['<='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['>='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['=='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
 cubo[NUMERO]['&'] = defaultdict(lambda: None, {})
 cubo[NUMERO]['|'] = defaultdict(lambda: None, {})
 
@@ -77,6 +77,9 @@ def num(s):
         return int(s)
     except ValueError:
         return float(s)
+
+def error(linea, mensaje):
+    print("Error: linea", linea, ":", mensaje)
 
 
 # This class defines a complete listener for a parse tree produced by LienzoParser.
@@ -91,48 +94,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#materiales.
-    def enterMateriales(self, ctx:LienzoParser.MaterialesContext):
+    # Enter a parse tree produced by LienzoParser#lienzo.
+    def enterLienzo(self, ctx:LienzoParser.LienzoContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#materiales.
-    def exitMateriales(self, ctx:LienzoParser.MaterialesContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#material.
-    def enterMaterial(self, ctx:LienzoParser.MaterialContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#material.
-    def exitMaterial(self, ctx:LienzoParser.MaterialContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#tipoFigura.
-    def enterTipoFigura(self, ctx:LienzoParser.TipoFiguraContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#tipoFigura.
-    def exitTipoFigura(self, ctx:LienzoParser.TipoFiguraContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#color.
-    def enterColor(self, ctx:LienzoParser.ColorContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#color.
-    def exitColor(self, ctx:LienzoParser.ColorContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#escenario.
-    def enterEscenario(self, ctx:LienzoParser.EscenarioContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#escenario.
-    def exitEscenario(self, ctx:LienzoParser.EscenarioContext):
+    # Exit a parse tree produced by LienzoParser#lienzo.
+    def exitLienzo(self, ctx:LienzoParser.LienzoContext):
         pass
 
 
@@ -145,6 +112,15 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LienzoParser#color.
+    def enterColor(self, ctx:LienzoParser.ColorContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#color.
+    def exitColor(self, ctx:LienzoParser.ColorContext):
+        pass
+
+
     # Enter a parse tree produced by LienzoParser#tamanoLienzo.
     def enterTamanoLienzo(self, ctx:LienzoParser.TamanoLienzoContext):
         pass
@@ -154,30 +130,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#posicion.
-    def enterPosicion(self, ctx:LienzoParser.PosicionContext):
+    # Enter a parse tree produced by LienzoParser#dibujo.
+    def enterDibujo(self, ctx:LienzoParser.DibujoContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#posicion.
-    def exitPosicion(self, ctx:LienzoParser.PosicionContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#coord.
-    def enterCoord(self, ctx:LienzoParser.CoordContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#coord.
-    def exitCoord(self, ctx:LienzoParser.CoordContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#animacion.
-    def enterAnimacion(self, ctx:LienzoParser.AnimacionContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#animacion.
-    def exitAnimacion(self, ctx:LienzoParser.AnimacionContext):
+    # Exit a parse tree produced by LienzoParser#dibujo.
+    def exitDibujo(self, ctx:LienzoParser.DibujoContext):
         pass
 
 
@@ -199,12 +157,21 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#instruccion.
-    def enterInstruccion(self, ctx:LienzoParser.InstruccionContext):
+    # Enter a parse tree produced by LienzoParser#instruccion_aux.
+    def enterInstruccion_aux(self, ctx:LienzoParser.Instruccion_auxContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#instruccion.
-    def exitInstruccion(self, ctx:LienzoParser.InstruccionContext):
+    # Exit a parse tree produced by LienzoParser#instruccion_aux.
+    def exitInstruccion_aux(self, ctx:LienzoParser.Instruccion_auxContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#llamadaFuncionPredefinida.
+    def enterLlamadaFuncionPredefinida(self, ctx:LienzoParser.LlamadaFuncionPredefinidaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#llamadaFuncionPredefinida.
+    def exitLlamadaFuncionPredefinida(self, ctx:LienzoParser.LlamadaFuncionPredefinidaContext):
         pass
 
 
@@ -214,6 +181,15 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#lectura.
     def exitLectura(self, ctx:LienzoParser.LecturaContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#escritura.
+    def enterEscritura(self, ctx:LienzoParser.EscrituraContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#escritura.
+    def exitEscritura(self, ctx:LienzoParser.EscrituraContext):
         pass
 
 
@@ -235,48 +211,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#mostrarMensaje.
-    def enterMostrarMensaje(self, ctx:LienzoParser.MostrarMensajeContext):
+    # Enter a parse tree produced by LienzoParser#imprimir.
+    def enterImprimir(self, ctx:LienzoParser.ImprimirContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#mostrarMensaje.
-    def exitMostrarMensaje(self, ctx:LienzoParser.MostrarMensajeContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#dormir.
-    def enterDormir(self, ctx:LienzoParser.DormirContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#dormir.
-    def exitDormir(self, ctx:LienzoParser.DormirContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#mientrasQue.
-    def enterMientrasQue(self, ctx:LienzoParser.MientrasQueContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#mientrasQue.
-    def exitMientrasQue(self, ctx:LienzoParser.MientrasQueContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#cambioColor.
-    def enterCambioColor(self, ctx:LienzoParser.CambioColorContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#cambioColor.
-    def exitCambioColor(self, ctx:LienzoParser.CambioColorContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#figura.
-    def enterFigura(self, ctx:LienzoParser.FiguraContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#figura.
-    def exitFigura(self, ctx:LienzoParser.FiguraContext):
+    # Exit a parse tree produced by LienzoParser#imprimir.
+    def exitImprimir(self, ctx:LienzoParser.ImprimirContext):
         pass
 
 
@@ -286,6 +226,15 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#condicional.
     def exitCondicional(self, ctx:LienzoParser.CondicionalContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#mientrasQue.
+    def enterMientrasQue(self, ctx:LienzoParser.MientrasQueContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#mientrasQue.
+    def exitMientrasQue(self, ctx:LienzoParser.MientrasQueContext):
         pass
 
 
@@ -352,21 +301,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#funciones.
-    def enterFunciones(self, ctx:LienzoParser.FuncionesContext):
+    # Enter a parse tree produced by LienzoParser#funcion.
+    def enterFuncion(self, ctx:LienzoParser.FuncionContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#funciones.
-    def exitFunciones(self, ctx:LienzoParser.FuncionesContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#func.
-    def enterFunc(self, ctx:LienzoParser.FuncContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#func.
-    def exitFunc(self, ctx:LienzoParser.FuncContext):
+    # Exit a parse tree produced by LienzoParser#funcion.
+    def exitFuncion(self, ctx:LienzoParser.FuncionContext):
         pass
 
 

@@ -18,44 +18,44 @@ currentArgumentList = []
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
 
-CONDICION = "condicion"
-MENSAJE = "mensaje"
+BOLEANO = "boleano"
+TEXTO = "texto"
 NUMERO = "numero"
 
 cubo = {}
-cubo[CONDICION] = {}
-cubo[MENSAJE] = {}
+cubo[BOLEANO] = {}
+cubo[TEXTO] = {}
 cubo[NUMERO] = {}
 
-# Condiciones
-cubo[CONDICION]['+'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['-'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['*'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['/'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['%'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['<'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['>'] = defaultdict(lambda: None, {})
-cubo[CONDICION]['<='] = defaultdict(lambda: None, {})
-cubo[CONDICION]['>='] = defaultdict(lambda: None, {})
-cubo[CONDICION]['=='] = defaultdict(lambda: None, {CONDICION : CONDICION})
-cubo[CONDICION]['!='] = defaultdict(lambda: None, {CONDICION : CONDICION})
-cubo[CONDICION]['&'] = defaultdict(lambda: None, {CONDICION : CONDICION})
-cubo[CONDICION]['|'] = defaultdict(lambda: None, {CONDICION : CONDICION})
+# Boleanos
+cubo[BOLEANO]['+'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['-'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['*'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['/'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['%'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['<'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['>'] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['<='] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['>='] = defaultdict(lambda: None, {})
+cubo[BOLEANO]['=='] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
+cubo[BOLEANO]['!='] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
+cubo[BOLEANO]['&'] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
+cubo[BOLEANO]['|'] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
 
 # Mensajes
-cubo[MENSAJE]['+'] = defaultdict(lambda: None, {MENSAJE : MENSAJE})
-cubo[MENSAJE]['-'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['*'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['/'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['%'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['<'] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['>'] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['<='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['>='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['=='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['!='] = defaultdict(lambda: None, {MENSAJE : CONDICION})
-cubo[MENSAJE]['&'] = defaultdict(lambda: None, {})
-cubo[MENSAJE]['|'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['+'] = defaultdict(lambda: None, {TEXTO : TEXTO})
+cubo[TEXTO]['-'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['*'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['/'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['%'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['<'] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['>'] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['<='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['>='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['=='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['!='] = defaultdict(lambda: None, {TEXTO : BOLEANO})
+cubo[TEXTO]['&'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['|'] = defaultdict(lambda: None, {})
 
 # Numero
 cubo[NUMERO]['+'] = defaultdict(lambda: None, {NUMERO : NUMERO})
@@ -63,12 +63,12 @@ cubo[NUMERO]['-'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['/'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['%'] = defaultdict(lambda: None, {NUMERO : NUMERO})
-cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['>'] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['<='] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['>='] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['=='] = defaultdict(lambda: None, {NUMERO : CONDICION})
-cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : CONDICION})
+cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['>'] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['<='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['>='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['=='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
+cubo[NUMERO]['!='] = defaultdict(lambda: None, {NUMERO : BOLEANO})
 cubo[NUMERO]['&'] = defaultdict(lambda: None, {})
 cubo[NUMERO]['|'] = defaultdict(lambda: None, {})
 
@@ -77,26 +77,23 @@ def num(s):
         return int(s)
     except ValueError:
         return float(s)
+
+def error(linea, mensaje):
+    print("Error: linea", linea, ":", mensaje)
 }
 
 program:
-	DIBUJO '{' materiales escenario funciones animacion '}' EOF
+	lienzo funcion* dibujo EOF
 	;
 
-materiales:
-	MATERIALES '{' material* '}'
+lienzo:
+	LIENZO '{' colorLienzo ';' tamanoLienzo ';' '}'
 	;
 
-material:
-	(NUMERIC_CONSTANT tipoFigura color LLAMADO ID DE expresion POR expresion ';')
+colorLienzo:
+	COLOR DE LIENZO '=' color
 	;
 
-tipoFigura:
-	OVALO
-	| RECTANGULO
-	| TRIANGULO
-	;
-	
 color:
 	ROJO
 	| VERDE
@@ -110,50 +107,39 @@ color:
 	| GRIS
 	;
 
-escenario:
-	ESCENARIO '{' colorLienzo ';' tamanoLienzo ';' (posicion ';')* '}'
-	;
-
-colorLienzo:
-	COLOR DE LIENZO '=' color
-	;
-
 tamanoLienzo:
-	TAMANO DE LIENZO '=' expresion POR expresion
+	TAMANO DE LIENZO '=' largo=ss_expresion POR ancho=ss_expresion
+{
+if $largo.type != NUMERO:
+    error($largo.start.line, "Largo del lienzo debe ser una expresion entera")
+elif $ancho.type != NUMERO:
+    error($ancho.start.line, "Ancho del lienzo debe ser una expresion entera")
+}
 	;
 
-posicion:
-	POSICION coord DE figura '=' expresion
-	;
-
-coord:
-	X
-	| Y
-	;
-
-animacion:
-	ANIMACION {
+dibujo:	
+    DIBUJO {
 global currentFunctionName
-currentFunctionName = "animacion"
+currentFunctionName = $DIBUJO.text
 namespaceTable.addFunction(currentFunctionName, "nada", [])
 memoryregisters.newFunction(currentFunctionName)
 } 
-'{' cuerpo '}'
+    '{' cuerpo '}'
 	;
 
 cuerpo:
-    declaracion* instruccion*
+    declaracion* instruccion_aux*
     ;
 
 declaracion:
 	tipo ID
 {
 if namespaceTable.variableExists($ID.text, currentFunctionName):
-    print("Error: linea", $ID.line, ": Variable", $ID.text, "ya fue declarada")
-} '=' ss_expresion ';'
+    error($ID.line, ": Variable " + $ID.text + " ya fue declarada")
+}   '=' ss_expresion ';'
 {
 if $ss_expresion.type != $tipo.text:
-    print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", $tipo.text)
+    error($ID.line, "Variable " + $ID.text + " es de tipo " + $tipo.text)
 else:
     namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
     idcontent= memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
@@ -161,90 +147,84 @@ else:
 }
 	;
 
-instruccion:
+instruccion_aux:
     (
         asignacion
-        | mostrarMensaje
-        | dormir
-        | mientrasQue
-        | cambioColor
-        | posicion
         | condicional
+        | mientrasQue
+        | llamadaFuncionPredefinida
         | llamadaFuncion
-        | lectura
 	) ';'
 	;
+
+llamadaFuncionPredefinida:
+    lectura
+    | escritura
+    | imprimir
+    ;
     
 lectura:
     LEER ID
 {
 idcontent=memoryregisters.getMemoryRegister($ID.text,currentFunctionName)
-cuadruplos.addCuadruplo(LEER,None,None,idcontent)
+cuadruplos.addCuadruplo(READ,None,None,idcontent)
 }    
     ;
+    
+escritura:
+	ESCRIBIR ss_expresion EN expresion ',' expresion
+{
+if $ss_expresion.type == TEXTO:
+    cuadruplos.addCuadruplo(PRINT, $ss_expresion.valor, None)
+else:
+    error($ss_expresion.start.line, "solo se pueden imprimir texto")
+}
+	;
 
 asignacion:
 	ID '=' ss_expresion
 {
 idType = namespaceTable.getVariableType($ID.text, currentFunctionName)
 if not idType:
-    print("Error: linea", $ID.line, ": Variable", $ID.text, "no ha sido declarada")
+    error($ID.line, "Variable " + $ID.text + " no ha sido declarada")
 elif $ss_expresion.type != idType:
-    print("Error: linea", $ID.line, ": Variable", $ID.text, "es de tipo", idType)
+   error($ID.line, "Variable " + $ID.text + " es de tipo " + idType)
 else:
     idcontent = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
-    cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
+    cuadruplos.addCuadruplo('=', $ss_expresion.valor, None, idcontent)
 }
 	;
 
 tipo:
-	MENSAJE
-	| CONDICION
+	TEXTO
+	| BOLEANO
 	| NUMERO
 	;
-	
-mostrarMensaje:
-	ESCRIBIR ss_expresion EN expresion ',' expresion
-{
-if $ss_expresion.type == MENSAJE:
-    cuadruplos.addCuadruplo(PRINT, $ss_expresion.valor, None)
-else:
-    print("Error: linea", $ss_expresion.start.line, ": solo se pueden imprimir mensajes")
-}
-	;
-
-dormir:
-	DORMIR expresion
-	;
-	
-mientrasQue:
-	MIENTRAS QUE '(' ss_expresion ')' 
-{
-if $ss_expresion.type != CONDICION:
-    print("Error: linea", $ss_expresion.start.line, ": el estatuto 'mientras que' necesita una condicion")
-}
-    '{' instruccion* '}'
-	;
-
-cambioColor:
-	COLOR DE figura '=' color
-	;
-
-figura:
-	ID ('[' expresion ']')?
-	;
-
+    
+imprimir:
+    IMPRIMIR ss_expresion
+    ;
+    
 condicional:
 	SI '(' ss_expresion ')'
 {
-if $ss_expresion.type != CONDICION:
-    print("Error: linea", $ss_expresion.start.line, ": el estatuto 'si' necesita una condicion")
+if $ss_expresion.type != BOLEANO:
+    error($ss_expresion.start.line, "el estatuto 'si' necesita una boleano")
 }
-    '{' (instruccion)* '}' (SINO '{' (instruccion)* '}')?
+    '{' (instruccion_aux)* '}' (SINO '{' (instruccion_aux)* '}')?
+	;
+
+mientrasQue:
+	MIENTRAS QUE '(' ss_expresion ')' 
+{
+if $ss_expresion.type != BOLEANO:
+    error($ss_expresion.start.line, "el estatuto 'mientras que' necesita una boleano")
+}
+    '{' instruccion_aux* '}'
 	;
 
 llamadaFuncion returns [type]:
-	ID 
+	ID
 {
 functionType = namespaceTable.getFunctionType($ID.text)
 if not functionType:
@@ -318,7 +298,6 @@ if not type:
     print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $term2.type)
 else:
     $valor = cuadruplos.addCuadruplo($op.text,$valor,$term2.valor)
-    
 }
     )*
 	;
@@ -344,16 +323,16 @@ factor returns [type,valor]:
     (neg='!'? factor_aux)
 {
 $type = $factor_aux.type
-if $neg.text and $factor_aux.type != CONDICION:
-    print("Error: linea", $neg.line, ": operador", $neg.text, "no puede ser aplicado a", $factor_aux.type)
+if $neg.text and $factor_aux.type != BOLEANO:
+    error($neg.line, "operador " + $neg.text + " no puede ser aplicado a " + $factor_aux.type)
     $type = None
 else:
     if $neg.text:
-        $valor = cuadruplos.addCuadruplo($neg.text,$factor_aux.valor,None)
+        $valor = cuadruplos.addCuadruplo($neg.text, $factor_aux.valor, None)
     else:
         $valor = $factor_aux.valor
 } |
-    (neg='-'? NUMERIC_CONSTANT 
+    (neg='-'? NUMERIC_CONSTANT)
 {
 $type = NUMERO
 
@@ -361,10 +340,9 @@ if $neg.text:
     $valor = cuadruplos.addCuadruplo($neg.text,num($NUMERIC_CONSTANT.text),None)
 else:
     $valor = num($NUMERIC_CONSTANT.text)
-}) |
-    STRING_CONSTANT 
+} | STRING_CONSTANT 
 {
-$type = MENSAJE
+$type = TEXTO
 $valor = $STRING_CONSTANT.text[1:-1]
 }
 	;
@@ -378,12 +356,12 @@ if $type:
     $valor = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
 else:
     $valor = None
-    print("Error: linea", $ID.line, ": variable", $ID.text, "no ha sido declarada")
+    errir($ID.line, "variable " + $ID.text + " no ha sido declarada")
 
-} | CONDITION_CONSTANT 
+} | BOOLEAN_CONSTANT 
 {
-$type = CONDICION
-$valor = True if $CONDITION_CONSTANT.text == 'verdadero' else False
+$type = BOLEANO
+$valor = True if $BOOLEAN_CONSTANT.text == 'verdadero' else False
 }
 | llamadaFuncion
 {
@@ -403,17 +381,13 @@ else:
 }
     ;
 	
-funciones:
-	FUNCIONES '{' func* '}'
-	;
-	
-func:
+funcion:
 	tipoFunc ID '(' (parametro (',' parametro)*)? ')' {
 global currentFunctionName
 global currentParameterList
 currentFunctionName = $ID.text
 if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, currentParameterList):
-    print("Error: linea", $ID.line, ": Funcion", $ID.text, "ya fue declarada")
+    error($ID.line, "Funcion " + $ID.text + " ya fue declarada")
 else:
     memoryregisters.newFunction(currentFunctionName)
 currentParameterList = []
@@ -429,7 +403,7 @@ parametro:
     tipo MODIFICABLE? ID {
 global currentParameterList
 if $ID.text in [parameter[0] for parameter in currentParameterList]:
-    print("Error: linea", $ID.line, ": Parametro", $ID.text, "ya fue declarado")
+    error($ID.line, "Parametro " + $ID.text + " ya fue declarado")
 else:
     modificable = False
     if $MODIFICABLE.text:
@@ -440,13 +414,6 @@ else:
     
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
 
-DIBUJO : 'dibujo' ;
-MATERIALES : 'materiales' ;
-LLAMADO : 'llamado' ;
-DE : 'de' ;
-OVALO : 'ovalo';
-RECTANGULO: 'rectangulo' ;
-TRIANGULO : 'triangulo' ;
 ROJO : 'rojo' ;
 VERDE : 'verde' ;
 AMARILLO : 'amarillo' ;
@@ -457,33 +424,28 @@ MORADO : 'morado' ;
 NARANJA : 'naranja' ;
 CAFE : 'cafe' ;
 GRIS : 'gris' ;
-ESCENARIO : 'escenario' ;
 COLOR : 'color' ;
 LIENZO : 'lienzo' ;
 EQUALS : '=' ;
-TAMANO : 'tamano' ;  
+TAMANO : 'tamano' ;
 POR : 'por' ;
+DE : 'de' ;
 EN : 'en' ;
-POSICION : 'posicion' ;
-X : 'x' ;
-Y : 'y' ;
-ANIMACION : 'animacion' ;
+DIBUJO : 'dibujo' ;
 DORMIR : 'dormir' ;
 MIENTRAS : 'mientras' ;
 QUE : 'que' ;
 SI : 'si' ;
 SINO : 'sino' ;
-MENSAJE : 'mensaje' ;
+TEXTO : 'texto' ;
 LEER : 'leer';
-CONDICION : 'condicion' ;
+BOLEANO : 'boleano' ;
 NUMERO : 'numero' ;
-FUNCIONES : 'funciones' ;
 ESCRIBIR : 'escribir' ;
+IMPRIMIR : 'imprimir' ;
 NADA : 'nada' ;
-CONDITION_CONSTANT : VERDADERO | FALSO ;
-VERDADERO : 'verdadero' ;
-FALSO : 'falso' ;
+BOOLEAN_CONSTANT : 'verdadero' | 'falso' ;
 MODIFICABLE : 'modificable' ;
-NUMERIC_CONSTANT : [0-9]+('.'[0-9]+)? ;
+NUMERIC_CONSTANT : [1-9][0-9]*('.'[0-9]+)? ;
 STRING_CONSTANT : '"' ~('"')* '"' ;
 ID : [A-Za-z]+ ;

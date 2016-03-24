@@ -1,7 +1,7 @@
 from MemoryRegister import *
 
 PRINT = "PRINT"
-LEER = "LEER"
+READ = "LEER"
 
 class Cuadruplos:
     def __init__(self):

@@ -1,31 +1,20 @@
-dibujo {
-	materiales {
-		1 rectangulo verde llamado Izquierdo de 8 por 16;
-		4 ovalo verde llamado Ojos de 3 por 3;
-	}
-	
-	escenario {
-		color de lienzo = rojo;
-		tamano de lienzo = 30 por 30;
-		posicion x de Izquierdo = 1;
-		posicion y de Izquierdo = 1;
-	}
-	
-	funciones {
-        nada wow(mensaje modificable a) {
-            numero n = 3;
-            escribir "Perro" en 13,4;
-        }
-	}
+lienzo {
+    color de lienzo = rojo;
+    tamano de lienzo = 1*2*3 por verdadero;
+}
+
+nada wow(numero a) {
+    numero n = 3;
+    imprimir "Perro";
+}
     
-	animacion {
-        numero perro = "hola";
-        mensaje equis = "equis";
-		condicion mexico = verdadero & falso;
-        condicion dos = !mexico;
-        perro = -4-3.7;
-        perro = perro;
-        leer equis;
-        wow(1+2);
-	}
+dibujo {
+    numero perro = 1;
+    texto equis = "equis";
+    boleano mexico = verdadero & falso;
+    boleano dos = !mexico;
+    
+    perro = -4-3.7;
+    leer equis;
+    wow(1+2);
 }
