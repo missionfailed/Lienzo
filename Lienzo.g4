@@ -83,7 +83,7 @@ def error(linea, mensaje):
 }
 
 program:
-	lienzo funcion* dibujo EOF
+	lienzo declaracion* funcion* dibujo EOF
 	;
 
 lienzo:
@@ -116,16 +116,53 @@ elif $ancho.type != NUMERO:
     error($ancho.start.line, "Ancho del lienzo debe ser una expresion entera")
 }
 	;
-
-dibujo:	
-    DIBUJO {
-global currentFunctionName
-currentFunctionName = $DIBUJO.text
-namespaceTable.addFunction(currentFunctionName, "nada", [])
-memoryregisters.newFunction(currentFunctionName)
-} 
-    '{' cuerpo '}'
+    
+declaracion_global:
+    tipo GLOBAL ID
+{
+if namespaceTable.variableExists($ID.text, "global"):
+    error($ID.line, ": Variable " + $ID.text + " ya fue declarada")
+}   '=' ss_expresion ';'
+{
+if $ss_expresion.type != $tipo.text:
+    error($ID.line, "Variable " + $ID.text + " es de tipo " + $tipo.text)
+else:
+    namespaceTable.addVariable($ID.text, $tipo.text, "global")
+    idcontent= memoryregisters.createMemoryRegister($ID.text, "global")
+    cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
+}
 	;
+
+funcion:
+	tipoFunc ID '(' (parametro (',' parametro)*)? ')' {
+global currentFunctionName
+global currentParameterList
+currentFunctionName = $ID.text
+if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, currentParameterList):
+    error($ID.line, "Funcion " + $ID.text + " ya fue declarada")
+else:
+    memoryregisters.newFunction(currentFunctionName)
+currentParameterList = []
+}
+'{' cuerpo '}'
+	;
+   
+tipoFunc:
+    tipo | NADA
+    ;
+
+parametro:
+    tipo MODIFICABLE? ID {
+global currentParameterList
+if $ID.text in [parameter[0] for parameter in currentParameterList]:
+    error($ID.line, "Parametro " + $ID.text + " ya fue declarado")
+else:
+    modificable = False
+    if $MODIFICABLE.text:
+        modificable = True
+    currentParameterList.append(($ID.text, $tipo.text, modificable))
+}
+    ;
 
 cuerpo:
     declaracion* instruccion_aux*
@@ -380,40 +417,20 @@ else:
     $valor = None
 }
     ;
-	
-funcion:
-	tipoFunc ID '(' (parametro (',' parametro)*)? ')' {
-global currentFunctionName
-global currentParameterList
-currentFunctionName = $ID.text
-if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, currentParameterList):
-    error($ID.line, "Funcion " + $ID.text + " ya fue declarada")
-else:
-    memoryregisters.newFunction(currentFunctionName)
-currentParameterList = []
-}
-'{' cuerpo '}'
-	;
-   
-tipoFunc:
-    tipo | NADA
-    ;
 
-parametro:
-    tipo MODIFICABLE? ID {
-global currentParameterList
-if $ID.text in [parameter[0] for parameter in currentParameterList]:
-    error($ID.line, "Parametro " + $ID.text + " ya fue declarado")
-else:
-    modificable = False
-    if $MODIFICABLE.text:
-        modificable = True
-    currentParameterList.append(($ID.text, $tipo.text, modificable))
+dibujo:
+    DIBUJO {
+global currentFunctionName
+currentFunctionName = $DIBUJO.text
+namespaceTable.addFunction(currentFunctionName, "nada", [])
+memoryregisters.newFunction(currentFunctionName)
 }
-    ;
+    '{' cuerpo '}'
+	;
     
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
 
+GLOBAL : 'global' ;
 ROJO : 'rojo' ;
 VERDE : 'verde' ;
 AMARILLO : 'amarillo' ;
