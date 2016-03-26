@@ -2,6 +2,7 @@ class MemoryRegisters:
     
     def __init__(self):
         self.registers = {}
+        self.registers["global"] = {}
     
     def newFunction(self, nameOfFunction):
         self.registers[nameOfFunction] = {}
@@ -11,7 +12,10 @@ class MemoryRegisters:
         return self.registers[nameOfFunction][nameOfVariable]
     
     def getMemoryRegister(self, nameOfVariable, nameOfFunction):
-        return self.registers[nameOfFunction][nameOfVariable]
+        if nameOfVariable in self.registers[nameOfFunction]:
+            return self.registers[nameOfFunction][nameOfVariable]
+        else:
+            return self.registers["global"][nameOfVariable]
         
 class MemoryRegister:
 

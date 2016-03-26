@@ -1,7 +1,10 @@
 lienzo {
     color de lienzo = rojo;
-    tamano de lienzo = 1*2*3 por verdadero;
+    tamano de lienzo = 1*2*3 por 3;
 }
+
+numero global n = 4;
+texto global equis = "dos";
 
 nada wow(numero a) {
     numero n = 3;

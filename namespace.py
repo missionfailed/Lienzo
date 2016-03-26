@@ -52,6 +52,7 @@ class NamespaceTable:
     
     def __init__(self):
         self.tabla = {}
+        self.tabla["global"] = Function("global", "nada")
 								
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
@@ -70,7 +71,7 @@ class NamespaceTable:
     Regresa True si la operacion fue exitosa, False si no."""
     def addVariable(self, nameOfVariable, typeOfVariable, nameOfFunction):
         if self.functionExists(nameOfFunction):
-            if self.tabla[nameOfFunction].searchVariable(nameOfVariable):
+            if self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla["global"].searchVariable(nameOfVariable):
                 return False
             else:
                 auxiliar=Variable(nameOfVariable,typeOfVariable,False)
@@ -81,22 +82,18 @@ class NamespaceTable:
 
     
     """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
-    def variableExists(self, nameOfVariable, nameOfFunction):
-        if self.functionExists(nameOfFunction):
-            return self.tabla[nameOfFunction].searchVariable(nameOfVariable)
-        else:
-            return False
+    def idAlreadyTaken(self, nameOfVariable, nameOfFunction):
+        return nameOfVariable in self.tabla or self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla["global"].searchVariable(nameOfVariable)
 	
     def functionExists(self, name):
         '''Metodo que busca una funcion en la tabla de funciones'''
-        if name in self.tabla:
-            return True
-        else:
-            return False
-
+        return name in self.tabla
+        
     def getVariableType(self, nameOfVariable, nameOfFunction):
-        if self.variableExists(nameOfVariable,nameOfFunction):
+        if self.tabla[nameOfFunction].searchVariable(nameOfVariable):
             return self.tabla[nameOfFunction].getType(nameOfVariable)
+        elif self.tabla["global"].searchVariable(nameOfVariable):
+            return self.tabla["global"].getType(nameOfVariable)
         else:
             return None
             

@@ -130,12 +130,39 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#dibujo.
-    def enterDibujo(self, ctx:LienzoParser.DibujoContext):
+    # Enter a parse tree produced by LienzoParser#declaracion_global.
+    def enterDeclaracion_global(self, ctx:LienzoParser.Declaracion_globalContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#dibujo.
-    def exitDibujo(self, ctx:LienzoParser.DibujoContext):
+    # Exit a parse tree produced by LienzoParser#declaracion_global.
+    def exitDeclaracion_global(self, ctx:LienzoParser.Declaracion_globalContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#funcion.
+    def enterFuncion(self, ctx:LienzoParser.FuncionContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#funcion.
+    def exitFuncion(self, ctx:LienzoParser.FuncionContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#tipoFunc.
+    def enterTipoFunc(self, ctx:LienzoParser.TipoFuncContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#tipoFunc.
+    def exitTipoFunc(self, ctx:LienzoParser.TipoFuncContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#parametro.
+    def enterParametro(self, ctx:LienzoParser.ParametroContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#parametro.
+    def exitParametro(self, ctx:LienzoParser.ParametroContext):
         pass
 
 
@@ -301,30 +328,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#funcion.
-    def enterFuncion(self, ctx:LienzoParser.FuncionContext):
+    # Enter a parse tree produced by LienzoParser#dibujo.
+    def enterDibujo(self, ctx:LienzoParser.DibujoContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#funcion.
-    def exitFuncion(self, ctx:LienzoParser.FuncionContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#tipoFunc.
-    def enterTipoFunc(self, ctx:LienzoParser.TipoFuncContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#tipoFunc.
-    def exitTipoFunc(self, ctx:LienzoParser.TipoFuncContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#parametro.
-    def enterParametro(self, ctx:LienzoParser.ParametroContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#parametro.
-    def exitParametro(self, ctx:LienzoParser.ParametroContext):
+    # Exit a parse tree produced by LienzoParser#dibujo.
+    def exitDibujo(self, ctx:LienzoParser.DibujoContext):
         pass
 
 

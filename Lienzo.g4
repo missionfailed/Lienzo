@@ -83,7 +83,7 @@ def error(linea, mensaje):
 }
 
 program:
-	lienzo declaracion* funcion* dibujo EOF
+	lienzo declaracion_global* funcion* dibujo EOF
 	;
 
 lienzo:
@@ -120,8 +120,8 @@ elif $ancho.type != NUMERO:
 declaracion_global:
     tipo GLOBAL ID
 {
-if namespaceTable.variableExists($ID.text, "global"):
-    error($ID.line, ": Variable " + $ID.text + " ya fue declarada")
+if namespaceTable.idAlreadyTaken($ID.text, "global"):
+    error($ID.line, ": Identificador " + $ID.text + " ya fue declarado")
 }   '=' ss_expresion ';'
 {
 if $ss_expresion.type != $tipo.text:
@@ -171,8 +171,8 @@ cuerpo:
 declaracion:
 	tipo ID
 {
-if namespaceTable.variableExists($ID.text, currentFunctionName):
-    error($ID.line, ": Variable " + $ID.text + " ya fue declarada")
+if namespaceTable.idAlreadyTaken($ID.text, currentFunctionName):
+    error($ID.line, ": Identificador " + $ID.text + " ya fue declarado")
 }   '=' ss_expresion ';'
 {
 if $ss_expresion.type != $tipo.text:
