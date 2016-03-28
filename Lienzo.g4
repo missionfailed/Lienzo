@@ -83,15 +83,11 @@ def error(linea, mensaje):
 }
 
 program:
-	lienzo declaracion_global* funcion* dibujo EOF
-	;
-
-lienzo:
-	LIENZO '{' colorLienzo ';' tamanoLienzo ';' '}'
+	declaracion_global* colorLienzo tamanoLienzo funcion* dibujo EOF
 	;
 
 colorLienzo:
-	COLOR DE LIENZO '=' color
+	COLOR DE LIENZO '=' color ';'
 	;
 
 color:
@@ -108,7 +104,7 @@ color:
 	;
 
 tamanoLienzo:
-	TAMANO DE LIENZO '=' largo=ss_expresion POR ancho=ss_expresion
+	TAMANO DE LIENZO '=' largo=ss_expresion POR ancho=ss_expresion ';'
 {
 if $largo.type != NUMERO:
     error($largo.start.line, "Largo del lienzo debe ser una expresion entera")
@@ -134,7 +130,7 @@ else:
 	;
 
 funcion:
-	tipoFunc ID '(' (parametro (',' parametro)*)? ')' {
+	tipoFunc ID ':' (parametro (',' parametro)*)? {
 global currentFunctionName
 global currentParameterList
 currentFunctionName = $ID.text
@@ -198,25 +194,85 @@ llamadaFuncionPredefinida:
     lectura
     | escritura
     | imprimir
+    | mover_adelante
+    | mover_atras
+    | girar_izquierda
+    | girar_derecha
+    | cambio_color
+    | subir_pluma
+    | bajar_pluma
     ;
     
 lectura:
     LEER ID
 {
 idcontent=memoryregisters.getMemoryRegister($ID.text,currentFunctionName)
-cuadruplos.addCuadruplo(READ,None,None,idcontent)
+cuadruplos.addCuadruplo(READ, idcontent, None, idcontent)
 }    
     ;
     
 escritura:
-	ESCRIBIR ss_expresion EN expresion ',' expresion
+	ESCRIBIR ss_expresion
 {
-if $ss_expresion.type == TEXTO:
-    cuadruplos.addCuadruplo(PRINT, $ss_expresion.valor, None)
-else:
-    error($ss_expresion.start.line, "solo se pueden imprimir texto")
+cuadruplos.addCuadruplo(WRITE, $ss_expresion.valor, None, None, False)
 }
 	;
+    
+imprimir:
+    IMPRIMIR ss_expresion
+{
+cuadruplos.addCuadruplo(PRINT, $ss_expresion.valor, None, None, False)
+}
+    ;
+
+mover_adelante:
+    MOVER ADELANTE ss_expresion
+{
+cuadruplos.addCuadruplo(FORWARD, $ss_expresion.valor, None, None, False)
+}
+    ;
+    
+mover_atras:
+    MOVER ATRAS ss_expresion
+{
+cuadruplos.addCuadruplo(BACKWARD, $ss_expresion.valor, None, None, False)
+}
+    ;
+    
+girar_derecha:
+    GIRAR DERECHA ss_expresion
+{
+cuadruplos.addCuadruplo(RIGHT, $ss_expresion.valor, None, None, False)
+}
+    ;
+
+girar_izquierda:
+    GIRAR IZQUIERDA ss_expresion
+{
+cuadruplos.addCuadruplo(LEFT, $ss_expresion.valor, None, None, False)
+}
+    ;
+    
+subir_pluma:
+    LEVANTAR PLUMA
+{
+cuadruplos.addCuadruplo(PENUP, None, None, None, False)
+}
+    ;
+    
+bajar_pluma:
+    BAJAR PLUMA
+{
+cuadruplos.addCuadruplo(PENDOWN, None, None, None, False)
+}
+    ;
+    
+cambio_color:
+    COLOR DE PLUMA '=' color
+{
+cuadruplos.addCuadruplo(COLOR_CHANGE, None, None, None, False)
+}
+    ;
 
 asignacion:
 	ID '=' ss_expresion
@@ -237,10 +293,6 @@ tipo:
 	| BOLEANO
 	| NUMERO
 	;
-    
-imprimir:
-    IMPRIMIR ss_expresion
-    ;
     
 condicional:
 	SI '(' ss_expresion ')'
@@ -269,7 +321,7 @@ if not functionType:
 else:
     $type = None if functionType == "nada" else functionType
 }
-    '(' (ss_exp1=ss_expresion
+    (ss_exp1=ss_expresion
 {
 global currentArgumentList
 currentArgumentList.append(($ss_exp1.text, $ss_exp1.type))
@@ -279,7 +331,7 @@ currentArgumentList.append(($ss_exp1.text, $ss_exp1.type))
 {
 currentArgumentList.append(($ss_exp2.text, $ss_exp2.type))
 }
-    )*)? ')'
+    )*)?
 {
 if not namespaceTable.argumentsAgree($ID.text, currentArgumentList):
     print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, ": argumentos incorrectos")
@@ -317,7 +369,7 @@ if not type:
     print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $exp2.type)
 else:
     $valor = cuadruplos.addCuadruplo($op.text,$valor,$exp2.valor)
-}       
+}
     )*
 	;
 	
@@ -368,8 +420,7 @@ else:
         $valor = cuadruplos.addCuadruplo($neg.text, $factor_aux.valor, None)
     else:
         $valor = $factor_aux.valor
-} |
-    (neg='-'? NUMERIC_CONSTANT)
+} | (neg='-'? NUMERIC_CONSTANT)
 {
 $type = NUMERO
 
@@ -399,8 +450,7 @@ else:
 {
 $type = BOLEANO
 $valor = True if $BOOLEAN_CONSTANT.text == 'verdadero' else False
-}
-| llamadaFuncion
+} | llamadaFuncion
 {
 functionType = $llamadaFuncion.type
 $type = functionType if functionType != "nada" else None
@@ -415,7 +465,7 @@ if $type:
     $valor = $ss_expresion.valor
 else:
     $valor = None
-}
+} | llamadaFuncionPredefinida
     ;
 
 dibujo:
@@ -448,6 +498,15 @@ TAMANO : 'tamano' ;
 POR : 'por' ;
 DE : 'de' ;
 EN : 'en' ;
+MOVER : 'mover' ;
+ADELANTE : 'adelante' ;
+ATRAS : 'atras' ;
+GIRAR : 'girar' ;
+DERECHA : 'derecha' ;
+IZQUIERDA : 'izquierda' ;
+LEVANTAR : 'levantar' ;
+BAJAR : 'bajar' ;
+PLUMA : 'pluma' ;
 DIBUJO : 'dibujo' ;
 DORMIR : 'dormir' ;
 MIENTRAS : 'mientras' ;
@@ -465,4 +524,4 @@ BOOLEAN_CONSTANT : 'verdadero' | 'falso' ;
 MODIFICABLE : 'modificable' ;
 NUMERIC_CONSTANT : [1-9][0-9]*('.'[0-9]+)? ;
 STRING_CONSTANT : '"' ~('"')* '"' ;
-ID : [A-Za-z]+ ;
+ID : [A-Za-z][A-Za-z0-9]*;

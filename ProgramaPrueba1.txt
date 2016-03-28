@@ -1,23 +1,26 @@
-lienzo {
-    color de lienzo = rojo;
-    tamano de lienzo = 1*2*3 por 3;
-}
-
 numero global n = 4;
 texto global equis = "dos";
 
-nada wow(numero a) {
-    numero n = 3;
+color de lienzo = rojo;
+tamano de lienzo = 1*2*3 por 3;
+
+nada wow : numero a, numero modificable b {
+    numero n2 = 3;
     imprimir "Perro";
 }
-    
+
 dibujo {
     numero perro = 1;
-    texto equis = "equis";
+    texto equis2 = "equis";
     boleano mexico = verdadero & falso;
     boleano dos = !mexico;
     
     perro = -4-3.7;
-    leer equis;
-    wow(1+2);
+    leer equis2;
+    mover adelante 2;
+    mover atras 3;
+    girar derecha 40;
+    girar izquierda 2;
+    color de pluma = rojo;
+    wow 1 + 2, perro;
 }

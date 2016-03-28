@@ -94,15 +94,6 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#lienzo.
-    def enterLienzo(self, ctx:LienzoParser.LienzoContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#lienzo.
-    def exitLienzo(self, ctx:LienzoParser.LienzoContext):
-        pass
-
-
     # Enter a parse tree produced by LienzoParser#colorLienzo.
     def enterColorLienzo(self, ctx:LienzoParser.ColorLienzoContext):
         pass
@@ -220,6 +211,78 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LienzoParser#imprimir.
+    def enterImprimir(self, ctx:LienzoParser.ImprimirContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#imprimir.
+    def exitImprimir(self, ctx:LienzoParser.ImprimirContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#mover_adelante.
+    def enterMover_adelante(self, ctx:LienzoParser.Mover_adelanteContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#mover_adelante.
+    def exitMover_adelante(self, ctx:LienzoParser.Mover_adelanteContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#mover_atras.
+    def enterMover_atras(self, ctx:LienzoParser.Mover_atrasContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#mover_atras.
+    def exitMover_atras(self, ctx:LienzoParser.Mover_atrasContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#girar_derecha.
+    def enterGirar_derecha(self, ctx:LienzoParser.Girar_derechaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#girar_derecha.
+    def exitGirar_derecha(self, ctx:LienzoParser.Girar_derechaContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#girar_izquierda.
+    def enterGirar_izquierda(self, ctx:LienzoParser.Girar_izquierdaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#girar_izquierda.
+    def exitGirar_izquierda(self, ctx:LienzoParser.Girar_izquierdaContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#subir_pluma.
+    def enterSubir_pluma(self, ctx:LienzoParser.Subir_plumaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#subir_pluma.
+    def exitSubir_pluma(self, ctx:LienzoParser.Subir_plumaContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#bajar_pluma.
+    def enterBajar_pluma(self, ctx:LienzoParser.Bajar_plumaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#bajar_pluma.
+    def exitBajar_pluma(self, ctx:LienzoParser.Bajar_plumaContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#cambio_color.
+    def enterCambio_color(self, ctx:LienzoParser.Cambio_colorContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#cambio_color.
+    def exitCambio_color(self, ctx:LienzoParser.Cambio_colorContext):
+        pass
+
+
     # Enter a parse tree produced by LienzoParser#asignacion.
     def enterAsignacion(self, ctx:LienzoParser.AsignacionContext):
         pass
@@ -235,15 +298,6 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#tipo.
     def exitTipo(self, ctx:LienzoParser.TipoContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#imprimir.
-    def enterImprimir(self, ctx:LienzoParser.ImprimirContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#imprimir.
-    def exitImprimir(self, ctx:LienzoParser.ImprimirContext):
         pass
 
 
