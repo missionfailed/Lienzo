@@ -14,6 +14,7 @@ COLOR_CHANGE = "COLOR_CHANGE"
 GOTOF = "GOTOF"
 GOTO = "GOTO"
 END = "END"
+RETURN = "RETURN"
 
 
 class Cuadruplos:

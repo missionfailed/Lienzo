@@ -144,7 +144,22 @@ else:
     memoryregisters.newFunction(currentFunctionName)
 currentParameterList = []
 }
-'{' cuerpo '}'
+'{' cuerpo (REGRESAR ss_expresion ';')? '}'
+
+{
+if $REGRESAR:
+    if $tipoFunc.text == "nada":
+        error($ID.line, "Funcion " + $ID.text + " no debe tener valor de retorno")
+    elif $ss_expresion.type != $tipoFunc.text:
+        error($ID.line, "Funcion " + $ID.text + " tiene valor de retorno de tipo incorrecto. Se esperaba un " + $tipoFunc.text)
+    else:
+        cuadruplos.addCuadruplo(RETURN,$ss_expresion.valor,None,None,False)
+else:
+    if $tipoFunc.text == "nada":
+        cuadruplos.addCuadruplo(RETURN,None,None,None,False)
+    else:
+        error($ID.line, "Funcion " + $ID.text + " debe tener valor de retorno")      
+} 
 	;
    
 tipoFunc:
@@ -530,6 +545,7 @@ PLUMA : 'pluma' ;
 DIBUJO : 'dibujo' ;
 DORMIR : 'dormir' ;
 MIENTRAS : 'mientras' ;
+REGRESAR: 'regresar';
 QUE : 'que' ;
 SI : 'si' ;
 SINO : 'sino' ;

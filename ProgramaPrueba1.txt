@@ -12,6 +12,7 @@ numero wow(numero a, numero b) {
     imprimir n;
     imprimir t;
     imprimir "Perro";
+    regresar 4;
 }
 
 numero f2(numero modificable a, numero modificable b) {
@@ -23,6 +24,12 @@ numero f3() {
     numero a = 2;
     numero b = 3;
     numero c = f2(a, b);
+    regresar "hola";
+}
+
+nada f4() {
+    leer n;
+    regresar 5;
 }
 
 imprimir "el programa inicia aqui";
