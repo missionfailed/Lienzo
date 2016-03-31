@@ -52,7 +52,7 @@ class NamespaceTable:
     
     def __init__(self):
         self.tabla = {}
-        self.tabla["global"] = Function("global", "nada")
+        self.tabla[""] = Function("", "nada")
 								
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
@@ -71,7 +71,7 @@ class NamespaceTable:
     Regresa True si la operacion fue exitosa, False si no."""
     def addVariable(self, nameOfVariable, typeOfVariable, nameOfFunction):
         if self.functionExists(nameOfFunction):
-            if self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla["global"].searchVariable(nameOfVariable):
+            if self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla[""].searchVariable(nameOfVariable):
                 return False
             else:
                 auxiliar=Variable(nameOfVariable,typeOfVariable,False)
@@ -83,7 +83,7 @@ class NamespaceTable:
     
     """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
     def idAlreadyTaken(self, nameOfVariable, nameOfFunction):
-        return nameOfVariable in self.tabla or self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla["global"].searchVariable(nameOfVariable)
+        return nameOfVariable in self.tabla or self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla[""].searchVariable(nameOfVariable)
 	
     def functionExists(self, name):
         '''Metodo que busca una funcion en la tabla de funciones'''
@@ -92,8 +92,8 @@ class NamespaceTable:
     def getVariableType(self, nameOfVariable, nameOfFunction):
         if self.tabla[nameOfFunction].searchVariable(nameOfVariable):
             return self.tabla[nameOfFunction].getType(nameOfVariable)
-        elif self.tabla["global"].searchVariable(nameOfVariable):
-            return self.tabla["global"].getType(nameOfVariable)
+        elif self.tabla[""].searchVariable(nameOfVariable):
+            return self.tabla[""].getType(nameOfVariable)
         else:
             return None
             

@@ -1,5 +1,5 @@
-numero global n = 4;
-texto global equis = "dos";
+numero n = 4;
+texto equis = "dos";
 
 color de lienzo = rojo;
 tamano de lienzo = 1*2*3 por 3;
@@ -9,21 +9,15 @@ nada wow : numero a, numero modificable b {
     imprimir "Perro";
 }
 
-dibujo {
-    si ( 1+2 == 3)
-    {
-        mover adelante 5;
-        girar derecha 1;
-    } sino
-    {
-        mover adelante 10;
-        mover atras 6;
-    };
-    leer n;
-    mientras que (5 != n)
-    {
-        escribir "Saludos peludos";
-        mover atras 1;
-    }
-    leer n;
+si 1+2 == 3 {
+    mover adelante 5;
+    girar derecha 1;
+} sino si 1 + 2 == 3 {
+    mover adelante 10;
+    mover atras 6;
 }
+leer n;
+mientras que (5 != n)
+    escribir "Saludos peludos";
+mover atras 1;
+leer n;

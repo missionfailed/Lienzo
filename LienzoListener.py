@@ -121,12 +121,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#declaracion_global.
-    def enterDeclaracion_global(self, ctx:LienzoParser.Declaracion_globalContext):
+    # Enter a parse tree produced by LienzoParser#declaracion.
+    def enterDeclaracion(self, ctx:LienzoParser.DeclaracionContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#declaracion_global.
-    def exitDeclaracion_global(self, ctx:LienzoParser.Declaracion_globalContext):
+    # Exit a parse tree produced by LienzoParser#declaracion.
+    def exitDeclaracion(self, ctx:LienzoParser.DeclaracionContext):
         pass
 
 
@@ -166,12 +166,12 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LienzoParser#declaracion.
-    def enterDeclaracion(self, ctx:LienzoParser.DeclaracionContext):
+    # Enter a parse tree produced by LienzoParser#bloque_instrucciones.
+    def enterBloque_instrucciones(self, ctx:LienzoParser.Bloque_instruccionesContext):
         pass
 
-    # Exit a parse tree produced by LienzoParser#declaracion.
-    def exitDeclaracion(self, ctx:LienzoParser.DeclaracionContext):
+    # Exit a parse tree produced by LienzoParser#bloque_instrucciones.
+    def exitBloque_instrucciones(self, ctx:LienzoParser.Bloque_instruccionesContext):
         pass
 
 

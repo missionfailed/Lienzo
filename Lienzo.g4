@@ -83,7 +83,10 @@ def error(linea, mensaje):
 }
 
 program:
-	declaracion_global* colorLienzo tamanoLienzo funcion* dibujo EOF
+{
+cuadruplos.addCuadruplo(BEGIN, None, None, None, False)
+}
+	declaracion* colorLienzo tamanoLienzo funcion* instruccion_aux* EOF
 {
 cuadruplos.addCuadruplo(END, None, None, None, False)
 cuadruplos.printCuadruplos()
@@ -117,18 +120,18 @@ elif $ancho.type != NUMERO:
 }
 	;
     
-declaracion_global:
-    tipo GLOBAL ID
+declaracion:
+	tipo ID
 {
-if namespaceTable.idAlreadyTaken($ID.text, "global"):
+if namespaceTable.idAlreadyTaken($ID.text, currentFunctionName):
     error($ID.line, ": Identificador " + $ID.text + " ya fue declarado")
 }   '=' ss_expresion ';'
 {
 if $ss_expresion.type != $tipo.text:
     error($ID.line, "Variable " + $ID.text + " es de tipo " + $tipo.text)
 else:
-    namespaceTable.addVariable($ID.text, $tipo.text, "global")
-    idcontent= memoryregisters.createMemoryRegister($ID.text, "global")
+    namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
+    idcontent= memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
     cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
 }
 	;
@@ -168,30 +171,16 @@ cuerpo:
     declaracion* instruccion_aux*
     ;
 
-declaracion:
-	tipo ID
-{
-if namespaceTable.idAlreadyTaken($ID.text, currentFunctionName):
-    error($ID.line, ": Identificador " + $ID.text + " ya fue declarado")
-}   '=' ss_expresion ';'
-{
-if $ss_expresion.type != $tipo.text:
-    error($ID.line, "Variable " + $ID.text + " es de tipo " + $tipo.text)
-else:
-    namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
-    idcontent= memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
-    cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
-}
-	;
+bloque_instrucciones:
+    instruccion_aux | '{' instruccion_aux* '}'
+    ;
 
 instruccion_aux:
-    (
+    ((
         asignacion
-        | condicional
-        | mientrasQue
         | llamadaFuncionPredefinida
         | llamadaFuncion
-	) ';'
+	) ';') | condicional | mientrasQue
 	;
 
 llamadaFuncionPredefinida:
@@ -299,7 +288,7 @@ tipo:
 	;
     
 condicional:
-	SI '(' ss_expresion ')'
+	SI ss_expresion
 {
 if $ss_expresion.type != BOLEANO:
     error($ss_expresion.start.line, "el estatuto 'si' necesita una boleano")
@@ -307,7 +296,7 @@ else:
     cuadruplos.addCuadruplo(GOTOF, $ss_expresion.valor, None, None, False)
     cuadruplos.pushPilaSaltos(cuadruplos.last())
 }
-    '{' (instruccion_aux)* '}'
+    bloque_instrucciones
     (SINO
 {
 if $SINO:
@@ -315,7 +304,7 @@ if $SINO:
     cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
     cuadruplos.pushPilaSaltos(cuadruplos.last())
 }
-    '{' (instruccion_aux)* '}'
+    bloque_instrucciones
 {
 cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
 }    
@@ -328,7 +317,7 @@ mientrasQue:
 {
 cuadruplos.pushPilaSaltos(cuadruplos.current())
 }
-    '(' ss_expresion ')' 
+    ss_expresion
 {
 if $ss_expresion.type != BOLEANO:
     error($ss_expresion.start.line, "el estatuto 'mientras que' necesita una boleano")
@@ -336,7 +325,7 @@ else:
     cuadruplos.addCuadruplo(GOTOF,$ss_expresion.valor,None,None,False)
     cuadruplos.pushPilaSaltos(cuadruplos.last())
 }    
-    '{' instruccion_aux* '}'
+    bloque_instrucciones
 {
 pop1 = cuadruplos.popPilaSaltos()
 pop2 = cuadruplos.popPilaSaltos()

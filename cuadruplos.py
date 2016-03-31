@@ -1,5 +1,6 @@
 from MemoryRegister import *
 
+BEGIN = "BEGIN"
 READ = "READ"
 WRITE = "WRITE"
 PRINT = "PRINT"
