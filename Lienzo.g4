@@ -83,9 +83,6 @@ def error(linea, mensaje):
 }
 
 program:
-{
-cuadruplos.addCuadruplo(BEGIN, None, None, None, False)
-}
 	declaracion* colorLienzo tamanoLienzo funcion* instruccion_aux* EOF
 {
 cuadruplos.addCuadruplo(END, None, None, None, False)

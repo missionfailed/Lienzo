@@ -18,12 +18,19 @@ class MemoryRegisters:
             return self.registers[""][nameOfVariable]
         
 class MemoryRegister:
-
+    c = 0
+    
     def __init__(self):
         self.content = None
+        self.counter = MemoryRegister.c
+        MemoryRegister.c += 1
+        
     
     def write(self, c):
         self.content = c
         
     def read(self):
         return self.content
+    
+    def __repr__(self):
+        return 't' + str(self.counter)
