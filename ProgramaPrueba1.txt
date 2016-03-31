@@ -1,23 +1,46 @@
 numero n = 4;
-texto equis = "dos";
+numero m = 0;
+boleano salir = falso;
+boleano gigante = (5 == 5 & salir) | !(1+2+3 == 8) | verdadero;
+texto t = "este es mi texto";
 
 color de lienzo = rojo;
-tamano de lienzo = 1*2*3 por 3;
+tamano de lienzo = 1*2*3 por 3*4*5;
 
-nada wow : numero a, numero modificable b {
-    numero n2 = 3;
+numero wow(numero a, numero b) {
+    mover adelante 4;
+    imprimir n;
+    imprimir t;
     imprimir "Perro";
 }
 
-si 1+2 == 3 {
+numero f2(numero modificable a, numero modificable b) {
+    numero w = 3 + 2;
+    w = wow(1, 1);
+}
+
+numero f3() {
+    numero a = 2;
+    numero b = 3;
+    numero c = f2(a, b);
+}
+
+imprimir "el programa inicia aqui";
+leer n;
+si n == 3 {
     mover adelante 5;
     girar derecha 1;
-} sino si 1 + 2 == 3 {
+} sino si salir & 1 + 2 == 3 {
     mover adelante 10;
     mover atras 6;
 }
+
 leer n;
-mientras que (5 != n)
+mientras que (5 != n) {
     escribir "Saludos peludos";
+    n = n + 1;
+}
 mover atras 1;
-leer n;
+n = wow(1, 3);
+m = f3();
+imprimir "hasta luego";

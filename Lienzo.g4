@@ -134,7 +134,7 @@ else:
 	;
 
 funcion:
-	tipoFunc ID ':' (parametro (',' parametro)*)? {
+	tipoFunc ID '(' (parametro (',' parametro)*)? ')' {
 global currentFunctionName
 global currentParameterList
 currentFunctionName = $ID.text
@@ -340,7 +340,7 @@ if not functionType:
 else:
     $type = None if functionType == "nada" else functionType
 }
-    (ss_exp1=ss_expresion
+    '(' (ss_exp1=ss_expresion
 {
 global currentArgumentList
 currentArgumentList.append(($ss_exp1.text, $ss_exp1.type))
@@ -350,10 +350,11 @@ currentArgumentList.append(($ss_exp1.text, $ss_exp1.type))
 {
 currentArgumentList.append(($ss_exp2.text, $ss_exp2.type))
 }
-    )*)?
+    )*)? ')'
 {
 if not namespaceTable.argumentsAgree($ID.text, currentArgumentList):
     print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, ": argumentos incorrectos")
+currentArgumentList = []
 }
 	;
 
@@ -463,7 +464,7 @@ if $type:
     $valor = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
 else:
     $valor = None
-    errir($ID.line, "variable " + $ID.text + " no ha sido declarada")
+    error($ID.line, "variable " + $ID.text + " no ha sido declarada")
 
 } | BOOLEAN_CONSTANT 
 {
@@ -541,6 +542,6 @@ IMPRIMIR : 'imprimir' ;
 NADA : 'nada' ;
 BOOLEAN_CONSTANT : 'verdadero' | 'falso' ;
 MODIFICABLE : 'modificable' ;
-NUMERIC_CONSTANT : [1-9][0-9]*('.'[0-9]+)? ;
+NUMERIC_CONSTANT : [0-9]+('.'[0-9]+)? ;
 STRING_CONSTANT : '"' ~('"')* '"' ;
 ID : [A-Za-z][A-Za-z0-9]*;
