@@ -84,6 +84,10 @@ def error(linea, mensaje):
 
 program:
 	declaracion_global* colorLienzo tamanoLienzo funcion* dibujo EOF
+{
+cuadruplos.addCuadruplo(END, None, None, None, False)
+cuadruplos.printCuadruplos()
+}
 	;
 
 colorLienzo:
@@ -299,17 +303,46 @@ condicional:
 {
 if $ss_expresion.type != BOLEANO:
     error($ss_expresion.start.line, "el estatuto 'si' necesita una boleano")
+else:
+    cuadruplos.addCuadruplo(GOTOF, $ss_expresion.valor, None, None, False)
+    cuadruplos.pushPilaSaltos(cuadruplos.last())
 }
-    '{' (instruccion_aux)* '}' (SINO '{' (instruccion_aux)* '}')?
+    '{' (instruccion_aux)* '}'
+    (SINO
+{
+if $SINO:
+    cuadruplos.addCuadruplo(GOTO,None,None,None,False)
+    cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
+    cuadruplos.pushPilaSaltos(cuadruplos.last())
+}
+    '{' (instruccion_aux)* '}'
+{
+cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
+}    
+    
+)?
 	;
 
 mientrasQue:
-	MIENTRAS QUE '(' ss_expresion ')' 
+	MIENTRAS QUE
+{
+cuadruplos.pushPilaSaltos(cuadruplos.current())
+}
+    '(' ss_expresion ')' 
 {
 if $ss_expresion.type != BOLEANO:
     error($ss_expresion.start.line, "el estatuto 'mientras que' necesita una boleano")
-}
+else:
+    cuadruplos.addCuadruplo(GOTOF,$ss_expresion.valor,None,None,False)
+    cuadruplos.pushPilaSaltos(cuadruplos.last())
+}    
     '{' instruccion_aux* '}'
+{
+pop1 = cuadruplos.popPilaSaltos()
+pop2 = cuadruplos.popPilaSaltos()
+cuadruplos.addCuadruplo(GOTO,None,None,pop2,False)
+cuadruplos.editCuadruplo(pop1,cuadruplos.current())
+}
 	;
 
 llamadaFuncion returns [type]:

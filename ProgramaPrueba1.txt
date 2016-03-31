@@ -10,17 +10,20 @@ nada wow : numero a, numero modificable b {
 }
 
 dibujo {
-    numero perro = 1;
-    texto equis2 = "equis";
-    boleano mexico = verdadero & falso;
-    boleano dos = !mexico;
-    
-    perro = -4-3.7;
-    leer equis2;
-    mover adelante 2;
-    mover atras 3;
-    girar derecha 40;
-    girar izquierda 2;
-    color de pluma = rojo;
-    wow 1 + 2, perro;
+    si ( 1+2 == 3)
+    {
+        mover adelante 5;
+        girar derecha 1;
+    } sino
+    {
+        mover adelante 10;
+        mover atras 6;
+    };
+    leer n;
+    mientras que (5 != n)
+    {
+        escribir "Saludos peludos";
+        mover atras 1;
+    }
+    leer n;
 }
