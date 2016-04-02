@@ -1038,6 +1038,7 @@ class LienzoParser ( Parser ):
                 if (None if localctx._MODIFICABLE is None else localctx._MODIFICABLE.text):
                     modificable = True
                 currentParameterList.append(((None if localctx._ID is None else localctx._ID.text), (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))), modificable))
+                memoryregisters.createMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2295,7 +2296,7 @@ class LienzoParser ( Parser ):
             if k != amountOfParameters:
                 error((0 if localctx.paren is None else localctx.paren.line), "Se esperaban" + amountOfParameters + " parametros, se recibieron " + k)
             else:
-                cuadruplos.addCuadruplo(GOSUB, (None if localctx._ID is None else localctx._ID.text), namespaceTable.getDireccionInicio((None if localctx._ID is None else localctx._ID.text)))
+                cuadruplos.addCuadruplo(GOSUB, (None if localctx._ID is None else localctx._ID.text), namespaceTable.getDireccionInicio((None if localctx._ID is None else localctx._ID.text)), None, False)
 
         except RecognitionException as re:
             localctx.exception = re

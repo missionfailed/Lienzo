@@ -178,6 +178,7 @@ else:
     if $MODIFICABLE.text:
         modificable = True
     currentParameterList.append(($ID.text, $tipo.text, modificable))
+    memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
 }
     ;
 
@@ -386,7 +387,7 @@ amountOfParameters = namespaceTable.getParameterAmount($ID.text)
 if k != amountOfParameters:
     error($paren.line, "Se esperaban" + amountOfParameters + " parametros, se recibieron " + k)
 else:
-    cuadruplos.addCuadruplo(GOSUB, $ID.text, namespaceTable.getDireccionInicio($ID.text))
+    cuadruplos.addCuadruplo(GOSUB, $ID.text, namespaceTable.getDireccionInicio($ID.text), None, False)
 }
 	;
 
