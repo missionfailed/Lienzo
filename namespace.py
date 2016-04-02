@@ -8,7 +8,7 @@ class Variable:
         self.reference=ref
         
 class Parameter:
-    ''' Una variable tiene nombre y tipo'''
+    ''' Una parametro tiene nombre, tipo y referencia'''
     def __init__(self,nameOfVariable,typeOfVariable,ref):
         self.name=nameOfVariable
         self.type=typeOfVariable
@@ -16,32 +16,39 @@ class Parameter:
 
 class Function:
     '''Una funcion tiene nombre, tipo y variables, que pueden ser variables o parametros'''
-    def __init__(self,nameOfFunction,typeOfFunction):
+    def __init__(self,nameOfFunction,typeOfFunction,dirInicio):
         self.name = nameOfFunction
         self.type = typeOfFunction
         self.variables = []
         self.parameters = []
+        self.direccionInicio = dirInicio
         
+    '''Recibe los atributos de una variable, la crea y agrega a la funcion'''    
     def addVariable(self,nameOfVariable,typeOfVariable,ref):
         auxiliar = Variable(nameOfVariable,typeOfVariable,ref)
         self.variables.append(auxiliar)
     
+    '''Recibe los atributos de un parametro, lo crea y agrega a la funcion'''
     def addParameter(self,nameOfVariable,typeOfVariable,ref):
         auxiliar = Parameter(nameOfVariable,typeOfVariable,ref)
         self.parameters.append(auxiliar)
 
+    '''Agrega directamebte una variable ya creada (objeto tipo variable) a la funcion'''    
     def addVariableObject(self,auxiliar):
         self.variables.append(auxiliar)
     
+    '''Agrega directamebte un parametro ya creado (objeto tipo parametro) a la funcion'''    
     def addParameterObject(self,auxiliar):
         self.parameters.append(auxiliar)    
-
+    
+    '''Busca el nombre de una variable dentro de la funcion'''
     def searchVariable(self,variablename):
         for f in self.variables + self.parameters:
             if variablename==f.name:
                 return True               
         return False
     
+    '''Regresa el tipo del nombre de la variable dada'''
     def getType(self,variablename):
         for f in self.variables+ self.parameters:
             if variablename==f.name:
@@ -56,11 +63,11 @@ class NamespaceTable:
 								
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
-    def addFunction(self, nameOfFunction, typeOfFunction, parameterList):	
+    def addFunction(self, nameOfFunction, typeOfFunction, dirInicio, parameterList):	
         if self.functionExists(nameOfFunction):
             return False
         else:
-            auxiliar = Function(nameOfFunction,typeOfFunction)
+            auxiliar = Function(nameOfFunction,typeOfFunction,dirInicio)
             "Nombre del parametro, Tipo del parametro, Booleano Referencia True Valor False"
             for item in parameterList:
                 auxiliar.addParameter(item[0],item[1],item[2])
