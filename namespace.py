@@ -1,4 +1,7 @@
 import re
+BOLEANO = "boleano"
+TEXTO = "texto"
+NUMERO = "numero"
 
 class Variable:
     ''' Una variable tiene nombre y tipo'''
@@ -22,6 +25,7 @@ class Function:
         self.variables = []
         self.parameters = []
         self.direccionInicio = dirInicio
+        self.tipos = {NUMERO:0, BOLEANO:0 , TEXTO:0}
         
     '''Recibe los atributos de una variable, la crea y agrega a la funcion'''    
     def addVariable(self,nameOfVariable,typeOfVariable,ref):
@@ -53,13 +57,19 @@ class Function:
         for f in self.variables+ self.parameters:
             if variablename==f.name:
                 return f.type
-        return None        
+        return None
+        
+    def addType(self,type):
+        self.tipos[type]+=1;
+        
+
+    
 		
 class NamespaceTable:
     
     def __init__(self):
         self.tabla = {}
-        self.tabla[""] = Function("", "nada")
+        self.tabla[""] = Function("", "nada", 0)
 								
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
@@ -87,7 +97,13 @@ class NamespaceTable:
         else:
             return False
 
-    
+    """Metodo que se encarga de actualizar tamano cuando hay variables temporales"""
+    def addTemporal(self,nameOfFunction,typeOfVariable):
+        if self.functionExists(nameOfFunction):
+            self.tabla[nameOfFunction].addType(typeOfVariable)
+        else:
+            return False;
+        
     """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
     def idAlreadyTaken(self, nameOfVariable, nameOfFunction):
         return nameOfVariable in self.tabla or self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla[""].searchVariable(nameOfVariable)
@@ -109,20 +125,28 @@ class NamespaceTable:
             return self.tabla[nameOfFunction].type
         else:
             return None
+            
+    def getFunctionSize(self,nameOfFunction):
+        return 3
     
-    def argumentsAgree(self, nameOfFunction, argumentList):
-        tamano = len(argumentList)
+    def getParameterAmount(self,nameOfFunction):
+        return len(self.tabla[nameOfFunction].parameters)
+    
+    """Metodo que checa si los argumentos concuerdan"""
+    def argumentAgree(self, nameOfFunction, argumentPos, argumentName, argumentType):
         pattern = re.compile("[A-Za-z]+$")
-        if tamano == len(self.tabla[nameOfFunction].parameters):
-            for i,j in list(zip(self.tabla[nameOfFunction].parameters,argumentList)):
-                if i.type != j[1]:
-                    return False
-                else:
-                    '''Por referencia'''
-                    if i.reference:
-                        "Hacer match para regexp por ref"
-                        if not pattern.match(j[0]):
-                            return False                  
-            return True                
-        else:
+        if(argumentPos >= len(self.tabla[nameOfFunction].parameters)):
             return False
+        else:
+            if self.tabla[nameOfFunction].parameters[argumentPos].type != argumentType:
+                return False
+            else:
+                '''Por referencia'''
+                if self.tabla[nameOfFunction].parameters[argumentPos].reference:
+                    "Hacer match para regexp por ref"
+                    if not pattern.match(argumentName):
+                        return False                  
+                return True
+    
+    def getDireccionInicio(self,nameOfFunction):
+        return self.tabla[nameOfFunction].direccionInicio

@@ -13,7 +13,6 @@ from cuadruplos import *
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
 currentParameterList = []
-currentArgumentList = []
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
@@ -379,15 +378,6 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#factor_aux.
     def exitFactor_aux(self, ctx:LienzoParser.Factor_auxContext):
-        pass
-
-
-    # Enter a parse tree produced by LienzoParser#dibujo.
-    def enterDibujo(self, ctx:LienzoParser.DibujoContext):
-        pass
-
-    # Exit a parse tree produced by LienzoParser#dibujo.
-    def exitDibujo(self, ctx:LienzoParser.DibujoContext):
         pass
 
 

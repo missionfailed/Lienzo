@@ -15,7 +15,10 @@ GOTOF = "GOTOF"
 GOTO = "GOTO"
 END = "END"
 RETURN = "RETURN"
-
+ERA = "ERA"
+PARAM = "PARAM"
+GOSUB = "GOSUB"
+RET = "RET"
 
 class Cuadruplos:
     def __init__(self):
