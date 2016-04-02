@@ -138,7 +138,7 @@ funcion:
 global currentFunctionName
 global currentParameterList
 currentFunctionName = $ID.text
-if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, currentParameterList):
+if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, cuadruplos.current, currentParameterList):
     error($ID.line, "Funcion " + $ID.text + " ya fue declarada")
 else:
     memoryregisters.newFunction(currentFunctionName)
@@ -503,19 +503,8 @@ else:
 } | llamadaFuncionPredefinida
     ;
 
-dibujo:
-    DIBUJO {
-global currentFunctionName
-currentFunctionName = $DIBUJO.text
-namespaceTable.addFunction(currentFunctionName, "nada", [])
-memoryregisters.newFunction(currentFunctionName)
-}
-    '{' cuerpo '}'
-	;
-    
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
 
-GLOBAL : 'global' ;
 ROJO : 'rojo' ;
 VERDE : 'verde' ;
 AMARILLO : 'amarillo' ;
