@@ -1,6 +1,7 @@
 from MemoryRegister import *
 
-BEGIN = "BEGIN"
+CANVAS_COLOR = "CANVAS_COLOR"
+CANVAS_SIZE = "CANVAS_SIZE"
 READ = "READ"
 WRITE = "WRITE"
 PRINT = "PRINT"
@@ -27,7 +28,7 @@ class Cuadruplos:
     
     def addCuadruplo(self, operator, op1, op2, t=None, generateT=True):
         if not t and generateT:
-            t = MemoryRegister()
+            t = TemporalRegister()
         self.listaCuadruplos.append([operator, op1, op2, t])
         return t
         
@@ -49,10 +50,3 @@ class Cuadruplos:
     def printCuadruplos(self):
         for i, c in enumerate(self.listaCuadruplos):
             print(i,c)
-        
-        
-        
-        
-        
-    
-        

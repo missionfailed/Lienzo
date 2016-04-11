@@ -90,6 +90,9 @@ cuadruplos.printCuadruplos()
 
 colorLienzo:
 	COLOR DE LIENZO '=' color ';'
+{
+cuadruplos.addCuadruplo(CANVAS_COLOR, $color.start.text, None, None, False)
+}
 	;
 
 color:
@@ -112,6 +115,8 @@ if $largo.type != NUMERO:
     error($largo.start.line, "Largo del lienzo debe ser una expresion entera")
 elif $ancho.type != NUMERO:
     error($ancho.start.line, "Ancho del lienzo debe ser una expresion entera")
+else:
+    cuadruplos.addCuadruplo(CANVAS_SIZE, $largo.valor, $ancho.valor, None, False)
 }
 	;
     
@@ -156,11 +161,12 @@ else:
     if $tipoFunc.text == "nada":
         cuadruplos.addCuadruplo(RETURN,None,None,None,False)
     else:
-        error($ID.line, "Funcion " + $ID.text + " debe tener valor de retorno")      
+        error($ID.line, "Funcion " + $ID.text + " debe tener valor de retorno")
 }
 '}'
 {
 cuadruplos.addCuadruplo(RET, None, None, None, False)
+currentFunctionName = ""
 }
 	;
    

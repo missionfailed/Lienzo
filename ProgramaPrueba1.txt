@@ -4,8 +4,16 @@ numero p = 5;
 color de lienzo = rojo;
 tamano de lienzo = 1*2*3 por 3*4*5;
 
+numero h() {
+    numero y = 3;
+    texto hola = "HOLA";
+    regresar y;
+}
+
 numero wow(numero a) {
-    mover adelante a;
+    texto hola = "bye";
+    numero y = 4;
+    mover adelante y;
     regresar a;
 }
 
