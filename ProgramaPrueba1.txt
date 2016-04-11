@@ -10,4 +10,4 @@ numero wow(numero a) {
 }
 
 imprimir "el programa inicia aqui";
-escribir n + wow(p); 
+escribir n + wow(p);

@@ -778,7 +778,7 @@ class LienzoParser ( Parser ):
             else:
                 namespaceTable.addVariable((None if localctx._ID is None else localctx._ID.text), (None if localctx._tipo is None else self._input.getText((localctx._tipo.start,localctx._tipo.stop))), currentFunctionName)
                 idcontent= memoryregisters.createMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
-                cuadruplos.addCuadruplo('=', localctx._ss_expresion.valor,None,idcontent)
+                cuadruplos.addCuadruplo('=', localctx._ss_expresion.valor, None, idcontent)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2203,6 +2203,7 @@ class LienzoParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.name = None
             self.type = None
             self._ID = None # Token
             self.ss_exp1 = None # Ss_expresionContext
@@ -2244,6 +2245,7 @@ class LienzoParser ( Parser ):
             localctx._ID = self.match(LienzoParser.ID)
 
             functionType = namespaceTable.getFunctionType((None if localctx._ID is None else localctx._ID.text))
+            localctx.name = (None if localctx._ID is None else localctx._ID.text)
             if not functionType:
                 print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": llamada a funcion", (None if localctx._ID is None else localctx._ID.text), "inexistente")
             else:
@@ -2821,7 +2823,7 @@ class LienzoParser ( Parser ):
                 functionType = localctx._llamadaFuncion.type
                 localctx.type = functionType if functionType != "nada" else None
                 if functionType:
-                    pass
+                    localctx.valor = cuadruplos.addCuadruplo('=', memoryregisters.getMemoryRegister(localctx._llamadaFuncion.name, ""), None)
                 else:
                     localctx.valor = None
 

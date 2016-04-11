@@ -6,6 +6,7 @@ class MemoryRegisters:
     
     def newFunction(self, nameOfFunction):
         self.registers[nameOfFunction] = {}
+        self.registers[""][nameOfFunction] = MemoryRegister()
     
     def createMemoryRegister(self, nameOfVariable, nameOfFunction):
         self.registers[nameOfFunction][nameOfVariable] = MemoryRegister()

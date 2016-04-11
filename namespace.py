@@ -61,9 +61,6 @@ class Function:
         
     def addType(self,type):
         self.tipos[type]+=1;
-        
-
-    
 		
 class NamespaceTable:
     
@@ -74,7 +71,7 @@ class NamespaceTable:
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
     def addFunction(self, nameOfFunction, typeOfFunction, dirInicio, parameterList):	
-        if self.functionExists(nameOfFunction):
+        if nameOfFunction in self.tabla or self.tabla[""].searchVariable(nameOfFunction):
             return False
         else:
             auxiliar = Function(nameOfFunction,typeOfFunction,dirInicio)
@@ -82,6 +79,8 @@ class NamespaceTable:
             for item in parameterList:
                 auxiliar.addParameter(item[0],item[1],item[2])
             self.tabla[nameOfFunction]=auxiliar
+            auxiliar2=Variable(nameOfFunction, None, False)
+            self.tabla[""].addVariableObject(auxiliar2)
             return True
     
     """Metodo que agrega una variable a la tabla de variables en el ambito de la funcion dada.

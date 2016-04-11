@@ -127,7 +127,7 @@ if $ss_expresion.type != $tipo.text:
 else:
     namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
     idcontent= memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
-    cuadruplos.addCuadruplo('=', $ss_expresion.valor,None,idcontent)
+    cuadruplos.addCuadruplo('=', $ss_expresion.valor, None, idcontent)
 }
 	;
 
@@ -349,10 +349,11 @@ cuadruplos.editCuadruplo(pop1,cuadruplos.current())
 }
 	;
 
-llamadaFuncion returns [type]:
+llamadaFuncion returns [name,type]:
 	ID
 {
 functionType = namespaceTable.getFunctionType($ID.text)
+$name = $ID.text
 if not functionType:
     print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, "inexistente")
 else:
@@ -518,7 +519,7 @@ $valor = True if $BOOLEAN_CONSTANT.text == 'verdadero' else False
 functionType = $llamadaFuncion.type
 $type = functionType if functionType != "nada" else None
 if functionType:
-    pass
+    $valor = cuadruplos.addCuadruplo('=', memoryregisters.getMemoryRegister($llamadaFuncion.name, ""), None)
 else:
     $valor = None
 } | '(' ss_expresion ')'
