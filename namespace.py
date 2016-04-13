@@ -76,6 +76,9 @@ class NamespaceTable:
         self.tabla = {}
         self.tabla[""] = Function("", NADA, 0)
         
+    def getDirProc(self):
+        return self.tabla
+        
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
     def addFunction(self, nameOfFunction, typeOfFunction, dirInicio):	

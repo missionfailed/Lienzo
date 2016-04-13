@@ -9,6 +9,7 @@ from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
 from cuadruplos import *
+import VM
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""

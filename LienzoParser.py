@@ -8,6 +8,7 @@ from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
 from cuadruplos import *
+import VM
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
@@ -500,7 +501,7 @@ class LienzoParser ( Parser ):
             self.state = 86
             self.match(LienzoParser.EOF)
 
-            cuadruplos.printCuadruplos()
+            VM.executeVM(namespaceTable.getDirProc(), cuadruplos.getCuadruplos())
 
         except RecognitionException as re:
             localctx.exception = re

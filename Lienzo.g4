@@ -9,6 +9,7 @@ from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
 from cuadruplos import *
+import VM
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
@@ -83,7 +84,7 @@ def error(linea, mensaje):
 program:
 	declaracion* colorLienzo tamanoLienzo funcion* instruccion_aux* EOF
 {
-cuadruplos.printCuadruplos()
+VM.executeVM(namespaceTable.getDirProc(), cuadruplos.getCuadruplos())
 }
 	;
 

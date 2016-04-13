@@ -26,6 +26,9 @@ class Cuadruplos:
         self.listaCuadruplos = []
         self.pilaSaltos = []
     
+    def getCuadruplos(self):
+        return self.listaCuadruplos
+   
     def addCuadruplo(self, functionName, operator, op1, op2, t=None, generateT=True):
         if not t and generateT:
             t = TemporalRegister(functionName)
