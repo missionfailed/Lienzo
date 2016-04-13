@@ -82,7 +82,14 @@ def error(linea, mensaje):
 }
 
 program:
-	declaracion* colorLienzo tamanoLienzo funcion* instruccion_aux* EOF
+	declaracion* colorLienzo tamanoLienzo
+{
+cuadruplos.addCuadruplo("", GOTO, None, None, None, False)
+cuadruplos.pushPilaSaltos(cuadruplos.last())
+} funcion*
+{
+cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(), cuadruplos.current())
+} instruccion_aux* EOF
 {
 VM.executeVM(namespaceTable.getDirProc(), cuadruplos.getCuadruplos())
 }

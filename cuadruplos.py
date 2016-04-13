@@ -20,6 +20,20 @@ ERA = "ERA"
 PARAM = "PARAM"
 GOSUB = "GOSUB"
 RET = "RET"
+PLUS = "+"
+MINUS = "-"
+TIMES = "*"
+DIVIDE = "/"
+MODULO = "%"
+ASSIGN = "="
+EQUALS = "=="
+LESS_THAN = "<"
+GREATER_THAN = ">"
+LESS_THAN_EQUAL = "<="
+GREATER_THAN_EQUAL = ">="
+AND = "&"
+OR = "|"
+NOT = "!"
 
 class Cuadruplos:
     def __init__(self):
@@ -49,7 +63,3 @@ class Cuadruplos:
         
     def current(self):
         return len(self.listaCuadruplos)
-    
-    def printCuadruplos(self):
-        for i, c in enumerate(self.listaCuadruplos):
-            print(i,c)
