@@ -2,6 +2,7 @@ import re
 BOLEANO = "boleano"
 TEXTO = "texto"
 NUMERO = "numero"
+NADA = "nada"
 
 class Variable:
     ''' Una variable tiene nombre y tipo'''
@@ -25,12 +26,12 @@ class Function:
         self.variables = []
         self.parameters = []
         self.direccionInicio = dirInicio
-        self.tipos = {NUMERO:0, BOLEANO:0 , TEXTO:0}
+        self.tipos = {NUMERO: 0, BOLEANO: 0, TEXTO: 0}
         
     '''Recibe los atributos de una variable, la crea y agrega a la funcion'''    
     def addVariable(self,nameOfVariable,typeOfVariable,ref):
         auxiliar = Variable(nameOfVariable,typeOfVariable,ref)
-        self.variables.append(auxiliar)
+        self.addVariableObject(auxiliar)
     
     '''Recibe los atributos de un parametro, lo crea y agrega a la funcion'''
     def addParameter(self,nameOfVariable,typeOfVariable,ref):
@@ -40,6 +41,7 @@ class Function:
     '''Agrega directamebte una variable ya creada (objeto tipo variable) a la funcion'''    
     def addVariableObject(self,auxiliar):
         self.variables.append(auxiliar)
+        self.addType(auxiliar.type)
     
     '''Agrega directamebte un parametro ya creado (objeto tipo parametro) a la funcion'''    
     def addParameterObject(self,auxiliar):
@@ -50,6 +52,12 @@ class Function:
         for f in self.variables + self.parameters:
             if variablename==f.name:
                 return True               
+        return False
+        
+    def searchParameter(self, parameterName):
+        for f in self.parameters:
+            if f.name == parameterName:
+                return True
         return False
     
     '''Regresa el tipo del nombre de la variable dada'''
@@ -66,21 +74,26 @@ class NamespaceTable:
     
     def __init__(self):
         self.tabla = {}
-        self.tabla[""] = Function("", "nada", 0)
-								
+        self.tabla[""] = Function("", NADA, 0)
+        
     """Metodo que agrega una funcion a la tabla de funciones. 
     Regresa True si la operacion fue exitosa, False si no."""
-    def addFunction(self, nameOfFunction, typeOfFunction, dirInicio, parameterList):	
+    def addFunction(self, nameOfFunction, typeOfFunction, dirInicio):	
         if nameOfFunction in self.tabla or self.tabla[""].searchVariable(nameOfFunction):
             return False
         else:
             auxiliar = Function(nameOfFunction,typeOfFunction,dirInicio)
             "Nombre del parametro, Tipo del parametro, Booleano Referencia True Valor False"
-            for item in parameterList:
-                auxiliar.addParameter(item[0],item[1],item[2])
             self.tabla[nameOfFunction]=auxiliar
-            auxiliar2=Variable(nameOfFunction, None, False)
-            self.tabla[""].addVariableObject(auxiliar2)
+            if typeOfFunction != NADA:
+                self.tabla[""].addVariableObject(Variable(nameOfFunction, typeOfFunction, False))
+            return True
+    
+    def addParameter(self, nameOfFunction, parameterName, typeOfParameter, modificable):
+        if self.tabla[nameOfFunction].searchParameter(parameterName):
+            return False
+        else:
+            self.tabla[nameOfFunction].addParameter(parameterName, typeOfParameter, modificable)
             return True
     
     """Metodo que agrega una variable a la tabla de variables en el ambito de la funcion dada.
@@ -124,9 +137,6 @@ class NamespaceTable:
             return self.tabla[nameOfFunction].type
         else:
             return None
-            
-    def getFunctionSize(self,nameOfFunction):
-        return 3
     
     def getParameterAmount(self,nameOfFunction):
         return len(self.tabla[nameOfFunction].parameters)

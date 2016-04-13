@@ -12,7 +12,6 @@ from cuadruplos import *
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
-currentParameterList = []
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
