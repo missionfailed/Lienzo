@@ -1,0 +1,4 @@
+boleano x = verdadero & falso;
+
+color de lienzo = rojo;
+tamano de lienzo = 38 por 3;
