@@ -1,7 +1,7 @@
 from MemoryRegister import *
 
-CANVAS_COLOR = "CANVAS_COLOR"
 CANVAS_SIZE = "CANVAS_SIZE"
+CANVAS_COLOR = "CANVAS_COLOR"
 READ = "READ"
 WRITE = "WRITE"
 PRINT = "PRINT"
@@ -27,6 +27,7 @@ DIVIDE = "/"
 MODULO = "%"
 ASSIGN = "="
 EQUALS = "=="
+NOT_EQUALS = '!='
 LESS_THAN = "<"
 GREATER_THAN = ">"
 LESS_THAN_EQUAL = "<="

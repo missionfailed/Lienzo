@@ -44,7 +44,7 @@ cubo[BOLEANO]['|'] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
 # Mensajes
 cubo[TEXTO]['+'] = defaultdict(lambda: None, {TEXTO : TEXTO})
 cubo[TEXTO]['-'] = defaultdict(lambda: None, {})
-cubo[TEXTO]['*'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['*'] = defaultdict(lambda: None, {NUMERO : TEXTO})
 cubo[TEXTO]['/'] = defaultdict(lambda: None, {})
 cubo[TEXTO]['%'] = defaultdict(lambda: None, {})
 cubo[TEXTO]['<'] = defaultdict(lambda: None, {TEXTO : BOLEANO})
@@ -82,7 +82,7 @@ def error(linea, mensaje):
 }
 
 program:
-	declaracion* colorLienzo tamanoLienzo
+	declaracion* (tamanoLienzo colorLienzo)?
 {
 cuadruplos.addCuadruplo("", GOTO, None, None, None, False)
 cuadruplos.pushPilaSaltos(cuadruplos.last())

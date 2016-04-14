@@ -1,4 +1,23 @@
-boleano x = verdadero & falso;
+boleano x = verdadero & !falso;
+numero y = 3 * 2 * 4;
+texto p = "hola" * 3;
 
+tamano de lienzo = 800 por 600;
 color de lienzo = rojo;
-tamano de lienzo = 38 por 3;
+
+mover adelante 100;
+girar izquierda 45;
+mover adelante 100;
+girar izquierda 45;
+mover adelante 100;
+girar izquierda 45;
+mover adelante 100;
+girar izquierda 45;
+mover adelante 100;
+girar izquierda 45;
+mover adelante 100;
+girar izquierda 45;
+mover adelante 100;
+girar izquierda 45;
+mover adelante 100;
+girar izquierda 45;

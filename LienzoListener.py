@@ -44,7 +44,7 @@ cubo[BOLEANO]['|'] = defaultdict(lambda: None, {BOLEANO : BOLEANO})
 # Mensajes
 cubo[TEXTO]['+'] = defaultdict(lambda: None, {TEXTO : TEXTO})
 cubo[TEXTO]['-'] = defaultdict(lambda: None, {})
-cubo[TEXTO]['*'] = defaultdict(lambda: None, {})
+cubo[TEXTO]['*'] = defaultdict(lambda: None, {NUMERO : TEXTO})
 cubo[TEXTO]['/'] = defaultdict(lambda: None, {})
 cubo[TEXTO]['%'] = defaultdict(lambda: None, {})
 cubo[TEXTO]['<'] = defaultdict(lambda: None, {TEXTO : BOLEANO})

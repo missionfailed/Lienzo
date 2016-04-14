@@ -2,8 +2,8 @@ numero n = 4;
 numero p = 5;
 boleano perro = verdadero;
 
-color de lienzo = rojo;
 tamano de lienzo = 1*2*3 por 3*4*5;
+color de lienzo = rojo;
 
 numero h() {
     numero y = 3;
