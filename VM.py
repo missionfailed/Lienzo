@@ -16,6 +16,32 @@ GLOBALS = 0
 LOCALS = 0
 TEMPORALS = 1
 
+def translateColor(color):
+    translatedcolor="white"
+    
+    if color == "rojo":
+        translatedcolor="red"
+    elif color == "azul":
+        translatedcolor="blue"
+    elif color == "verde":
+        translatedcolor="green"
+    elif color =="amarillo":
+        translatedcolor="yellow"
+    elif color == "naranja":
+        translatedcolor="orange"
+    elif color == "blanco":
+        translatedcolor="white"
+    elif color == "negro":
+        translatedcolor="black"
+    elif color == "violeta":
+        translatedcolor="violet"
+    elif color == "cafe":
+        translatedcolor="brown"
+    elif color == "gris":
+        translatedcolor="gray"
+    
+    return translatedcolor
+
 def store(variable, respuesta):
     if Tipo(variable) == GLOBAL_REGISTER:
         if len(pila[GLOBAL][GLOBALS]) <= variable.counter:
@@ -39,7 +65,7 @@ def executeVM(dirProc, listaCuadruplos):
     tortuga = turtle.Turtle()
     
     for i, c in enumerate(listaCuadruplos):
-        print(i, c)
+        # print(i, c)
         op = c[0]
         valor1 = c[1]
         valor2 = c[2]
@@ -94,8 +120,9 @@ def executeVM(dirProc, listaCuadruplos):
             screen.setup(Valor(valor1), Valor(valor2))
         
         elif op == CANVAS_COLOR:
+            translatedcolor = translateColor(Valor(valor1))
             #valor1 es el color en string, pero esta en espanol, cambiar en ingles
-            screen.bgcolor("orange")
+            screen.bgcolor(translatedcolor)
         
         elif op == FORWARD:
             tortuga.forward(Valor(valor1))
@@ -108,7 +135,28 @@ def executeVM(dirProc, listaCuadruplos):
         
         elif op == RIGHT:
             tortuga.right(Valor(valor1))
-                
+ 
+        elif op == READ:
+            aux = input(Valor(valor1)+": ")
+            store(variable,aux)
+            
+        elif op == WRITE:
+            tortuga.write(Valor(valor1),True)
+        
+        elif op == PRINT:
+            print(Valor(valor1))
+        
+        elif op == PENUP:
+            tortuga.penup()
+        
+        elif op == PENDOWN:
+            tortuga.pendown()
+            
+        elif op == COLOR_CHANGE:
+            print(Valor(valor1))
+            translatedcolor = translateColor(Valor(valor1))
+            tortuga.pencolor(translatedcolor)
+                       
     print(pila)
     screen.mainloop()
     

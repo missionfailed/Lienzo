@@ -82,7 +82,7 @@ def error(linea, mensaje):
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3D")
-        buf.write("\u017c\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u017d\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
@@ -100,154 +100,154 @@ def serializedATN():
         buf.write("\3\13\7\13\u00b2\n\13\f\13\16\13\u00b5\13\13\3\13\5\13")
         buf.write("\u00b8\n\13\3\f\3\f\3\f\5\f\u00bd\n\f\3\f\3\f\3\f\3\f")
         buf.write("\5\f\u00c3\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r")
-        buf.write("\5\r\u00cf\n\r\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17")
-        buf.write("\3\20\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\22\3\22")
-        buf.write("\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\23\3\24\3\24\3\24")
-        buf.write("\3\24\3\24\3\25\3\25\3\25\3\25\3\26\3\26\3\26\3\26\3\27")
-        buf.write("\3\27\3\27\3\27\3\27\3\27\3\27\3\30\3\30\3\30\3\30\3\30")
-        buf.write("\3\31\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32")
-        buf.write("\5\32\u0110\n\32\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3")
-        buf.write("\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34")
-        buf.write("\7\34\u0124\n\34\f\34\16\34\u0127\13\34\5\34\u0129\n\34")
-        buf.write("\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35\3\35\7\35\u0134")
-        buf.write("\n\35\f\35\16\35\u0137\13\35\3\36\3\36\3\36\3\36\3\36")
-        buf.write("\3\36\3\36\7\36\u0140\n\36\f\36\16\36\u0143\13\36\3\37")
-        buf.write("\3\37\3\37\3\37\3\37\3\37\3\37\7\37\u014c\n\37\f\37\16")
-        buf.write("\37\u014f\13\37\3 \3 \3 \3 \3 \3 \7 \u0157\n \f \16 \u015a")
-        buf.write("\13 \3!\5!\u015d\n!\3!\3!\3!\3!\3!\5!\u0164\n!\3!\3!\3")
-        buf.write("!\3!\3!\5!\u016b\n!\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3")
-        buf.write("\"\3\"\3\"\3\"\3\"\5\"\u017a\n\"\3\"\2\2#\2\4\6\b\n\f")
-        buf.write("\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@")
-        buf.write("B\2\b\3\2\30!\4\299;<\3\2\t\n\3\2\13\20\3\2\21\22\3\2")
-        buf.write("\23\25\u0183\2G\3\2\2\2\4`\3\2\2\2\6h\3\2\2\2\bj\3\2\2")
-        buf.write("\2\nt\3\2\2\2\f|\3\2\2\2\16\u0099\3\2\2\2\20\u009b\3\2")
-        buf.write("\2\2\22\u00a5\3\2\2\2\24\u00b7\3\2\2\2\26\u00c2\3\2\2")
-        buf.write("\2\30\u00ce\3\2\2\2\32\u00d0\3\2\2\2\34\u00d4\3\2\2\2")
-        buf.write("\36\u00d8\3\2\2\2 \u00dc\3\2\2\2\"\u00e1\3\2\2\2$\u00e6")
-        buf.write("\3\2\2\2&\u00eb\3\2\2\2(\u00f0\3\2\2\2*\u00f4\3\2\2\2")
-        buf.write(",\u00f8\3\2\2\2.\u00ff\3\2\2\2\60\u0104\3\2\2\2\62\u0106")
-        buf.write("\3\2\2\2\64\u0111\3\2\2\2\66\u0119\3\2\2\28\u012d\3\2")
-        buf.write("\2\2:\u0138\3\2\2\2<\u0144\3\2\2\2>\u0150\3\2\2\2@\u016a")
-        buf.write("\3\2\2\2B\u0179\3\2\2\2DF\5\n\6\2ED\3\2\2\2FI\3\2\2\2")
-        buf.write("GE\3\2\2\2GH\3\2\2\2HM\3\2\2\2IG\3\2\2\2JK\5\b\5\2KL\5")
-        buf.write("\4\3\2LN\3\2\2\2MJ\3\2\2\2MN\3\2\2\2NO\3\2\2\2OS\b\2\1")
-        buf.write("\2PR\5\f\7\2QP\3\2\2\2RU\3\2\2\2SQ\3\2\2\2ST\3\2\2\2T")
-        buf.write("V\3\2\2\2US\3\2\2\2VZ\b\2\1\2WY\5\26\f\2XW\3\2\2\2Y\\")
-        buf.write("\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[]\3\2\2\2\\Z\3\2\2\2]^\7")
-        buf.write("\2\2\3^_\b\2\1\2_\3\3\2\2\2`a\7\"\2\2ab\7\'\2\2bc\7#\2")
-        buf.write("\2cd\7$\2\2de\5\6\4\2ef\7\3\2\2fg\b\3\1\2g\5\3\2\2\2h")
-        buf.write("i\t\2\2\2i\7\3\2\2\2jk\7%\2\2kl\7\'\2\2lm\7#\2\2mn\7$")
-        buf.write("\2\2no\58\35\2op\7&\2\2pq\58\35\2qr\7\3\2\2rs\b\5\1\2")
-        buf.write("s\t\3\2\2\2tu\5\60\31\2uv\7D\2\2vw\b\6\1\2wx\7$\2\2xy")
-        buf.write("\58\35\2yz\7\3\2\2z{\b\6\1\2{\13\3\2\2\2|}\5\16\b\2}~")
-        buf.write("\7D\2\2~\177\b\7\1\2\177\u0088\7\4\2\2\u0080\u0085\5\20")
-        buf.write("\t\2\u0081\u0082\7\5\2\2\u0082\u0084\5\20\t\2\u0083\u0081")
-        buf.write("\3\2\2\2\u0084\u0087\3\2\2\2\u0085\u0083\3\2\2\2\u0085")
-        buf.write("\u0086\3\2\2\2\u0086\u0089\3\2\2\2\u0087\u0085\3\2\2\2")
-        buf.write("\u0088\u0080\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u008a\3")
-        buf.write("\2\2\2\u008a\u008b\7\6\2\2\u008b\u008c\7\7\2\2\u008c\u0091")
-        buf.write("\5\22\n\2\u008d\u008e\7\65\2\2\u008e\u008f\58\35\2\u008f")
-        buf.write("\u0090\7\3\2\2\u0090\u0092\3\2\2\2\u0091\u008d\3\2\2\2")
-        buf.write("\u0091\u0092\3\2\2\2\u0092\u0093\3\2\2\2\u0093\u0094\b")
-        buf.write("\7\1\2\u0094\u0095\7\b\2\2\u0095\u0096\b\7\1\2\u0096\r")
-        buf.write("\3\2\2\2\u0097\u009a\5\60\31\2\u0098\u009a\7?\2\2\u0099")
-        buf.write("\u0097\3\2\2\2\u0099\u0098\3\2\2\2\u009a\17\3\2\2\2\u009b")
-        buf.write("\u009d\5\60\31\2\u009c\u009e\7A\2\2\u009d\u009c\3\2\2")
-        buf.write("\2\u009d\u009e\3\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a0")
-        buf.write("\7D\2\2\u00a0\u00a1\b\t\1\2\u00a1\21\3\2\2\2\u00a2\u00a4")
-        buf.write("\5\n\6\2\u00a3\u00a2\3\2\2\2\u00a4\u00a7\3\2\2\2\u00a5")
-        buf.write("\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00ab\3\2\2\2")
-        buf.write("\u00a7\u00a5\3\2\2\2\u00a8\u00aa\5\26\f\2\u00a9\u00a8")
-        buf.write("\3\2\2\2\u00aa\u00ad\3\2\2\2\u00ab\u00a9\3\2\2\2\u00ab")
-        buf.write("\u00ac\3\2\2\2\u00ac\23\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ae")
-        buf.write("\u00b8\5\26\f\2\u00af\u00b3\7\7\2\2\u00b0\u00b2\5\26\f")
-        buf.write("\2\u00b1\u00b0\3\2\2\2\u00b2\u00b5\3\2\2\2\u00b3\u00b1")
-        buf.write("\3\2\2\2\u00b3\u00b4\3\2\2\2\u00b4\u00b6\3\2\2\2\u00b5")
-        buf.write("\u00b3\3\2\2\2\u00b6\u00b8\7\b\2\2\u00b7\u00ae\3\2\2\2")
-        buf.write("\u00b7\u00af\3\2\2\2\u00b8\25\3\2\2\2\u00b9\u00bd\5.\30")
-        buf.write("\2\u00ba\u00bd\5\30\r\2\u00bb\u00bd\5\66\34\2\u00bc\u00b9")
-        buf.write("\3\2\2\2\u00bc\u00ba\3\2\2\2\u00bc\u00bb\3\2\2\2\u00bd")
-        buf.write("\u00be\3\2\2\2\u00be\u00bf\7\3\2\2\u00bf\u00c3\3\2\2\2")
-        buf.write("\u00c0\u00c3\5\62\32\2\u00c1\u00c3\5\64\33\2\u00c2\u00bc")
-        buf.write("\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c2\u00c1\3\2\2\2\u00c3")
-        buf.write("\27\3\2\2\2\u00c4\u00cf\5\32\16\2\u00c5\u00cf\5\34\17")
-        buf.write("\2\u00c6\u00cf\5\36\20\2\u00c7\u00cf\5 \21\2\u00c8\u00cf")
-        buf.write("\5\"\22\2\u00c9\u00cf\5&\24\2\u00ca\u00cf\5$\23\2\u00cb")
-        buf.write("\u00cf\5,\27\2\u00cc\u00cf\5(\25\2\u00cd\u00cf\5*\26\2")
-        buf.write("\u00ce\u00c4\3\2\2\2\u00ce\u00c5\3\2\2\2\u00ce\u00c6\3")
-        buf.write("\2\2\2\u00ce\u00c7\3\2\2\2\u00ce\u00c8\3\2\2\2\u00ce\u00c9")
-        buf.write("\3\2\2\2\u00ce\u00ca\3\2\2\2\u00ce\u00cb\3\2\2\2\u00ce")
-        buf.write("\u00cc\3\2\2\2\u00ce\u00cd\3\2\2\2\u00cf\31\3\2\2\2\u00d0")
-        buf.write("\u00d1\7:\2\2\u00d1\u00d2\7D\2\2\u00d2\u00d3\b\16\1\2")
-        buf.write("\u00d3\33\3\2\2\2\u00d4\u00d5\7=\2\2\u00d5\u00d6\58\35")
-        buf.write("\2\u00d6\u00d7\b\17\1\2\u00d7\35\3\2\2\2\u00d8\u00d9\7")
-        buf.write(">\2\2\u00d9\u00da\58\35\2\u00da\u00db\b\20\1\2\u00db\37")
-        buf.write("\3\2\2\2\u00dc\u00dd\7)\2\2\u00dd\u00de\7*\2\2\u00de\u00df")
-        buf.write("\58\35\2\u00df\u00e0\b\21\1\2\u00e0!\3\2\2\2\u00e1\u00e2")
-        buf.write("\7)\2\2\u00e2\u00e3\7+\2\2\u00e3\u00e4\58\35\2\u00e4\u00e5")
-        buf.write("\b\22\1\2\u00e5#\3\2\2\2\u00e6\u00e7\7,\2\2\u00e7\u00e8")
-        buf.write("\7-\2\2\u00e8\u00e9\58\35\2\u00e9\u00ea\b\23\1\2\u00ea")
-        buf.write("%\3\2\2\2\u00eb\u00ec\7,\2\2\u00ec\u00ed\7.\2\2\u00ed")
-        buf.write("\u00ee\58\35\2\u00ee\u00ef\b\24\1\2\u00ef\'\3\2\2\2\u00f0")
-        buf.write("\u00f1\7/\2\2\u00f1\u00f2\7\61\2\2\u00f2\u00f3\b\25\1")
-        buf.write("\2\u00f3)\3\2\2\2\u00f4\u00f5\7\60\2\2\u00f5\u00f6\7\61")
-        buf.write("\2\2\u00f6\u00f7\b\26\1\2\u00f7+\3\2\2\2\u00f8\u00f9\7")
-        buf.write("\"\2\2\u00f9\u00fa\7\'\2\2\u00fa\u00fb\7\61\2\2\u00fb")
-        buf.write("\u00fc\7$\2\2\u00fc\u00fd\5\6\4\2\u00fd\u00fe\b\27\1\2")
-        buf.write("\u00fe-\3\2\2\2\u00ff\u0100\7D\2\2\u0100\u0101\7$\2\2")
-        buf.write("\u0101\u0102\58\35\2\u0102\u0103\b\30\1\2\u0103/\3\2\2")
-        buf.write("\2\u0104\u0105\t\3\2\2\u0105\61\3\2\2\2\u0106\u0107\7")
-        buf.write("\67\2\2\u0107\u0108\58\35\2\u0108\u0109\b\32\1\2\u0109")
-        buf.write("\u010f\5\24\13\2\u010a\u010b\78\2\2\u010b\u010c\b\32\1")
-        buf.write("\2\u010c\u010d\5\24\13\2\u010d\u010e\b\32\1\2\u010e\u0110")
-        buf.write("\3\2\2\2\u010f\u010a\3\2\2\2\u010f\u0110\3\2\2\2\u0110")
-        buf.write("\63\3\2\2\2\u0111\u0112\7\64\2\2\u0112\u0113\7\66\2\2")
-        buf.write("\u0113\u0114\b\33\1\2\u0114\u0115\58\35\2\u0115\u0116")
-        buf.write("\b\33\1\2\u0116\u0117\5\24\13\2\u0117\u0118\b\33\1\2\u0118")
-        buf.write("\65\3\2\2\2\u0119\u011a\7D\2\2\u011a\u011b\b\34\1\2\u011b")
-        buf.write("\u011c\7\4\2\2\u011c\u0128\b\34\1\2\u011d\u011e\58\35")
-        buf.write("\2\u011e\u0125\b\34\1\2\u011f\u0120\7\5\2\2\u0120\u0121")
-        buf.write("\58\35\2\u0121\u0122\b\34\1\2\u0122\u0124\3\2\2\2\u0123")
-        buf.write("\u011f\3\2\2\2\u0124\u0127\3\2\2\2\u0125\u0123\3\2\2\2")
-        buf.write("\u0125\u0126\3\2\2\2\u0126\u0129\3\2\2\2\u0127\u0125\3")
-        buf.write("\2\2\2\u0128\u011d\3\2\2\2\u0128\u0129\3\2\2\2\u0129\u012a")
-        buf.write("\3\2\2\2\u012a\u012b\7\6\2\2\u012b\u012c\b\34\1\2\u012c")
-        buf.write("\67\3\2\2\2\u012d\u012e\5:\36\2\u012e\u0135\b\35\1\2\u012f")
-        buf.write("\u0130\t\4\2\2\u0130\u0131\5:\36\2\u0131\u0132\b\35\1")
-        buf.write("\2\u0132\u0134\3\2\2\2\u0133\u012f\3\2\2\2\u0134\u0137")
-        buf.write("\3\2\2\2\u0135\u0133\3\2\2\2\u0135\u0136\3\2\2\2\u0136")
-        buf.write("9\3\2\2\2\u0137\u0135\3\2\2\2\u0138\u0139\5<\37\2\u0139")
-        buf.write("\u0141\b\36\1\2\u013a\u013b\t\5\2\2\u013b\u013c\5<\37")
-        buf.write("\2\u013c\u013d\3\2\2\2\u013d\u013e\b\36\1\2\u013e\u0140")
-        buf.write("\3\2\2\2\u013f\u013a\3\2\2\2\u0140\u0143\3\2\2\2\u0141")
-        buf.write("\u013f\3\2\2\2\u0141\u0142\3\2\2\2\u0142;\3\2\2\2\u0143")
-        buf.write("\u0141\3\2\2\2\u0144\u0145\5> \2\u0145\u014d\b\37\1\2")
-        buf.write("\u0146\u0147\t\6\2\2\u0147\u0148\5> \2\u0148\u0149\3\2")
-        buf.write("\2\2\u0149\u014a\b\37\1\2\u014a\u014c\3\2\2\2\u014b\u0146")
-        buf.write("\3\2\2\2\u014c\u014f\3\2\2\2\u014d\u014b\3\2\2\2\u014d")
-        buf.write("\u014e\3\2\2\2\u014e=\3\2\2\2\u014f\u014d\3\2\2\2\u0150")
-        buf.write("\u0151\5@!\2\u0151\u0158\b \1\2\u0152\u0153\t\7\2\2\u0153")
-        buf.write("\u0154\5@!\2\u0154\u0155\b \1\2\u0155\u0157\3\2\2\2\u0156")
-        buf.write("\u0152\3\2\2\2\u0157\u015a\3\2\2\2\u0158\u0156\3\2\2\2")
-        buf.write("\u0158\u0159\3\2\2\2\u0159?\3\2\2\2\u015a\u0158\3\2\2")
-        buf.write("\2\u015b\u015d\7\26\2\2\u015c\u015b\3\2\2\2\u015c\u015d")
-        buf.write("\3\2\2\2\u015d\u015e\3\2\2\2\u015e\u015f\5B\"\2\u015f")
-        buf.write("\u0160\3\2\2\2\u0160\u0161\b!\1\2\u0161\u016b\3\2\2\2")
-        buf.write("\u0162\u0164\7\22\2\2\u0163\u0162\3\2\2\2\u0163\u0164")
-        buf.write("\3\2\2\2\u0164\u0165\3\2\2\2\u0165\u0166\7B\2\2\u0166")
-        buf.write("\u0167\3\2\2\2\u0167\u016b\b!\1\2\u0168\u0169\7C\2\2\u0169")
-        buf.write("\u016b\b!\1\2\u016a\u015c\3\2\2\2\u016a\u0163\3\2\2\2")
-        buf.write("\u016a\u0168\3\2\2\2\u016bA\3\2\2\2\u016c\u016d\7D\2\2")
-        buf.write("\u016d\u017a\b\"\1\2\u016e\u016f\7@\2\2\u016f\u017a\b")
-        buf.write("\"\1\2\u0170\u0171\5\66\34\2\u0171\u0172\b\"\1\2\u0172")
-        buf.write("\u017a\3\2\2\2\u0173\u0174\7\4\2\2\u0174\u0175\58\35\2")
-        buf.write("\u0175\u0176\7\6\2\2\u0176\u0177\b\"\1\2\u0177\u017a\3")
-        buf.write("\2\2\2\u0178\u017a\5\30\r\2\u0179\u016c\3\2\2\2\u0179")
-        buf.write("\u016e\3\2\2\2\u0179\u0170\3\2\2\2\u0179\u0173\3\2\2\2")
-        buf.write("\u0179\u0178\3\2\2\2\u017aC\3\2\2\2\35GMSZ\u0085\u0088")
+        buf.write("\5\r\u00cf\n\r\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17")
+        buf.write("\3\17\3\20\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\22")
+        buf.write("\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\23\3\24\3\24")
+        buf.write("\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\26\3\26\3\26\3\26")
+        buf.write("\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\30\3\30\3\30\3\30")
+        buf.write("\3\30\3\31\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32")
+        buf.write("\3\32\5\32\u0111\n\32\3\33\3\33\3\33\3\33\3\33\3\33\3")
+        buf.write("\33\3\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34")
+        buf.write("\3\34\7\34\u0125\n\34\f\34\16\34\u0128\13\34\5\34\u012a")
+        buf.write("\n\34\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35\3\35\7\35")
+        buf.write("\u0135\n\35\f\35\16\35\u0138\13\35\3\36\3\36\3\36\3\36")
+        buf.write("\3\36\3\36\3\36\7\36\u0141\n\36\f\36\16\36\u0144\13\36")
+        buf.write("\3\37\3\37\3\37\3\37\3\37\3\37\3\37\7\37\u014d\n\37\f")
+        buf.write("\37\16\37\u0150\13\37\3 \3 \3 \3 \3 \3 \7 \u0158\n \f")
+        buf.write(" \16 \u015b\13 \3!\5!\u015e\n!\3!\3!\3!\3!\3!\5!\u0165")
+        buf.write("\n!\3!\3!\3!\3!\3!\5!\u016c\n!\3\"\3\"\3\"\3\"\3\"\3\"")
+        buf.write("\3\"\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u017b\n\"\3\"\2\2#\2")
+        buf.write("\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64")
+        buf.write("\668:<>@B\2\b\3\2\30!\4\299;<\3\2\t\n\3\2\13\20\3\2\21")
+        buf.write("\22\3\2\23\25\u0184\2G\3\2\2\2\4`\3\2\2\2\6h\3\2\2\2\b")
+        buf.write("j\3\2\2\2\nt\3\2\2\2\f|\3\2\2\2\16\u0099\3\2\2\2\20\u009b")
+        buf.write("\3\2\2\2\22\u00a5\3\2\2\2\24\u00b7\3\2\2\2\26\u00c2\3")
+        buf.write("\2\2\2\30\u00ce\3\2\2\2\32\u00d0\3\2\2\2\34\u00d5\3\2")
+        buf.write("\2\2\36\u00d9\3\2\2\2 \u00dd\3\2\2\2\"\u00e2\3\2\2\2$")
+        buf.write("\u00e7\3\2\2\2&\u00ec\3\2\2\2(\u00f1\3\2\2\2*\u00f5\3")
+        buf.write("\2\2\2,\u00f9\3\2\2\2.\u0100\3\2\2\2\60\u0105\3\2\2\2")
+        buf.write("\62\u0107\3\2\2\2\64\u0112\3\2\2\2\66\u011a\3\2\2\28\u012e")
+        buf.write("\3\2\2\2:\u0139\3\2\2\2<\u0145\3\2\2\2>\u0151\3\2\2\2")
+        buf.write("@\u016b\3\2\2\2B\u017a\3\2\2\2DF\5\n\6\2ED\3\2\2\2FI\3")
+        buf.write("\2\2\2GE\3\2\2\2GH\3\2\2\2HM\3\2\2\2IG\3\2\2\2JK\5\b\5")
+        buf.write("\2KL\5\4\3\2LN\3\2\2\2MJ\3\2\2\2MN\3\2\2\2NO\3\2\2\2O")
+        buf.write("S\b\2\1\2PR\5\f\7\2QP\3\2\2\2RU\3\2\2\2SQ\3\2\2\2ST\3")
+        buf.write("\2\2\2TV\3\2\2\2US\3\2\2\2VZ\b\2\1\2WY\5\26\f\2XW\3\2")
+        buf.write("\2\2Y\\\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[]\3\2\2\2\\Z\3\2\2")
+        buf.write("\2]^\7\2\2\3^_\b\2\1\2_\3\3\2\2\2`a\7\"\2\2ab\7\'\2\2")
+        buf.write("bc\7#\2\2cd\7$\2\2de\5\6\4\2ef\7\3\2\2fg\b\3\1\2g\5\3")
+        buf.write("\2\2\2hi\t\2\2\2i\7\3\2\2\2jk\7%\2\2kl\7\'\2\2lm\7#\2")
+        buf.write("\2mn\7$\2\2no\58\35\2op\7&\2\2pq\58\35\2qr\7\3\2\2rs\b")
+        buf.write("\5\1\2s\t\3\2\2\2tu\5\60\31\2uv\7D\2\2vw\b\6\1\2wx\7$")
+        buf.write("\2\2xy\58\35\2yz\7\3\2\2z{\b\6\1\2{\13\3\2\2\2|}\5\16")
+        buf.write("\b\2}~\7D\2\2~\177\b\7\1\2\177\u0088\7\4\2\2\u0080\u0085")
+        buf.write("\5\20\t\2\u0081\u0082\7\5\2\2\u0082\u0084\5\20\t\2\u0083")
+        buf.write("\u0081\3\2\2\2\u0084\u0087\3\2\2\2\u0085\u0083\3\2\2\2")
+        buf.write("\u0085\u0086\3\2\2\2\u0086\u0089\3\2\2\2\u0087\u0085\3")
+        buf.write("\2\2\2\u0088\u0080\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u008a")
+        buf.write("\3\2\2\2\u008a\u008b\7\6\2\2\u008b\u008c\7\7\2\2\u008c")
+        buf.write("\u0091\5\22\n\2\u008d\u008e\7\65\2\2\u008e\u008f\58\35")
+        buf.write("\2\u008f\u0090\7\3\2\2\u0090\u0092\3\2\2\2\u0091\u008d")
+        buf.write("\3\2\2\2\u0091\u0092\3\2\2\2\u0092\u0093\3\2\2\2\u0093")
+        buf.write("\u0094\b\7\1\2\u0094\u0095\7\b\2\2\u0095\u0096\b\7\1\2")
+        buf.write("\u0096\r\3\2\2\2\u0097\u009a\5\60\31\2\u0098\u009a\7?")
+        buf.write("\2\2\u0099\u0097\3\2\2\2\u0099\u0098\3\2\2\2\u009a\17")
+        buf.write("\3\2\2\2\u009b\u009d\5\60\31\2\u009c\u009e\7A\2\2\u009d")
+        buf.write("\u009c\3\2\2\2\u009d\u009e\3\2\2\2\u009e\u009f\3\2\2\2")
+        buf.write("\u009f\u00a0\7D\2\2\u00a0\u00a1\b\t\1\2\u00a1\21\3\2\2")
+        buf.write("\2\u00a2\u00a4\5\n\6\2\u00a3\u00a2\3\2\2\2\u00a4\u00a7")
+        buf.write("\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6")
+        buf.write("\u00ab\3\2\2\2\u00a7\u00a5\3\2\2\2\u00a8\u00aa\5\26\f")
+        buf.write("\2\u00a9\u00a8\3\2\2\2\u00aa\u00ad\3\2\2\2\u00ab\u00a9")
+        buf.write("\3\2\2\2\u00ab\u00ac\3\2\2\2\u00ac\23\3\2\2\2\u00ad\u00ab")
+        buf.write("\3\2\2\2\u00ae\u00b8\5\26\f\2\u00af\u00b3\7\7\2\2\u00b0")
+        buf.write("\u00b2\5\26\f\2\u00b1\u00b0\3\2\2\2\u00b2\u00b5\3\2\2")
+        buf.write("\2\u00b3\u00b1\3\2\2\2\u00b3\u00b4\3\2\2\2\u00b4\u00b6")
+        buf.write("\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b6\u00b8\7\b\2\2\u00b7")
+        buf.write("\u00ae\3\2\2\2\u00b7\u00af\3\2\2\2\u00b8\25\3\2\2\2\u00b9")
+        buf.write("\u00bd\5.\30\2\u00ba\u00bd\5\30\r\2\u00bb\u00bd\5\66\34")
+        buf.write("\2\u00bc\u00b9\3\2\2\2\u00bc\u00ba\3\2\2\2\u00bc\u00bb")
+        buf.write("\3\2\2\2\u00bd\u00be\3\2\2\2\u00be\u00bf\7\3\2\2\u00bf")
+        buf.write("\u00c3\3\2\2\2\u00c0\u00c3\5\62\32\2\u00c1\u00c3\5\64")
+        buf.write("\33\2\u00c2\u00bc\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c2\u00c1")
+        buf.write("\3\2\2\2\u00c3\27\3\2\2\2\u00c4\u00cf\5\32\16\2\u00c5")
+        buf.write("\u00cf\5\34\17\2\u00c6\u00cf\5\36\20\2\u00c7\u00cf\5 ")
+        buf.write("\21\2\u00c8\u00cf\5\"\22\2\u00c9\u00cf\5&\24\2\u00ca\u00cf")
+        buf.write("\5$\23\2\u00cb\u00cf\5,\27\2\u00cc\u00cf\5(\25\2\u00cd")
+        buf.write("\u00cf\5*\26\2\u00ce\u00c4\3\2\2\2\u00ce\u00c5\3\2\2\2")
+        buf.write("\u00ce\u00c6\3\2\2\2\u00ce\u00c7\3\2\2\2\u00ce\u00c8\3")
+        buf.write("\2\2\2\u00ce\u00c9\3\2\2\2\u00ce\u00ca\3\2\2\2\u00ce\u00cb")
+        buf.write("\3\2\2\2\u00ce\u00cc\3\2\2\2\u00ce\u00cd\3\2\2\2\u00cf")
+        buf.write("\31\3\2\2\2\u00d0\u00d1\7:\2\2\u00d1\u00d2\58\35\2\u00d2")
+        buf.write("\u00d3\7D\2\2\u00d3\u00d4\b\16\1\2\u00d4\33\3\2\2\2\u00d5")
+        buf.write("\u00d6\7=\2\2\u00d6\u00d7\58\35\2\u00d7\u00d8\b\17\1\2")
+        buf.write("\u00d8\35\3\2\2\2\u00d9\u00da\7>\2\2\u00da\u00db\58\35")
+        buf.write("\2\u00db\u00dc\b\20\1\2\u00dc\37\3\2\2\2\u00dd\u00de\7")
+        buf.write(")\2\2\u00de\u00df\7*\2\2\u00df\u00e0\58\35\2\u00e0\u00e1")
+        buf.write("\b\21\1\2\u00e1!\3\2\2\2\u00e2\u00e3\7)\2\2\u00e3\u00e4")
+        buf.write("\7+\2\2\u00e4\u00e5\58\35\2\u00e5\u00e6\b\22\1\2\u00e6")
+        buf.write("#\3\2\2\2\u00e7\u00e8\7,\2\2\u00e8\u00e9\7-\2\2\u00e9")
+        buf.write("\u00ea\58\35\2\u00ea\u00eb\b\23\1\2\u00eb%\3\2\2\2\u00ec")
+        buf.write("\u00ed\7,\2\2\u00ed\u00ee\7.\2\2\u00ee\u00ef\58\35\2\u00ef")
+        buf.write("\u00f0\b\24\1\2\u00f0\'\3\2\2\2\u00f1\u00f2\7/\2\2\u00f2")
+        buf.write("\u00f3\7\61\2\2\u00f3\u00f4\b\25\1\2\u00f4)\3\2\2\2\u00f5")
+        buf.write("\u00f6\7\60\2\2\u00f6\u00f7\7\61\2\2\u00f7\u00f8\b\26")
+        buf.write("\1\2\u00f8+\3\2\2\2\u00f9\u00fa\7\"\2\2\u00fa\u00fb\7")
+        buf.write("\'\2\2\u00fb\u00fc\7\61\2\2\u00fc\u00fd\7$\2\2\u00fd\u00fe")
+        buf.write("\5\6\4\2\u00fe\u00ff\b\27\1\2\u00ff-\3\2\2\2\u0100\u0101")
+        buf.write("\7D\2\2\u0101\u0102\7$\2\2\u0102\u0103\58\35\2\u0103\u0104")
+        buf.write("\b\30\1\2\u0104/\3\2\2\2\u0105\u0106\t\3\2\2\u0106\61")
+        buf.write("\3\2\2\2\u0107\u0108\7\67\2\2\u0108\u0109\58\35\2\u0109")
+        buf.write("\u010a\b\32\1\2\u010a\u0110\5\24\13\2\u010b\u010c\78\2")
+        buf.write("\2\u010c\u010d\b\32\1\2\u010d\u010e\5\24\13\2\u010e\u010f")
+        buf.write("\b\32\1\2\u010f\u0111\3\2\2\2\u0110\u010b\3\2\2\2\u0110")
+        buf.write("\u0111\3\2\2\2\u0111\63\3\2\2\2\u0112\u0113\7\64\2\2\u0113")
+        buf.write("\u0114\7\66\2\2\u0114\u0115\b\33\1\2\u0115\u0116\58\35")
+        buf.write("\2\u0116\u0117\b\33\1\2\u0117\u0118\5\24\13\2\u0118\u0119")
+        buf.write("\b\33\1\2\u0119\65\3\2\2\2\u011a\u011b\7D\2\2\u011b\u011c")
+        buf.write("\b\34\1\2\u011c\u011d\7\4\2\2\u011d\u0129\b\34\1\2\u011e")
+        buf.write("\u011f\58\35\2\u011f\u0126\b\34\1\2\u0120\u0121\7\5\2")
+        buf.write("\2\u0121\u0122\58\35\2\u0122\u0123\b\34\1\2\u0123\u0125")
+        buf.write("\3\2\2\2\u0124\u0120\3\2\2\2\u0125\u0128\3\2\2\2\u0126")
+        buf.write("\u0124\3\2\2\2\u0126\u0127\3\2\2\2\u0127\u012a\3\2\2\2")
+        buf.write("\u0128\u0126\3\2\2\2\u0129\u011e\3\2\2\2\u0129\u012a\3")
+        buf.write("\2\2\2\u012a\u012b\3\2\2\2\u012b\u012c\7\6\2\2\u012c\u012d")
+        buf.write("\b\34\1\2\u012d\67\3\2\2\2\u012e\u012f\5:\36\2\u012f\u0136")
+        buf.write("\b\35\1\2\u0130\u0131\t\4\2\2\u0131\u0132\5:\36\2\u0132")
+        buf.write("\u0133\b\35\1\2\u0133\u0135\3\2\2\2\u0134\u0130\3\2\2")
+        buf.write("\2\u0135\u0138\3\2\2\2\u0136\u0134\3\2\2\2\u0136\u0137")
+        buf.write("\3\2\2\2\u01379\3\2\2\2\u0138\u0136\3\2\2\2\u0139\u013a")
+        buf.write("\5<\37\2\u013a\u0142\b\36\1\2\u013b\u013c\t\5\2\2\u013c")
+        buf.write("\u013d\5<\37\2\u013d\u013e\3\2\2\2\u013e\u013f\b\36\1")
+        buf.write("\2\u013f\u0141\3\2\2\2\u0140\u013b\3\2\2\2\u0141\u0144")
+        buf.write("\3\2\2\2\u0142\u0140\3\2\2\2\u0142\u0143\3\2\2\2\u0143")
+        buf.write(";\3\2\2\2\u0144\u0142\3\2\2\2\u0145\u0146\5> \2\u0146")
+        buf.write("\u014e\b\37\1\2\u0147\u0148\t\6\2\2\u0148\u0149\5> \2")
+        buf.write("\u0149\u014a\3\2\2\2\u014a\u014b\b\37\1\2\u014b\u014d")
+        buf.write("\3\2\2\2\u014c\u0147\3\2\2\2\u014d\u0150\3\2\2\2\u014e")
+        buf.write("\u014c\3\2\2\2\u014e\u014f\3\2\2\2\u014f=\3\2\2\2\u0150")
+        buf.write("\u014e\3\2\2\2\u0151\u0152\5@!\2\u0152\u0159\b \1\2\u0153")
+        buf.write("\u0154\t\7\2\2\u0154\u0155\5@!\2\u0155\u0156\b \1\2\u0156")
+        buf.write("\u0158\3\2\2\2\u0157\u0153\3\2\2\2\u0158\u015b\3\2\2\2")
+        buf.write("\u0159\u0157\3\2\2\2\u0159\u015a\3\2\2\2\u015a?\3\2\2")
+        buf.write("\2\u015b\u0159\3\2\2\2\u015c\u015e\7\26\2\2\u015d\u015c")
+        buf.write("\3\2\2\2\u015d\u015e\3\2\2\2\u015e\u015f\3\2\2\2\u015f")
+        buf.write("\u0160\5B\"\2\u0160\u0161\3\2\2\2\u0161\u0162\b!\1\2\u0162")
+        buf.write("\u016c\3\2\2\2\u0163\u0165\7\22\2\2\u0164\u0163\3\2\2")
+        buf.write("\2\u0164\u0165\3\2\2\2\u0165\u0166\3\2\2\2\u0166\u0167")
+        buf.write("\7B\2\2\u0167\u0168\3\2\2\2\u0168\u016c\b!\1\2\u0169\u016a")
+        buf.write("\7C\2\2\u016a\u016c\b!\1\2\u016b\u015d\3\2\2\2\u016b\u0164")
+        buf.write("\3\2\2\2\u016b\u0169\3\2\2\2\u016cA\3\2\2\2\u016d\u016e")
+        buf.write("\7D\2\2\u016e\u017b\b\"\1\2\u016f\u0170\7@\2\2\u0170\u017b")
+        buf.write("\b\"\1\2\u0171\u0172\5\66\34\2\u0172\u0173\b\"\1\2\u0173")
+        buf.write("\u017b\3\2\2\2\u0174\u0175\7\4\2\2\u0175\u0176\58\35\2")
+        buf.write("\u0176\u0177\7\6\2\2\u0177\u0178\b\"\1\2\u0178\u017b\3")
+        buf.write("\2\2\2\u0179\u017b\5\30\r\2\u017a\u016d\3\2\2\2\u017a")
+        buf.write("\u016f\3\2\2\2\u017a\u0171\3\2\2\2\u017a\u0174\3\2\2\2")
+        buf.write("\u017a\u0179\3\2\2\2\u017bC\3\2\2\2\35GMSZ\u0085\u0088")
         buf.write("\u0091\u0099\u009d\u00a5\u00ab\u00b3\u00b7\u00bc\u00c2")
-        buf.write("\u00ce\u010f\u0125\u0128\u0135\u0141\u014d\u0158\u015c")
-        buf.write("\u0163\u016a\u0179")
+        buf.write("\u00ce\u0110\u0126\u0129\u0136\u0142\u014e\u0159\u015d")
+        buf.write("\u0164\u016b\u017a")
         return buf.getvalue()
 
 
@@ -1438,10 +1438,15 @@ class LienzoParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self._ss_expresion = None # Ss_expresionContext
             self._ID = None # Token
 
         def LEER(self):
             return self.getToken(LienzoParser.LEER, 0)
+
+        def ss_expresion(self):
+            return self.getTypedRuleContext(LienzoParser.Ss_expresionContext,0)
+
 
         def ID(self):
             return self.getToken(LienzoParser.ID, 0)
@@ -1469,10 +1474,12 @@ class LienzoParser ( Parser ):
             self.state = 206
             self.match(LienzoParser.LEER)
             self.state = 207
+            localctx._ss_expresion = self.ss_expresion()
+            self.state = 208
             localctx._ID = self.match(LienzoParser.ID)
 
             idcontent=memoryregisters.getMemoryRegister((None if localctx._ID is None else localctx._ID.text),currentFunctionName)
-            cuadruplos.addCuadruplo(currentFunctionName, READ, idcontent, None, idcontent)
+            cuadruplos.addCuadruplo(currentFunctionName, READ, localctx._ss_expresion.valor, None, idcontent)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1516,9 +1523,9 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 26, self.RULE_escritura)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 210
-            self.match(LienzoParser.ESCRIBIR)
             self.state = 211
+            self.match(LienzoParser.ESCRIBIR)
+            self.state = 212
             localctx._ss_expresion = self.ss_expresion()
 
             cuadruplos.addCuadruplo(currentFunctionName, WRITE, localctx._ss_expresion.valor, None, None, False)
@@ -1565,9 +1572,9 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_imprimir)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 214
-            self.match(LienzoParser.IMPRIMIR)
             self.state = 215
+            self.match(LienzoParser.IMPRIMIR)
+            self.state = 216
             localctx._ss_expresion = self.ss_expresion()
 
             cuadruplos.addCuadruplo(currentFunctionName, PRINT, localctx._ss_expresion.valor, None, None, False)
@@ -1617,11 +1624,11 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 30, self.RULE_mover_adelante)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 218
-            self.match(LienzoParser.MOVER)
             self.state = 219
-            self.match(LienzoParser.ADELANTE)
+            self.match(LienzoParser.MOVER)
             self.state = 220
+            self.match(LienzoParser.ADELANTE)
+            self.state = 221
             localctx._ss_expresion = self.ss_expresion()
 
             cuadruplos.addCuadruplo(currentFunctionName, FORWARD, localctx._ss_expresion.valor, None, None, False)
@@ -1671,11 +1678,11 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 32, self.RULE_mover_atras)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 223
-            self.match(LienzoParser.MOVER)
             self.state = 224
-            self.match(LienzoParser.ATRAS)
+            self.match(LienzoParser.MOVER)
             self.state = 225
+            self.match(LienzoParser.ATRAS)
+            self.state = 226
             localctx._ss_expresion = self.ss_expresion()
 
             cuadruplos.addCuadruplo(currentFunctionName, BACKWARD, localctx._ss_expresion.valor, None, None, False)
@@ -1725,11 +1732,11 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_girar_derecha)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 228
-            self.match(LienzoParser.GIRAR)
             self.state = 229
-            self.match(LienzoParser.DERECHA)
+            self.match(LienzoParser.GIRAR)
             self.state = 230
+            self.match(LienzoParser.DERECHA)
+            self.state = 231
             localctx._ss_expresion = self.ss_expresion()
 
             cuadruplos.addCuadruplo(currentFunctionName, RIGHT, localctx._ss_expresion.valor, None, None, False)
@@ -1779,11 +1786,11 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 36, self.RULE_girar_izquierda)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 233
-            self.match(LienzoParser.GIRAR)
             self.state = 234
-            self.match(LienzoParser.IZQUIERDA)
+            self.match(LienzoParser.GIRAR)
             self.state = 235
+            self.match(LienzoParser.IZQUIERDA)
+            self.state = 236
             localctx._ss_expresion = self.ss_expresion()
 
             cuadruplos.addCuadruplo(currentFunctionName, LEFT, localctx._ss_expresion.valor, None, None, False)
@@ -1828,9 +1835,9 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_subir_pluma)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 238
-            self.match(LienzoParser.LEVANTAR)
             self.state = 239
+            self.match(LienzoParser.LEVANTAR)
+            self.state = 240
             self.match(LienzoParser.PLUMA)
 
             cuadruplos.addCuadruplo(currentFunctionName, PENUP, None, None, None, False)
@@ -1875,9 +1882,9 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 40, self.RULE_bajar_pluma)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 242
-            self.match(LienzoParser.BAJAR)
             self.state = 243
+            self.match(LienzoParser.BAJAR)
+            self.state = 244
             self.match(LienzoParser.PLUMA)
 
             cuadruplos.addCuadruplo(currentFunctionName, PENDOWN, None, None, None, False)
@@ -1895,6 +1902,7 @@ class LienzoParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self._color = None # ColorContext
 
         def COLOR(self):
             return self.getToken(LienzoParser.COLOR, 0)
@@ -1929,18 +1937,18 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 42, self.RULE_cambio_color)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 246
-            self.match(LienzoParser.COLOR)
             self.state = 247
-            self.match(LienzoParser.DE)
+            self.match(LienzoParser.COLOR)
             self.state = 248
-            self.match(LienzoParser.PLUMA)
+            self.match(LienzoParser.DE)
             self.state = 249
-            self.match(LienzoParser.EQUALS)
+            self.match(LienzoParser.PLUMA)
             self.state = 250
-            self.color()
+            self.match(LienzoParser.EQUALS)
+            self.state = 251
+            localctx._color = self.color()
 
-            cuadruplos.addCuadruplo(currentFunctionName, COLOR_CHANGE, None, None, None, False)
+            cuadruplos.addCuadruplo(currentFunctionName, COLOR_CHANGE, (None if localctx._color is None else self._input.getText((localctx._color.start,localctx._color.stop))), None, None, False)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1985,11 +1993,11 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 44, self.RULE_asignacion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 253
-            localctx._ID = self.match(LienzoParser.ID)
             self.state = 254
-            self.match(LienzoParser.EQUALS)
+            localctx._ID = self.match(LienzoParser.ID)
             self.state = 255
+            self.match(LienzoParser.EQUALS)
+            self.state = 256
             localctx._ss_expresion = self.ss_expresion()
 
             idType = namespaceTable.getVariableType((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
@@ -2045,7 +2053,7 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 258
+            self.state = 259
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.TEXTO) | (1 << LienzoParser.BOLEANO) | (1 << LienzoParser.NUMERO))) != 0)):
                 self._errHandler.recoverInline(self)
@@ -2104,9 +2112,9 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 48, self.RULE_condicional)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 260
-            self.match(LienzoParser.SI)
             self.state = 261
+            self.match(LienzoParser.SI)
+            self.state = 262
             localctx._ss_expresion = self.ss_expresion()
 
             if localctx._ss_expresion.type != BOLEANO:
@@ -2115,13 +2123,13 @@ class LienzoParser ( Parser ):
                 cuadruplos.addCuadruplo(currentFunctionName, GOTOF, localctx._ss_expresion.valor, None, None, False)
                 cuadruplos.pushPilaSaltos(cuadruplos.last())
 
-            self.state = 263
+            self.state = 264
             self.bloque_instrucciones()
-            self.state = 269
+            self.state = 270
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
             if la_ == 1:
-                self.state = 264
+                self.state = 265
                 localctx._SINO = self.match(LienzoParser.SINO)
 
                 if localctx._SINO:
@@ -2129,7 +2137,7 @@ class LienzoParser ( Parser ):
                     cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
                     cuadruplos.pushPilaSaltos(cuadruplos.last())
 
-                self.state = 266
+                self.state = 267
                 self.bloque_instrucciones()
 
                 cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
@@ -2185,14 +2193,14 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 50, self.RULE_mientrasQue)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 271
-            self.match(LienzoParser.MIENTRAS)
             self.state = 272
+            self.match(LienzoParser.MIENTRAS)
+            self.state = 273
             self.match(LienzoParser.QUE)
 
             cuadruplos.pushPilaSaltos(cuadruplos.current())
 
-            self.state = 274
+            self.state = 275
             localctx._ss_expresion = self.ss_expresion()
 
             if localctx._ss_expresion.type != BOLEANO:
@@ -2201,7 +2209,7 @@ class LienzoParser ( Parser ):
                 cuadruplos.addCuadruplo(currentFunctionName, GOTOF,localctx._ss_expresion.valor,None,None,False)
                 cuadruplos.pushPilaSaltos(cuadruplos.last())
 
-            self.state = 276
+            self.state = 277
             self.bloque_instrucciones()
 
             pop1 = cuadruplos.popPilaSaltos()
@@ -2260,7 +2268,7 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 279
+            self.state = 280
             localctx._ID = self.match(LienzoParser.ID)
 
             functionType = namespaceTable.getFunctionType((None if localctx._ID is None else localctx._ID.text))
@@ -2271,15 +2279,15 @@ class LienzoParser ( Parser ):
                 localctx.type = None if functionType == "nada" else functionType
                 cuadruplos.addCuadruplo(currentFunctionName, ERA, (None if localctx._ID is None else localctx._ID.text), None, None, False)
 
-            self.state = 281
+            self.state = 282
             self.match(LienzoParser.T__1)
 
             k = 0
 
-            self.state = 294
+            self.state = 295
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__1) | (1 << LienzoParser.T__15) | (1 << LienzoParser.T__19) | (1 << LienzoParser.COLOR) | (1 << LienzoParser.MOVER) | (1 << LienzoParser.GIRAR) | (1 << LienzoParser.LEVANTAR) | (1 << LienzoParser.BAJAR) | (1 << LienzoParser.LEER) | (1 << LienzoParser.ESCRIBIR) | (1 << LienzoParser.IMPRIMIR) | (1 << LienzoParser.BOOLEAN_CONSTANT))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (LienzoParser.NUMERIC_CONSTANT - 64)) | (1 << (LienzoParser.STRING_CONSTANT - 64)) | (1 << (LienzoParser.ID - 64)))) != 0):
-                self.state = 283
+                self.state = 284
                 localctx.ss_exp1 = self.ss_expresion()
 
                 if namespaceTable.argumentAgree((None if localctx._ID is None else localctx._ID.text), k, (None if localctx.ss_exp1 is None else self._input.getText((localctx.ss_exp1.start,localctx.ss_exp1.stop))), localctx.ss_exp1.type):
@@ -2288,13 +2296,13 @@ class LienzoParser ( Parser ):
                     error((None if localctx.ss_exp1 is None else localctx.ss_exp1.start).line, ": argumento #" + k + "no concuerda con el parametro esperado")
                 k += 1
 
-                self.state = 291
+                self.state = 292
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==LienzoParser.T__2:
-                    self.state = 285
-                    self.match(LienzoParser.T__2)
                     self.state = 286
+                    self.match(LienzoParser.T__2)
+                    self.state = 287
                     localctx.ss_exp2 = self.ss_expresion()
 
                     if namespaceTable.argumentAgree((None if localctx._ID is None else localctx._ID.text), k, (None if localctx.ss_exp2 is None else self._input.getText((localctx.ss_exp2.start,localctx.ss_exp2.stop))), localctx.ss_exp2.type):
@@ -2303,13 +2311,13 @@ class LienzoParser ( Parser ):
                         error((None if localctx.ss_exp1 is None else localctx.ss_exp1.start).line, ": argumento #" + k + "no concuerda con el parametro esperado")
                     k += 1
 
-                    self.state = 293
+                    self.state = 294
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
 
 
-            self.state = 296
+            self.state = 297
             localctx.paren = self.match(LienzoParser.T__3)
 
             amountOfParameters = namespaceTable.getParameterAmount((None if localctx._ID is None else localctx._ID.text))
@@ -2365,25 +2373,25 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 299
+            self.state = 300
             localctx.s_exp1 = self.s_expresion()
 
             localctx.type = localctx.s_exp1.type
             localctx.valor = localctx.s_exp1.valor
 
-            self.state = 307
+            self.state = 308
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 301
+                    self.state = 302
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
                     if not(_la==LienzoParser.T__6 or _la==LienzoParser.T__7):
                         localctx.op = self._errHandler.recoverInline(self)
                     else:
                         self.consume()
-                    self.state = 302
+                    self.state = 303
                     localctx.s_exp2 = self.s_expresion()
 
                     tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.s_exp2.type]
@@ -2394,7 +2402,7 @@ class LienzoParser ( Parser ):
                         localctx.valor = cuadruplos.addCuadruplo(currentFunctionName, (None if localctx.op is None else localctx.op.text),localctx.valor,localctx.s_exp2.valor)
                     localctx.type = tipo
              
-                self.state = 309
+                self.state = 310
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
 
@@ -2445,25 +2453,25 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 310
+            self.state = 311
             localctx.exp1 = self.expresion()
 
             localctx.type = localctx.exp1.type
             localctx.valor = localctx.exp1.valor
 
-            self.state = 319
+            self.state = 320
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 312
+                    self.state = 313
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
                     if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__8) | (1 << LienzoParser.T__9) | (1 << LienzoParser.T__10) | (1 << LienzoParser.T__11) | (1 << LienzoParser.T__12) | (1 << LienzoParser.T__13))) != 0)):
                         localctx.op = self._errHandler.recoverInline(self)
                     else:
                         self.consume()
-                    self.state = 313
+                    self.state = 314
                     localctx.exp2 = self.expresion()
 
                     tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.exp2.type]
@@ -2474,7 +2482,7 @@ class LienzoParser ( Parser ):
                         namespaceTable.addTemporal(currentFunctionName, tipo)
                     localctx.type = tipo
              
-                self.state = 321
+                self.state = 322
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
 
@@ -2525,25 +2533,25 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 322
+            self.state = 323
             localctx.term1 = self.termino()
 
             localctx.type = localctx.term1.type
             localctx.valor = localctx.term1.valor
 
-            self.state = 331
+            self.state = 332
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 324
+                    self.state = 325
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
                     if not(_la==LienzoParser.T__14 or _la==LienzoParser.T__15):
                         localctx.op = self._errHandler.recoverInline(self)
                     else:
                         self.consume()
-                    self.state = 325
+                    self.state = 326
                     localctx.term2 = self.termino()
 
                     tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.term2.type]
@@ -2554,7 +2562,7 @@ class LienzoParser ( Parser ):
                         namespaceTable.addTemporal(currentFunctionName, tipo)
                     localctx.type = tipo
              
-                self.state = 333
+                self.state = 334
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
 
@@ -2605,25 +2613,25 @@ class LienzoParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 334
+            self.state = 335
             localctx.factor1 = self.factor()
 
             localctx.type = localctx.factor1.type
             localctx.valor = localctx.factor1.valor
 
-            self.state = 342
+            self.state = 343
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,22,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 336
+                    self.state = 337
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
                     if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LienzoParser.T__16) | (1 << LienzoParser.T__17) | (1 << LienzoParser.T__18))) != 0)):
                         localctx.op = self._errHandler.recoverInline(self)
                     else:
                         self.consume()
-                    self.state = 337
+                    self.state = 338
                     localctx.factor2 = self.factor()
 
                     tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.factor2.type]
@@ -2634,7 +2642,7 @@ class LienzoParser ( Parser ):
                         namespaceTable.addTemporal(currentFunctionName, tipo)
                     localctx.type = tipo
              
-                self.state = 344
+                self.state = 345
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,22,self._ctx)
 
@@ -2688,18 +2696,18 @@ class LienzoParser ( Parser ):
         self.enterRule(localctx, 62, self.RULE_factor)
         self._la = 0 # Token type
         try:
-            self.state = 360
+            self.state = 361
             token = self._input.LA(1)
             if token in [LienzoParser.T__1, LienzoParser.T__19, LienzoParser.COLOR, LienzoParser.MOVER, LienzoParser.GIRAR, LienzoParser.LEVANTAR, LienzoParser.BAJAR, LienzoParser.LEER, LienzoParser.ESCRIBIR, LienzoParser.IMPRIMIR, LienzoParser.BOOLEAN_CONSTANT, LienzoParser.ID]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 346
+                self.state = 347
                 _la = self._input.LA(1)
                 if _la==LienzoParser.T__19:
-                    self.state = 345
+                    self.state = 346
                     localctx.neg = self.match(LienzoParser.T__19)
 
 
-                self.state = 348
+                self.state = 349
                 localctx._factor_aux = self.factor_aux()
 
                 localctx.type = localctx._factor_aux.type
@@ -2716,14 +2724,14 @@ class LienzoParser ( Parser ):
 
             elif token in [LienzoParser.T__15, LienzoParser.NUMERIC_CONSTANT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 353
+                self.state = 354
                 _la = self._input.LA(1)
                 if _la==LienzoParser.T__15:
-                    self.state = 352
+                    self.state = 353
                     localctx.neg = self.match(LienzoParser.T__15)
 
 
-                self.state = 355
+                self.state = 356
                 localctx._NUMERIC_CONSTANT = self.match(LienzoParser.NUMERIC_CONSTANT)
 
                 localctx.type = NUMERO
@@ -2737,7 +2745,7 @@ class LienzoParser ( Parser ):
 
             elif token in [LienzoParser.STRING_CONSTANT]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 358
+                self.state = 359
                 localctx._STRING_CONSTANT = self.match(LienzoParser.STRING_CONSTANT)
 
                 localctx.type = TEXTO
@@ -2804,12 +2812,12 @@ class LienzoParser ( Parser ):
         localctx = LienzoParser.Factor_auxContext(self, self._ctx, self.state)
         self.enterRule(localctx, 64, self.RULE_factor_aux)
         try:
-            self.state = 375
+            self.state = 376
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,26,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 362
+                self.state = 363
                 localctx._ID = self.match(LienzoParser.ID)
 
                 localctx.type = namespaceTable.getVariableType((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
@@ -2825,7 +2833,7 @@ class LienzoParser ( Parser ):
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 364
+                self.state = 365
                 localctx._BOOLEAN_CONSTANT = self.match(LienzoParser.BOOLEAN_CONSTANT)
 
                 localctx.type = BOLEANO
@@ -2835,7 +2843,7 @@ class LienzoParser ( Parser ):
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 366
+                self.state = 367
                 localctx._llamadaFuncion = self.llamadaFuncion()
 
                 functionType = localctx._llamadaFuncion.type
@@ -2849,11 +2857,11 @@ class LienzoParser ( Parser ):
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 369
-                self.match(LienzoParser.T__1)
                 self.state = 370
-                localctx._ss_expresion = self.ss_expresion()
+                self.match(LienzoParser.T__1)
                 self.state = 371
+                localctx._ss_expresion = self.ss_expresion()
+                self.state = 372
                 self.match(LienzoParser.T__3)
 
                 localctx.type = localctx._ss_expresion.type
@@ -2866,7 +2874,7 @@ class LienzoParser ( Parser ):
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 374
+                self.state = 375
                 self.llamadaFuncionPredefinida()
                 pass
 

@@ -1,14 +1,17 @@
 boleano x = verdadero & !falso;
 numero y = 3 * 2 * 4;
 texto p = "hola" * 3;
+numero b=12;
 
-tamano de lienzo = 800 por 600;
-color de lienzo = rojo;
+tamano de lienzo = 800 por 400;
+color de lienzo = verde;
+imprimir "hola";
 
 mover adelante 100;
 girar izquierda 45;
 mover adelante 100;
 girar izquierda 45;
+color de pluma = rojo;
 mover adelante 100;
 girar izquierda 45;
 mover adelante 100;

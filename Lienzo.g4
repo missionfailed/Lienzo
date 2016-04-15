@@ -222,10 +222,10 @@ llamadaFuncionPredefinida:
     ;
     
 lectura:
-    LEER ID
+    LEER ss_expresion ID
 {
 idcontent=memoryregisters.getMemoryRegister($ID.text,currentFunctionName)
-cuadruplos.addCuadruplo(currentFunctionName, READ, idcontent, None, idcontent)
+cuadruplos.addCuadruplo(currentFunctionName, READ, $ss_expresion.valor, None, idcontent)
 }    
     ;
     
@@ -288,7 +288,7 @@ cuadruplos.addCuadruplo(currentFunctionName, PENDOWN, None, None, None, False)
 cambio_color:
     COLOR DE PLUMA '=' color
 {
-cuadruplos.addCuadruplo(currentFunctionName, COLOR_CHANGE, None, None, None, False)
+cuadruplos.addCuadruplo(currentFunctionName, COLOR_CHANGE, $color.text, None, None, False)
 }
     ;
 
