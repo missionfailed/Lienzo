@@ -35,6 +35,7 @@ GREATER_THAN_EQUAL = ">="
 AND = "&"
 OR = "|"
 NOT = "!"
+END = "END"
 
 class Cuadruplos:
     def __init__(self):

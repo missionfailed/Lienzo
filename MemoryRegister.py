@@ -10,12 +10,12 @@ class MemoryRegisters:
         self.nextLocalCounter[nameOfFunction] = 0
         self.registers[""][nameOfFunction] = GlobalRegister()
     
-    def createMemoryRegister(self, nameOfVariable, nameOfFunction):
+    def createMemoryRegister(self, nameOfVariable, nameOfFunction, typeOfVariable=None):
         register = None
         if nameOfFunction == "":
-            register = GlobalRegister()
+            register = GlobalRegister(typeOfVariable)
         else:
-            register = LocalRegister(self.nextLocalCounter[nameOfFunction])
+            register = LocalRegister(self.nextLocalCounter[nameOfFunction], typeOfVariable)
             self.nextLocalCounter[nameOfFunction] += 1
         self.registers[nameOfFunction][nameOfVariable] = register
         return self.registers[nameOfFunction][nameOfVariable]
@@ -42,8 +42,9 @@ class TemporalRegister:
 class GlobalRegister():
     c = 0
     
-    def __init__(self):
+    def __init__(self, tipo=None):
         self.counter = GlobalRegister.c
+        self.tipo = tipo
         GlobalRegister.c += 1
     
     def __repr__(self):
@@ -51,8 +52,9 @@ class GlobalRegister():
         
 class LocalRegister():
     
-    def __init__(self, next):
+    def __init__(self, next, tipo=None):
         self.counter = next
+        self.type = tipo
     
     def __repr__(self):
         return 'l' + str(self.counter)

@@ -1,6 +1,7 @@
 import turtle
 from cuadruplos import *
 from MemoryRegister import *
+import sys
 
 BOOLEAN = 0
 NUMBER = 1
@@ -64,9 +65,11 @@ def executeVM(dirProc, listaCuadruplos):
     screen = turtle.Screen()
     tortuga = turtle.Turtle()
     
-    for i, c in enumerate(listaCuadruplos):
-        # print(i, c)
-        op = c[0]
+    i = 0
+    c = listaCuadruplos[i]
+    op = c[0]
+    while op != END:
+    
         valor1 = c[1]
         valor2 = c[2]
         variable = c[3]
@@ -137,8 +140,26 @@ def executeVM(dirProc, listaCuadruplos):
             tortuga.right(Valor(valor1))
  
         elif op == READ:
-            aux = input(Valor(valor1)+": ")
-            store(variable,aux)
+            aux = input()
+            if variable.tipo == "texto":
+                store(variable, aux)
+            elif variable.tipo == "boleano":
+                if aux == 'verdadero':
+                    aux = True
+                else:
+                    aux = False
+                store(variable, aux)
+            else:
+                try:
+                    aux = int(aux)
+                    store(variable, aux)
+                except ValueError:
+                    try:
+                        aux = float(s)
+                        store(variable, aux)
+                    except:
+                        print("Error: se esperaba un ", variable.tipo)
+                        sys.exit(0)
             
         elif op == WRITE:
             tortuga.write(Valor(valor1),True)
@@ -156,8 +177,11 @@ def executeVM(dirProc, listaCuadruplos):
             print(Valor(valor1))
             translatedcolor = translateColor(Valor(valor1))
             tortuga.pencolor(translatedcolor)
-                       
-    print(pila)
+        
+        i += 1
+        c = listaCuadruplos[i]
+        op = c[0]
+
     screen.mainloop()
     
 

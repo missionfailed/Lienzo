@@ -91,6 +91,7 @@ cuadruplos.pushPilaSaltos(cuadruplos.last())
 cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(), cuadruplos.current())
 } instruccion_aux* EOF
 {
+cuadruplos.addCuadruplo("", END, None, None, None, False)
 VM.executeVM(namespaceTable.getDirProc(), cuadruplos.getCuadruplos())
 }
 	;
@@ -138,7 +139,7 @@ if $ss_expresion.type != $tipo.text:
     error($ID.line, "Variable " + $ID.text + " es de tipo " + $tipo.text)
 else:
     namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
-    idcontent = memoryregisters.createMemoryRegister($ID.text, currentFunctionName)
+    idcontent = memoryregisters.createMemoryRegister($ID.text, currentFunctionName, $tipo.text)
     cuadruplos.addCuadruplo(currentFunctionName, '=', $ss_expresion.valor, None, idcontent)
 }
 	;
@@ -222,10 +223,10 @@ llamadaFuncionPredefinida:
     ;
     
 lectura:
-    LEER ss_expresion ID
+    LEER ID
 {
 idcontent=memoryregisters.getMemoryRegister($ID.text,currentFunctionName)
-cuadruplos.addCuadruplo(currentFunctionName, READ, $ss_expresion.valor, None, idcontent)
+cuadruplos.addCuadruplo(currentFunctionName, READ, None, None, idcontent)
 }    
     ;
     
@@ -538,7 +539,7 @@ if $type:
     $valor = $ss_expresion.valor
 else:
     $valor = None
-} | llamadaFuncionPredefinida
+}
     ;
 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
