@@ -1,42 +1,8 @@
-dibujo {
-	materiales {
-		1 rectangulo verde llamado Izquierdo de 8 por 16;
-		4 ovalo verde llamado Ojos de 3 por 3;
-	}
-	
-	escenario {
-		color de lienzo = rojo;
-		tamano de lienzo = 30 por 30;
-		posicion x de Izquierdo = 1;
-		posicion y de Izquierdo = 1;
-	}
-	
-	funciones {
-		nada cambiarBanderaColor(numero modificable a, numero b) {
-			color de Izquierdo = rojo;
-			mostrar "hola" en 3, 4;
-		}
-		
-		nada otraFuncion() {
-			color de Izquierdo = rojo;
-			mostrar "hola" en 3, 4;
-		}
-	}
-	
-	animacion {
-		numero coordX = 3;
-		mensaje coordX = "Hola";
-		condicion mexico = verdadero;
-        posicion x de Ojos [ 4 ] = 3;
-		mientras que (verdadero) {
-			si (mexico) {
-				cambiarBandera(1, 2, 3);
-			}
-			sino {
-				cambiarBandera();
-			};
-		
-			dormir 1000;
-		};
-	}
-}
+boleano[15] perro;
+
+tamano de lienzo = 800 por 600;
+color de lienzo = verde;
+
+imprimir perro[3];
+perro[3] = verdadero;
+imprimir perro[3];

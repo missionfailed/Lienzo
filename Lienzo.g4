@@ -129,6 +129,10 @@ else:
 	;
     
 declaracion:
+    declaracion_variable | declaracion_arreglo
+    ;
+
+declaracion_variable:
 	tipo ID
 {
 if namespaceTable.idAlreadyTaken($ID.text, currentFunctionName):
@@ -140,10 +144,32 @@ if $ss_expresion.type != $tipo.text:
 else:
     namespaceTable.addVariable($ID.text, $tipo.text, currentFunctionName)
     idcontent = memoryregisters.createMemoryRegister($ID.text, currentFunctionName, $tipo.text)
-    cuadruplos.addCuadruplo(currentFunctionName, '=', $ss_expresion.valor, None, idcontent)
+    cuadruplos.addCuadruplo(currentFunctionName, ASSIGN, $ss_expresion.valor, None, idcontent, False)
 }
 	;
 
+declaracion_arreglo:
+    tipo '[' INTEGRAL_CONSTANT ']' ID ';'
+{
+if namespaceTable.idAlreadyTaken($ID.text, currentFunctionName):
+    error($ID.line, ": Identificador " + $ID.text + " ya fue declarado")
+else:
+    length = num($INTEGRAL_CONSTANT.text)
+    if length == 0:
+        error($ID.line, ": La longitud del arreglo " + $ID.text + " debe ser mayor a 0")
+    else:
+        namespaceTable.addArray($ID.text, $tipo.text, length, currentFunctionName)
+        idcontents = memoryregisters.createMemoryRegisterForArray($ID.text, $tipo.text, length, currentFunctionName)
+        valorInicial = 0
+        if $tipo.text == BOLEANO:
+            valorInicial = False
+        elif $tipo.text == TEXTO:
+            valorInicial = ""
+        for i in idcontents:
+            cuadruplos.addCuadruplo(currentFunctionName, ASSIGN, valorInicial, None, i, False)
+}
+    ;
+    
 funcion:
 	tipoFunc ID
 {
@@ -227,7 +253,7 @@ lectura:
 {
 idcontent=memoryregisters.getMemoryRegister($ID.text,currentFunctionName)
 cuadruplos.addCuadruplo(currentFunctionName, READ, None, None, idcontent)
-}    
+}
     ;
     
 escritura:
@@ -294,16 +320,27 @@ cuadruplos.addCuadruplo(currentFunctionName, COLOR_CHANGE, $color.text, None, No
     ;
 
 asignacion:
-	ID '=' ss_expresion
+	ID (arr='[' indice=ss_expresion ']')? '=' lhs=ss_expresion
 {
+# regresa el tipo, no importa si es arreglo o variable
 idType = namespaceTable.getVariableType($ID.text, currentFunctionName)
-if not idType:
-    error($ID.line, "Variable " + $ID.text + " no ha sido declarada")
-elif $ss_expresion.type != idType:
-    error($ID.line, "Variable " + $ID.text + " es de tipo " + idType)
+if not $arr:
+    if not idType:
+        error($ID.line, "Variable " + $ID.text + " no ha sido declarada")
+    elif $lhs.type != idType:
+        error($ID.line, "Variable " + $ID.text + " es de tipo " + idType)
+    else:
+        idcontent = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
+        cuadruplos.addCuadruplo(currentFunctionName, ASSIGN, $lhs.valor, None, idcontent)
 else:
-    idcontent = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
-    cuadruplos.addCuadruplo(currentFunctionName, '=', $ss_expresion.valor, None, idcontent)
+    if not idType:
+        error($ID.line, "Arreglo " + $ID.text + " no ha sido declarado")
+    elif $lhs.type != idType:
+        error($ID.line, "Arreglo " + $ID.text + " es de tipo " + idType)
+    else:
+        cuadruplos.addCuadruplo(currentFunctionName, CHECK_BOUNDS, $indice.valor, namespaceTable.getArrayLength($ID.text, currentFunctionName), None, False)
+        idcontent = memoryregisters.getArrayMemoryRegister($ID.text, $indice.valor, currentFunctionName)
+        cuadruplos.addCuadruplo(currentFunctionName, ASSIGN, $lhs.valor, None, idcontent)
 }
 	;
 
@@ -325,17 +362,15 @@ else:
     bloque_instrucciones
     (SINO
 {
-if $SINO:
-    cuadruplos.addCuadruplo(currentFunctionName, GOTO,None,None,None,False)
-    cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
-    cuadruplos.pushPilaSaltos(cuadruplos.last())
+cuadruplos.addCuadruplo(currentFunctionName, GOTO,None,None,None,False)
+cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
+cuadruplos.pushPilaSaltos(cuadruplos.last())
 }
-    bloque_instrucciones
+    bloque_instrucciones    
+    )?
 {
 cuadruplos.editCuadruplo(cuadruplos.popPilaSaltos(),cuadruplos.current())
-}    
-    
-)?
+}
 	;
 
 mientrasQue:
@@ -493,15 +528,15 @@ else:
         namespaceTable.addTemporal(currentFunctionName, $type)
     else:
         $valor = $factor_aux.valor
-} | (neg='-'? NUMERIC_CONSTANT)
+} | (neg='-'? n=(NUMERIC_CONSTANT|INTEGRAL_CONSTANT))
 {
 $type = NUMERO
 
 if $neg.text:
-    $valor = cuadruplos.addCuadruplo(currentFunctionName, $neg.text, num($NUMERIC_CONSTANT.text), None)
+    $valor = cuadruplos.addCuadruplo(currentFunctionName, $neg.text, num($n.text), None)
     namespaceTable.addTemporal(currentFunctionName, $type)
 else:
-    $valor = num($NUMERIC_CONSTANT.text)
+    $valor = num($n.text)
 } | STRING_CONSTANT
 {
 $type = TEXTO
@@ -510,16 +545,23 @@ $valor = $STRING_CONSTANT.text[1:-1]
 	;
 
 factor_aux returns[type,valor]:
-    ID
+    ID (arr='[' ss_expresion ']')?
 {
+# no importa si es arreglo o variable, regresa el tipo correcto
 $type = namespaceTable.getVariableType($ID.text, currentFunctionName)
-
-if $type:
-    $valor = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
-    namespaceTable.addTemporal(currentFunctionName, $type)
+if not $arr:
+    if $type:
+        $valor = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
+    else:
+        $valor = None
+        error($ID.line, "variable " + $ID.text + " no ha sido declarada")
 else:
-    $valor = None
-    error($ID.line, "variable " + $ID.text + " no ha sido declarada")
+    if $type:
+        cuadruplos.addCuadruplo(currentFunctionName, CHECK_BOUNDS, $ss_expresion.valor, namespaceTable.getArrayLength($ID.text, currentFunctionName), None, False)
+        $valor = memoryregisters.getArrayMemoryRegister($ID.text, $ss_expresion.valor, currentFunctionName)
+    else:
+        $valor = None
+        error($ID.line, "Arreglo " + $ID.text + " no ha sido declarado")  
 } | BOOLEAN_CONSTANT
 {
 $type = BOLEANO
@@ -586,6 +628,7 @@ IMPRIMIR : 'imprimir' ;
 NADA : 'nada' ;
 BOOLEAN_CONSTANT : 'verdadero' | 'falso' ;
 MODIFICABLE : 'modificable' ;
-NUMERIC_CONSTANT : [0-9]+('.'[0-9]+)? ;
+INTEGRAL_CONSTANT : [0-9]+ ;
+NUMERIC_CONSTANT : [0-9]+'.'[0-9]+ ;
 STRING_CONSTANT : '"' ~('"')* '"' ;
 ID : [A-Za-z][A-Za-z0-9]*;

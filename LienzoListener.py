@@ -129,6 +129,24 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LienzoParser#declaracion_variable.
+    def enterDeclaracion_variable(self, ctx:LienzoParser.Declaracion_variableContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#declaracion_variable.
+    def exitDeclaracion_variable(self, ctx:LienzoParser.Declaracion_variableContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#declaracion_arreglo.
+    def enterDeclaracion_arreglo(self, ctx:LienzoParser.Declaracion_arregloContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#declaracion_arreglo.
+    def exitDeclaracion_arreglo(self, ctx:LienzoParser.Declaracion_arregloContext):
+        pass
+
+
     # Enter a parse tree produced by LienzoParser#funcion.
     def enterFuncion(self, ctx:LienzoParser.FuncionContext):
         pass

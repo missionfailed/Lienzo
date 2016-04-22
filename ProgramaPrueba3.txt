@@ -6,10 +6,9 @@ numero b = 12;
 tamano de lienzo = 800 por 600;
 color de lienzo = verde;
 imprimir "teclea un numero";
-leer b;
 imprimir b;
 
-color de pluma = azul;
+color de pluma = morado;
 mover adelante 100;
 girar izquierda 45;
 mover adelante 100;

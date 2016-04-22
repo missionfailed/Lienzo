@@ -18,14 +18,32 @@ class MemoryRegisters:
             register = LocalRegister(self.nextLocalCounter[nameOfFunction], typeOfVariable)
             self.nextLocalCounter[nameOfFunction] += 1
         self.registers[nameOfFunction][nameOfVariable] = register
-        return self.registers[nameOfFunction][nameOfVariable]
+        return register
+        
+    def createMemoryRegisterForArray(self, nameOfArray, typeOfArray, length, nameOfFunction):
+        registers = []
+        if nameOfFunction == "":
+            for i in range(0, length):
+                registers.append(GlobalRegister(typeOfArray))
+        else:
+            for i in range(0, len):
+                registers.append(LocalRegister(self.nextLocalCounter[nameOfFunction], typeOfArray))
+                self.nextLocalCounter[nameOfFunction] += 1
+        self.registers[nameOfFunction][nameOfArray] = registers
+        return registers
     
     def getMemoryRegister(self, nameOfVariable, nameOfFunction):
         if nameOfVariable in self.registers[nameOfFunction]:
             return self.registers[nameOfFunction][nameOfVariable]
         else:
             return self.registers[""][nameOfVariable]
-        
+    
+    def getArrayMemoryRegister(self, nameOfArray, index, nameOfFunction):
+        if nameOfArray in self.registers[nameOfFunction]:
+            return (self.registers[nameOfFunction][nameOfArray], index)
+        else:
+            return (self.registers[""][nameOfArray], index)
+
 class TemporalRegister:
     
     nextCounter = {}

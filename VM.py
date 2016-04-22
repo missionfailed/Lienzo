@@ -44,7 +44,9 @@ def translateColor(color):
     return translatedcolor
 
 def store(variable, respuesta):
-    if Tipo(variable) == GLOBAL_REGISTER:
+    if isinstance(variable, tuple):
+        store(variable[0][Valor(variable[1])], respuesta)
+    elif Tipo(variable) == GLOBAL_REGISTER:
         if len(pila[GLOBAL][GLOBALS]) <= variable.counter:
             pila[GLOBAL][GLOBALS].append(None)
         pila[GLOBAL][GLOBALS][variable.counter] = respuesta
@@ -65,11 +67,14 @@ def executeVM(dirProc, listaCuadruplos):
     screen = turtle.Screen()
     tortuga = turtle.Turtle()
     
+    for i, c in enumerate(listaCuadruplos):
+        print(i, c)
+    
     i = 0
     c = listaCuadruplos[i]
     op = c[0]
     while op != END:
-    
+        
         valor1 = c[1]
         valor2 = c[2]
         variable = c[3]
@@ -174,7 +179,6 @@ def executeVM(dirProc, listaCuadruplos):
             tortuga.pendown()
             
         elif op == COLOR_CHANGE:
-            print(Valor(valor1))
             translatedcolor = translateColor(Valor(valor1))
             tortuga.pencolor(translatedcolor)
         
@@ -186,14 +190,13 @@ def executeVM(dirProc, listaCuadruplos):
     
 
 def Tipo(valor1):
-
     if isinstance(valor1, bool):
         return BOOLEAN
     elif isinstance(valor1, float):
         return NUMBER
     elif isinstance(valor1, int):
         return NUMBER
-    elif isinstance(valor1, (str)):
+    elif isinstance(valor1, str):
         return STRING                     
     elif isinstance(valor1, TemporalRegister):
         return TEMPORAL_REGISTER
@@ -201,19 +204,23 @@ def Tipo(valor1):
         return GLOBAL_REGISTER
     elif isinstance(valor1, LocalRegister):
         return LOCAL_REGISTER
+    else:
+        return Tipo(valor1[0][Valor(valor1[1])])
 
 
 def Valor(valor1):
     global pila
-    aux = Tipo(valor1)
-    if aux == GLOBAL_REGISTER:
-        return pila[GLOBAL][GLOBALS][valor1.counter]
+    if isinstance(valor1, tuple):
+        return Valor(valor1[0][Valor(valor1[1])])
     else:
-        current = len(pila) - 1
-        if aux == LOCAL_REGISTER:
-            return pila[current][LOCALS][valor1.counter]
-        elif aux == TEMPORAL_REGISTER:
-            return pila[current][TEMPORALS][valor1.counter]
-        else:
-            return valor1
-        
+        aux = Tipo(valor1)
+        if aux == GLOBAL_REGISTER:
+            return pila[GLOBAL][GLOBALS][valor1.counter]
+        else:   
+            current = len(pila) - 1
+            if aux == LOCAL_REGISTER:
+                return pila[current][LOCALS][valor1.counter]
+            elif aux == TEMPORAL_REGISTER:
+                return pila[current][TEMPORALS][valor1.counter]
+            else:
+                return valor1

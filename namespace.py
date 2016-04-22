@@ -10,6 +10,12 @@ class Variable:
         self.name=nameOfVariable
         self.type=typeOfVariable
         self.reference=ref
+
+class Array:
+    def __init__(self, nameOfArray, typeOfArray, lengthOfArray):
+        self.name = nameOfArray
+        self.type = typeOfArray
+        self.length = lengthOfArray
         
 class Parameter:
     ''' Una parametro tiene nombre, tipo y referencia'''
@@ -25,6 +31,7 @@ class Function:
         self.type = typeOfFunction
         self.variables = []
         self.parameters = []
+        self.arrays = []
         self.direccionInicio = dirInicio
         self.tipos = {NUMERO: 0, BOLEANO: 0, TEXTO: 0}
         
@@ -45,13 +52,16 @@ class Function:
     
     '''Agrega directamebte un parametro ya creado (objeto tipo parametro) a la funcion'''    
     def addParameterObject(self,auxiliar):
-        self.parameters.append(auxiliar)    
+        self.parameters.append(auxiliar)
+            
+    def addArrayObject(self, auxiliar):
+        self.arrays.append(auxiliar)
     
     '''Busca el nombre de una variable dentro de la funcion'''
     def searchVariable(self,variablename):
-        for f in self.variables + self.parameters:
-            if variablename==f.name:
-                return True               
+        for f in self.variables + self.parameters + self.arrays:
+            if variablename == f.name:
+                return True
         return False
         
     def searchParameter(self, parameterName):
@@ -62,10 +72,16 @@ class Function:
     
     '''Regresa el tipo del nombre de la variable dada'''
     def getType(self,variablename):
-        for f in self.variables+ self.parameters:
-            if variablename==f.name:
+        for f in self.variables + self.parameters + self.arrays:
+            if variablename == f.name:
                 return f.type
         return None
+    
+    def getArrayLength(self, arrayName):
+        for a in self.arrays:
+            if a.name == arrayName:
+                return a.length
+        return 0
         
     def addType(self,type):
         self.tipos[type]+=1;
@@ -102,22 +118,26 @@ class NamespaceTable:
     """Metodo que agrega una variable a la tabla de variables en el ambito de la funcion dada.
     Regresa True si la operacion fue exitosa, False si no."""
     def addVariable(self, nameOfVariable, typeOfVariable, nameOfFunction):
-        if self.functionExists(nameOfFunction):
-            if self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla[""].searchVariable(nameOfVariable):
-                return False
-            else:
-                auxiliar=Variable(nameOfVariable,typeOfVariable,False)
-                self.tabla[nameOfFunction].addVariableObject(auxiliar)
-                return True
-        else:
+        if self.tabla[nameOfFunction].searchVariable(nameOfVariable) or self.tabla[""].searchVariable(nameOfVariable):
             return False
+        else:
+            auxiliar=Variable(nameOfVariable,typeOfVariable,False)
+            self.tabla[nameOfFunction].addVariableObject(auxiliar)
+            return True
 
+    def addArray(self, nameOfArray, typeOfArray, lengthOfArray, nameOfFunction):
+        auxiliar = Array(nameOfArray, typeOfArray, lengthOfArray)
+        self.tabla[nameOfFunction].addArrayObject(auxiliar)
+    
     """Metodo que se encarga de actualizar tamano cuando hay variables temporales"""
     def addTemporal(self,nameOfFunction,typeOfVariable):
         if self.functionExists(nameOfFunction):
             self.tabla[nameOfFunction].addType(typeOfVariable)
         else:
             return False;
+     
+    def getArrayLength(self, nameOfArray, nameOfFunction):
+        return self.tabla[nameOfFunction].getArrayLength(nameOfArray)
         
     """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
     def idAlreadyTaken(self, nameOfVariable, nameOfFunction):

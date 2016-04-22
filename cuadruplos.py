@@ -35,6 +35,7 @@ GREATER_THAN_EQUAL = ">="
 AND = "&"
 OR = "|"
 NOT = "!"
+CHECK_BOUNDS = "CHB"
 END = "END"
 
 class Cuadruplos:
