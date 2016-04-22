@@ -1,4 +1,5 @@
 boleano[15] perro;
+numero[10] hola;
 
 tamano de lienzo = 800 por 600;
 color de lienzo = verde;
@@ -6,3 +7,8 @@ color de lienzo = verde;
 imprimir perro[3];
 perro[3] = verdadero;
 imprimir perro[3];
+
+hola[3+4] = 4;
+hola[4+5] = 5;
+imprimir hola[7] + hola[9];
+imprimir hola[7] + hola[11];

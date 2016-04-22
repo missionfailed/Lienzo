@@ -67,8 +67,8 @@ def executeVM(dirProc, listaCuadruplos):
     screen = turtle.Screen()
     tortuga = turtle.Turtle()
     
-    for i, c in enumerate(listaCuadruplos):
-        print(i, c)
+    #for i, c in enumerate(listaCuadruplos):
+    #    print(i, c)
     
     i = 0
     c = listaCuadruplos[i]
@@ -181,6 +181,13 @@ def executeVM(dirProc, listaCuadruplos):
         elif op == COLOR_CHANGE:
             translatedcolor = translateColor(Valor(valor1))
             tortuga.pencolor(translatedcolor)
+            
+        elif op == CHECK_BOUNDS:
+            v1 = Valor(valor1)
+            v2 = Valor(valor2)
+            if v1 >= v2:
+                print("Error: intentando acceder al indice", v1, ": el arreglo es de solo", v2, "elementos.")
+                sys.exit(0)
         
         i += 1
         c = listaCuadruplos[i]
