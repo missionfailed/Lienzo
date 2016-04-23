@@ -8,6 +8,21 @@ color de lienzo = verde;
 imprimir "teclea un numero";
 imprimir b;
 
+si (b<10)
+{
+	imprimir "if";
+}
+sino
+{
+	imprimir "else";
+}
+
+mientras que(b>5)
+{
+	b=b-1;
+	imprimir b;
+}
+
 color de pluma = morado;
 mover adelante 100;
 girar izquierda 45;

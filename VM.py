@@ -73,8 +73,10 @@ def executeVM(dirProc, listaCuadruplos):
     i = 0
     c = listaCuadruplos[i]
     op = c[0]
+    jump = -1
     while op != END:
         
+        print (i,c)
         valor1 = c[1]
         valor2 = c[2]
         variable = c[3]
@@ -123,7 +125,14 @@ def executeVM(dirProc, listaCuadruplos):
             
         elif op == GREATER_THAN_EQUAL:
             store(variable, Valor(valor1) >= Valor(valor2))
-        
+            
+        elif op == GOTOF:
+            if Valor(valor1) == False:
+                i = variable-1;
+
+        elif op == GOTO:
+                i = variable-1;                
+                
         elif op == CANVAS_SIZE:
             screen.setup(Valor(valor1), Valor(valor2))
         
