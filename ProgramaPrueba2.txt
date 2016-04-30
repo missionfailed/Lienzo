@@ -1,14 +1,13 @@
-boleano[15] perro;
-numero[10] hola;
+numero fibonacci(numero i) {
+    si i < 2
+        regresar 1;
+    regresar fibonacci(i - 1) + fibonacci(i - 2);
+}
 
-tamano de lienzo = 800 por 600;
-color de lienzo = verde;
+numero factorial(numero k) {
+    si k < 2
+        regresar 1;
+    regresar k * factorial(k - 1);
+}
 
-imprimir perro[3];
-perro[3] = verdadero;
-imprimir perro[3];
-
-hola[3+4] = 4;
-hola[4+5] = 5;
-imprimir hola[7] + hola[9];
-imprimir hola[7] + hola[11];
+imprimir factorial(4);

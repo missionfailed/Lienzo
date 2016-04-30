@@ -5,10 +5,10 @@ class MemoryRegisters:
         self.registers[""] = {}
         self.nextLocalCounter = {}
     
-    def newFunction(self, nameOfFunction):
+    def newFunction(self, nameOfFunction, typeOfFunction):
         self.registers[nameOfFunction] = {}
         self.nextLocalCounter[nameOfFunction] = 0
-        self.registers[""][nameOfFunction] = GlobalRegister()
+        return self.createMemoryRegister(nameOfFunction, "", typeOfFunction)
     
     def createMemoryRegister(self, nameOfVariable, nameOfFunction, typeOfVariable=None):
         register = None

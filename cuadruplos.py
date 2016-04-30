@@ -26,6 +26,7 @@ TIMES = "*"
 DIVIDE = "/"
 MODULO = "%"
 ASSIGN = "="
+ASSIGNFUNC = "_=_"
 EQUALS = "=="
 NOT_EQUALS = '!='
 LESS_THAN = "<"

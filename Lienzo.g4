@@ -13,6 +13,8 @@ import VM
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
+currentTipoFunc = ""
+hasReturn = False
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
@@ -59,7 +61,7 @@ cubo[TEXTO]['|'] = defaultdict(lambda: None, {})
 # Numero
 cubo[NUMERO]['+'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['-'] = defaultdict(lambda: None, {NUMERO : NUMERO})
-cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO, TEXTO : TEXTO})
 cubo[NUMERO]['/'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['%'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : BOLEANO})
@@ -174,31 +176,30 @@ funcion:
 	tipoFunc ID
 {
 global currentFunctionName
+global currentTipoFunc
 currentFunctionName = $ID.text
+currentTipoFunc = $tipoFunc.text
 if not namespaceTable.addFunction(currentFunctionName, $tipoFunc.text, cuadruplos.current()):
     error($ID.line, "Funcion " + $ID.text + " ya fue declarada")
 else:
-    memoryregisters.newFunction(currentFunctionName)
+    mr = memoryregisters.newFunction(currentFunctionName, $tipoFunc.text)
+    valorInicial = 0
+    if $tipoFunc.text == BOLEANO:
+        valorInicial = False
+    elif $tipoFunc.text == TEXTO:
+        valorInicial = ""
+    cuadruplos.addCuadruplo("", ASSIGNFUNC, valorInicial, None, mr, False)
 }
-'(' (parametro (',' parametro)*)? ')' '{' cuerpo (REGRESAR ss_expresion ';')?
+'(' (parametro (',' parametro)*)? ')' '{' cuerpo '}'
 {
-if $REGRESAR:
-    if $tipoFunc.text == "nada":
-        error($ID.line, "Funcion " + $ID.text + " no debe tener valor de retorno")
-    elif $ss_expresion.type != $tipoFunc.text:
-        error($ID.line, "Funcion " + $ID.text + " tiene valor de retorno de tipo incorrecto. Se esperaba un " + $tipoFunc.text)
-    else:
-        cuadruplos.addCuadruplo(currentFunctionName, RETURN,$ss_expresion.valor, None, None, False)
+global hasReturn
+if currentTipoFunc != "nada" and not hasReturn:
+    error($ID.line, "Funcion " + $ID.text + " debe tener valor de retorno")
 else:
-    if $tipoFunc.text == "nada":
-        cuadruplos.addCuadruplo(currentFunctionName, RETURN,None,None,None,False)
-    else:
-        error($ID.line, "Funcion " + $ID.text + " debe tener valor de retorno")
-}
-'}'
-{
+    hasReturn = False
 cuadruplos.addCuadruplo(currentFunctionName, RET, None, None, None, False)
 currentFunctionName = ""
+currentTipoFunc = ""
 }
 	;
    
@@ -232,8 +233,24 @@ instruccion_aux:
         asignacion
         | llamadaFuncionPredefinida
         | llamadaFuncion
+        | regresar
 	) ';') | condicional | mientrasQue
 	;
+
+regresar:
+    REGRESAR ss_expresion
+{
+global hasReturn
+hasReturn = True    
+if currentTipoFunc == "nada":
+    error($REGRESAR.line, "Funcion " + currentFunctionName + " no debe tener valor de retorno")
+elif $ss_expresion.type != currentTipoFunc:
+    error($REGRESAR.line, "Funcion " + currentFunctionName + " tiene valor de retorno de tipo incorrecto. Se esperaba un " + currentTipoFunc)
+else:
+    cuadruplos.addCuadruplo(currentFunctionName, RETURN, $ss_expresion.valor, None, None, False)
+    cuadruplos.addCuadruplo(currentFunctionName, RET, None, None, None, False)
+}
+    ;
 
 llamadaFuncionPredefinida:
     lectura
@@ -395,16 +412,17 @@ cuadruplos.editCuadruplo(pop1,cuadruplos.current())
 }
 	;
 
-llamadaFuncion returns [name,type]:
+llamadaFuncion returns [valor,type]:
 	ID
 {
 functionType = namespaceTable.getFunctionType($ID.text)
-$name = $ID.text
 if not functionType:
     print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, "inexistente")
+    $valor = None
 else:
     $type = None if functionType == "nada" else functionType
     cuadruplos.addCuadruplo(currentFunctionName, ERA, $ID.text, None, None, False)
+    $valor = memoryregisters.getMemoryRegister($ID.text, "")
 }
     '('
 {
@@ -413,7 +431,7 @@ k = 0
     (ss_exp1=ss_expresion
 {
 if namespaceTable.argumentAgree($ID.text, k, $ss_exp1.text, $ss_exp1.type):
-    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp1.valor, None, "param" + str(k))
+    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp1.valor, None, None, False)
 else:
     error($ss_exp1.start.line, ": argumento #" + k + "no concuerda con el parametro esperado")
 k += 1
@@ -422,7 +440,7 @@ k += 1
     (',' ss_exp2=ss_expresion
 {
 if namespaceTable.argumentAgree($ID.text, k, $ss_exp2.text, $ss_exp2.type):
-    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp2.valor, None, "param" + str(k))
+    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp2.valor, None, None, False)
 else:
     error($ss_exp1.start.line, ": argumento #" + k + "no concuerda con el parametro esperado")
 k += 1
@@ -433,7 +451,7 @@ amountOfParameters = namespaceTable.getParameterAmount($ID.text)
 if k != amountOfParameters:
     error($paren.line, "Se esperaban" + amountOfParameters + " parametros, se recibieron " + k)
 else:
-    cuadruplos.addCuadruplo(currentFunctionName, GOSUB, $ID.text, namespaceTable.getDireccionInicio($ID.text), None, False)
+    cuadruplos.addCuadruplo(currentFunctionName, GOSUB, namespaceTable.getDireccionInicio($ID.text), None, None, False)
 }
 	;
 
@@ -566,14 +584,11 @@ else:
 {
 $type = BOLEANO
 $valor = True if $BOOLEAN_CONSTANT.text == 'verdadero' else False
-} | llamadaFuncion
+} | lf=llamadaFuncion
 {
 functionType = $llamadaFuncion.type
 $type = functionType if functionType != "nada" else None
-if functionType:
-    $valor = cuadruplos.addCuadruplo(currentFunctionName, '=', memoryregisters.getMemoryRegister($llamadaFuncion.name, ""), None)
-else:
-    $valor = None
+$valor = cuadruplos.addCuadruplo(currentFunctionName, ASSIGN, $lf.valor, None)
 } | '(' ss_expresion ')'
 {
 $type = $ss_expresion.type

@@ -32,6 +32,7 @@ class Function:
         self.variables = []
         self.parameters = []
         self.arrays = []
+        self.functionVariables = []
         self.direccionInicio = dirInicio
         self.tipos = {NUMERO: 0, BOLEANO: 0, TEXTO: 0}
         
@@ -49,6 +50,9 @@ class Function:
     def addVariableObject(self,auxiliar):
         self.variables.append(auxiliar)
         self.addType(auxiliar.type)
+    
+    def addFunctionVariableObject(self, auxiliar):
+        self.functionVariables.append(auxiliar)
     
     '''Agrega directamebte un parametro ya creado (objeto tipo parametro) a la funcion'''    
     def addParameterObject(self,auxiliar):
@@ -96,16 +100,16 @@ class NamespaceTable:
         return self.tabla
         
     """Metodo que agrega una funcion a la tabla de funciones. 
-    Regresa True si la operacion fue exitosa, False si no."""
+    Regresa True si la operacion fue exitosa, False si no."""   
     def addFunction(self, nameOfFunction, typeOfFunction, dirInicio):	
         if nameOfFunction in self.tabla or self.tabla[""].searchVariable(nameOfFunction):
             return False
         else:
             auxiliar = Function(nameOfFunction,typeOfFunction,dirInicio)
-            "Nombre del parametro, Tipo del parametro, Booleano Referencia True Valor False"
+            # Nombre del parametro, Tipo del parametro, Booleano Referencia True Valor False
             self.tabla[nameOfFunction]=auxiliar
             if typeOfFunction != NADA:
-                self.tabla[""].addVariableObject(Variable(nameOfFunction, typeOfFunction, False))
+                self.tabla[""].addFunctionVariableObject(Variable(nameOfFunction, typeOfFunction, False))
             return True
     
     def addParameter(self, nameOfFunction, parameterName, typeOfParameter, modificable):

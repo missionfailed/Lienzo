@@ -11,6 +11,8 @@ import VM
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
+currentTipoFunc = ""
+hasReturn = False
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
@@ -57,7 +59,7 @@ cubo[TEXTO]['|'] = defaultdict(lambda: None, {})
 # Numero
 cubo[NUMERO]['+'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['-'] = defaultdict(lambda: None, {NUMERO : NUMERO})
-cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO, TEXTO : TEXTO})
 cubo[NUMERO]['/'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['%'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : BOLEANO})

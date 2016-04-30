@@ -9,7 +9,7 @@ STRING = 2
 TEMPORAL_REGISTER = 3
 GLOBAL_REGISTER = 4
 LOCAL_REGISTER = 5
-pila = [[[],[]]]
+pila = [([],[])]
 
 GLOBAL = 0
 
@@ -46,23 +46,28 @@ def translateColor(color):
 def store(variable, respuesta):
     if isinstance(variable, tuple):
         store(variable[0][Valor(variable[1])], respuesta)
-    elif Tipo(variable) == GLOBAL_REGISTER:
-        if len(pila[GLOBAL][GLOBALS]) <= variable.counter:
+    if Tipo(variable) == GLOBAL_REGISTER:
+        while len(pila[GLOBAL][GLOBALS]) <= variable.counter:
             pila[GLOBAL][GLOBALS].append(None)
         pila[GLOBAL][GLOBALS][variable.counter] = respuesta
     else:
         current = len(pila) - 1
         if Tipo(variable) == LOCAL_REGISTER:
-            if len(pila[current][LOCALS]) <= variable.counter:
+            while len(pila[current][LOCALS]) <= variable.counter:
                 pila[current][LOCALS].append(None)
             pila[current][LOCALS][variable.counter] = respuesta
         elif Tipo(variable) == TEMPORAL_REGISTER:
-            if len(pila[current][TEMPORALS]) <= variable.counter:
+            while len(pila[current][TEMPORALS]) <= variable.counter:
                 pila[current][TEMPORALS].append(None)          
             pila[current][TEMPORALS][variable.counter] = respuesta
 
 def executeVM(dirProc, listaCuadruplos):
+
     global pila
+    
+    functionRegisters = []
+    nextContext = None
+    jumpStack = []
     
     screen = turtle.Screen()
     tortuga = turtle.Turtle()
@@ -73,134 +78,158 @@ def executeVM(dirProc, listaCuadruplos):
     i = 0
     c = listaCuadruplos[i]
     op = c[0]
-    jump = -1
     while op != END:
         
-        print (i,c)
+        #print (i,c)
         valor1 = c[1]
         valor2 = c[2]
         variable = c[3]
         
-        if op == ASSIGN:
-            store(variable, Valor(valor1))
-                
-        elif op == PLUS:
-            store(variable, Valor(valor1) + Valor(valor2))
-
-        elif op == MINUS:
-            store(variable, Valor(valor1) - Valor(valor2))
-
-        elif op == TIMES:
-            store(variable, Valor(valor1) * Valor(valor2))
-                
-        elif op == DIVIDE:
-            store(variable, Valor(valor1) / Valor(valor2))
-
-        elif op == MODULO:
-            store(variable, Valor(valor1) % Valor(valor2))   
-            
-        elif op == AND:
-            store(variable, Valor(valor1) and Valor(valor2))
-
-        elif op == OR:
-            store(variable, Valor(valor1) or Valor(valor2)) 
-        
-        elif op == NOT:
-            store(variable, not Valor(valor1))
-        
-        elif op == EQUALS:
-            store(variable, Valor(valor1) == Valor(valor2))
-        
-        elif op == NOT_EQUALS:
-            store(variable, Valor(valor1) != Valor(valor2))
-        
-        elif op == LESS_THAN:
-            store(variable, Valor(valor1) < Valor(valor2))
-        
-        elif op == GREATER_THAN:
-            store(variable, Valor(valor1) > Valor(valor2))
-        
-        elif op == LESS_THAN_EQUAL:
-            store(variable, Valor(valor1) <= Valor(valor2))
-            
-        elif op == GREATER_THAN_EQUAL:
-            store(variable, Valor(valor1) >= Valor(valor2))
-            
-        elif op == GOTOF:
-            if Valor(valor1) == False:
-                i = variable-1;
+        if op == GOTOF and not Valor(valor1):
+            i = Valor(variable);
 
         elif op == GOTO:
-                i = variable-1;                
+            i = Valor(variable)
+        
+        elif op == GOSUB:
+            jumpStack.append(i + 1)
+            pila.append(nextContext)
+            i = Valor(valor1)
+        
+        elif op == RET:
+            i = jumpStack.pop()
+            pila.pop()
+            functionRegisters.pop()
+            
+        else:
+            if op == ASSIGN:
+                store(variable, Valor(valor1))
+            
+            if op == ASSIGNFUNC:
+                functionRegisters.append(variable)
+                store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
+                    
+            elif op == PLUS:
+                store(variable, Valor(valor1) + Valor(valor2))
+
+            elif op == MINUS:
+                store(variable, Valor(valor1) - Valor(valor2))
+
+            elif op == TIMES:
+                store(variable, Valor(valor1) * Valor(valor2))
+                    
+            elif op == DIVIDE:
+                store(variable, Valor(valor1) / Valor(valor2))
+
+            elif op == MODULO:
+                store(variable, Valor(valor1) % Valor(valor2))   
                 
-        elif op == CANVAS_SIZE:
-            screen.setup(Valor(valor1), Valor(valor2))
-        
-        elif op == CANVAS_COLOR:
-            translatedcolor = translateColor(Valor(valor1))
-            #valor1 es el color en string, pero esta en espanol, cambiar en ingles
-            screen.bgcolor(translatedcolor)
-        
-        elif op == FORWARD:
-            tortuga.forward(Valor(valor1))
+            elif op == AND:
+                store(variable, Valor(valor1) and Valor(valor2))
+
+            elif op == OR:
+                store(variable, Valor(valor1) or Valor(valor2)) 
             
-        elif op == BACKWARD:
-            tortuga.backward(Valor(valor1))
-        
-        elif op == LEFT:
-            tortuga.left(Valor(valor1))
-        
-        elif op == RIGHT:
-            tortuga.right(Valor(valor1))
- 
-        elif op == READ:
-            aux = input()
-            if variable.tipo == "texto":
-                store(variable, aux)
-            elif variable.tipo == "boleano":
-                if aux == 'verdadero':
-                    aux = True
-                else:
-                    aux = False
-                store(variable, aux)
-            else:
-                try:
-                    aux = int(aux)
+            elif op == NOT:
+                store(variable, not Valor(valor1))
+            
+            elif op == EQUALS:
+                store(variable, Valor(valor1) == Valor(valor2))
+            
+            elif op == NOT_EQUALS:
+                store(variable, Valor(valor1) != Valor(valor2))
+            
+            elif op == LESS_THAN:
+                store(variable, Valor(valor1) < Valor(valor2))
+            
+            elif op == GREATER_THAN:
+                store(variable, Valor(valor1) > Valor(valor2))
+            
+            elif op == LESS_THAN_EQUAL:
+                store(variable, Valor(valor1) <= Valor(valor2))
+                
+            elif op == GREATER_THAN_EQUAL:
+                store(variable, Valor(valor1) >= Valor(valor2))         
+                    
+            elif op == CANVAS_SIZE:
+                screen.setup(Valor(valor1), Valor(valor2))
+            
+            elif op == CANVAS_COLOR:
+                translatedcolor = translateColor(Valor(valor1))
+                #valor1 es el color en string, pero esta en espanol, cambiar a ingles
+                screen.bgcolor(translatedcolor)
+            
+            elif op == FORWARD:
+                tortuga.forward(Valor(valor1))
+                
+            elif op == BACKWARD:
+                tortuga.backward(Valor(valor1))
+            
+            elif op == LEFT:
+                tortuga.left(Valor(valor1))
+            
+            elif op == RIGHT:
+                tortuga.right(Valor(valor1))
+     
+            elif op == READ:
+                aux = input()
+                if variable.tipo == "texto":
                     store(variable, aux)
-                except ValueError:
+                elif variable.tipo == "boleano":
+                    if aux == 'verdadero':
+                        aux = True
+                    else:
+                        aux = False
+                    store(variable, aux)
+                else:
                     try:
-                        aux = float(s)
+                        aux = int(aux)
                         store(variable, aux)
-                    except:
-                        print("Error: se esperaba un ", variable.tipo)
-                        sys.exit(0)
+                    except ValueError:
+                        try:
+                            aux = float(s)
+                            store(variable, aux)
+                        except:
+                            print("Error: se esperaba un ", variable.tipo)
+                            sys.exit(0)
+                
+            elif op == WRITE:
+                tortuga.write(Valor(valor1),True)
             
-        elif op == WRITE:
-            tortuga.write(Valor(valor1),True)
-        
-        elif op == PRINT:
-            print(Valor(valor1))
-        
-        elif op == PENUP:
-            tortuga.penup()
-        
-        elif op == PENDOWN:
-            tortuga.pendown()
+            elif op == PRINT:
+                print(Valor(valor1))
             
-        elif op == COLOR_CHANGE:
-            translatedcolor = translateColor(Valor(valor1))
-            tortuga.pencolor(translatedcolor)
+            elif op == PENUP:
+                tortuga.penup()
             
-        elif op == CHECK_BOUNDS:
-            v1 = Valor(valor1)
-            v2 = Valor(valor2)
-            if v1 >= v2:
-                print("Error: intentando acceder al indice", v1, ": el arreglo es de solo", v2, "elementos.")
-                sys.exit(0)
-        
-        i += 1
+            elif op == PENDOWN:
+                tortuga.pendown()
+                
+            elif op == COLOR_CHANGE:
+                translatedcolor = translateColor(Valor(valor1))
+                tortuga.pencolor(translatedcolor)
+                
+            elif op == CHECK_BOUNDS:
+                v1 = Valor(valor1)
+                v2 = Valor(valor2)
+                if v1 >= v2:
+                    print("Error: intentando acceder al indice", v1, ": el arreglo es de solo", v2, "elementos.")
+                    sys.exit(0)
+
+            elif op == ERA:
+                nextContext = ([], [])
+            
+            elif op == PARAM:
+                nextContext[0].append(Valor(valor1))
+            
+            elif op == RETURN:
+                store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
+                
+            i += 1
+            
         c = listaCuadruplos[i]
         op = c[0]
+            
 
     screen.mainloop()
     

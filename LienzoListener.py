@@ -13,6 +13,8 @@ import VM
 
 namespaceTable = NamespaceTable()
 currentFunctionName = ""
+currentTipoFunc = ""
+hasReturn = False
 
 memoryregisters = MemoryRegisters()
 cuadruplos = Cuadruplos()
@@ -59,7 +61,7 @@ cubo[TEXTO]['|'] = defaultdict(lambda: None, {})
 # Numero
 cubo[NUMERO]['+'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['-'] = defaultdict(lambda: None, {NUMERO : NUMERO})
-cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO})
+cubo[NUMERO]['*'] = defaultdict(lambda: None, {NUMERO : NUMERO, TEXTO : TEXTO})
 cubo[NUMERO]['/'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['%'] = defaultdict(lambda: None, {NUMERO : NUMERO})
 cubo[NUMERO]['<'] = defaultdict(lambda: None, {NUMERO : BOLEANO})
@@ -198,6 +200,15 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#instruccion_aux.
     def exitInstruccion_aux(self, ctx:LienzoParser.Instruccion_auxContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#regresar.
+    def enterRegresar(self, ctx:LienzoParser.RegresarContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#regresar.
+    def exitRegresar(self, ctx:LienzoParser.RegresarContext):
         pass
 
 
