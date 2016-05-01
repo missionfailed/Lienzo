@@ -1,22 +1,12 @@
-numero n = 4;
-numero p = 5;
-boleano perro = verdadero;
-
-tamano de lienzo = 1*2*3 por 3*4*5;
-color de lienzo = rojo;
-
-numero h() {
-    numero y = 3;
-    texto hola = "HOLA";
-    regresar y;
+nada triplicar(numero modificable x) {
+    x = x * 3;
 }
 
-numero wow(numero a) {
-    texto hola = "bye";
-    numero y = 4;
-    mover adelante y;
-    regresar a;
+nada main() {
+    numero p = 2;
+    imprimir p;
+    triplicar(p);
+    imprimir(p);
 }
 
-imprimir "el programa inicia aqui";
-escribir n + wow(p);
+main();

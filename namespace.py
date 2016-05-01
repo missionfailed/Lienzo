@@ -168,6 +168,9 @@ class NamespaceTable:
     def getParameterAmount(self,nameOfFunction):
         return len(self.tabla[nameOfFunction].parameters)
     
+    def parameterReference(self, nameOfFunction, k):
+        return self.tabla[nameOfFunction].parameters[k].reference
+    
     """Metodo que checa si los argumentos concuerdan"""
     def argumentAgree(self, nameOfFunction, argumentPos, argumentName, argumentType):
         pattern = re.compile("[A-Za-z]+$")

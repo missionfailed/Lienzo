@@ -1673,7 +1673,7 @@ class LienzoParser ( Parser ):
             self.state = 223
             localctx._ID = self.match(LienzoParser.ID)
 
-            idcontent=memoryregisters.getMemoryRegister((None if localctx._ID is None else localctx._ID.text),currentFunctionName)
+            idcontent = memoryregisters.getMemoryRegister((None if localctx._ID is None else localctx._ID.text), currentFunctionName)
             cuadruplos.addCuadruplo(currentFunctionName, READ, None, None, idcontent)
 
         except RecognitionException as re:
@@ -2513,7 +2513,7 @@ class LienzoParser ( Parser ):
                 localctx.ss_exp1 = self.ss_expresion()
 
                 if namespaceTable.argumentAgree((None if localctx._ID is None else localctx._ID.text), k, (None if localctx.ss_exp1 is None else self._input.getText((localctx.ss_exp1.start,localctx.ss_exp1.stop))), localctx.ss_exp1.type):
-                    cuadruplos.addCuadruplo(currentFunctionName, PARAM, localctx.ss_exp1.valor, None, None, False)
+                    cuadruplos.addCuadruplo(currentFunctionName, PARAM, localctx.ss_exp1.valor, namespaceTable.parameterReference((None if localctx._ID is None else localctx._ID.text), k), None, False)
                 else:
                     error((None if localctx.ss_exp1 is None else localctx.ss_exp1.start).line, ": argumento #" + k + "no concuerda con el parametro esperado")
                 k += 1
@@ -2528,7 +2528,7 @@ class LienzoParser ( Parser ):
                     localctx.ss_exp2 = self.ss_expresion()
 
                     if namespaceTable.argumentAgree((None if localctx._ID is None else localctx._ID.text), k, (None if localctx.ss_exp2 is None else self._input.getText((localctx.ss_exp2.start,localctx.ss_exp2.stop))), localctx.ss_exp2.type):
-                        cuadruplos.addCuadruplo(currentFunctionName, PARAM, localctx.ss_exp2.valor, None, None, False)
+                        cuadruplos.addCuadruplo(currentFunctionName, PARAM, localctx.ss_exp2.valor, namespaceTable.parameterReference((None if localctx._ID is None else localctx._ID.text), k), None, False)
                     else:
                         error((None if localctx.ss_exp1 is None else localctx.ss_exp1.start).line, ": argumento #" + k + "no concuerda con el parametro esperado")
                     k += 1

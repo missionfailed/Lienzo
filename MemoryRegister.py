@@ -19,6 +19,11 @@ class MemoryRegisters:
             self.nextLocalCounter[nameOfFunction] += 1
         self.registers[nameOfFunction][nameOfVariable] = register
         return register
+    
+    def createRefRegister(self, nameOfVariable, typeOfVariable, nameOfFunction):
+        self.registers[nameOfFunction][nameOfVariable] = RefRegister(self.nextLocalCounter[nameOfFunction], typeOfVariable)
+        self.nextLocalCounter[nameOfFunction] += 1
+        return self.registers[nameOfFunction][nameOfVariable]
         
     def createMemoryRegisterForArray(self, nameOfArray, typeOfArray, length, nameOfFunction):
         registers = []
@@ -44,6 +49,14 @@ class MemoryRegisters:
         else:
             return (self.registers[""][nameOfArray], index)
 
+class RefRegister:
+    def __init__(self, next, tipo=None):
+        self.counter = next
+        self.type = tipo
+    
+    def __repr__(self):
+        return 'lr' + str(self.counter)
+            
 class TemporalRegister:
     
     nextCounter = {}
@@ -60,7 +73,7 @@ class TemporalRegister:
 class GlobalRegister():
     c = 0
     
-    def __init__(self, tipo=None):
+    def __init__(self, tipo = None):
         self.counter = GlobalRegister.c
         self.tipo = tipo
         GlobalRegister.c += 1
@@ -70,7 +83,7 @@ class GlobalRegister():
         
 class LocalRegister():
     
-    def __init__(self, next, tipo=None):
+    def __init__(self, next, tipo = None):
         self.counter = next
         self.type = tipo
     

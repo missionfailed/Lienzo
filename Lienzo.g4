@@ -268,7 +268,7 @@ llamadaFuncionPredefinida:
 lectura:
     LEER ID
 {
-idcontent=memoryregisters.getMemoryRegister($ID.text,currentFunctionName)
+idcontent = memoryregisters.getMemoryRegister($ID.text, currentFunctionName)
 cuadruplos.addCuadruplo(currentFunctionName, READ, None, None, idcontent)
 }
     ;
@@ -431,7 +431,7 @@ k = 0
     (ss_exp1=ss_expresion
 {
 if namespaceTable.argumentAgree($ID.text, k, $ss_exp1.text, $ss_exp1.type):
-    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp1.valor, None, None, False)
+    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp1.valor, namespaceTable.parameterReference($ID.text, k), None, False)
 else:
     error($ss_exp1.start.line, ": argumento #" + k + "no concuerda con el parametro esperado")
 k += 1
@@ -440,7 +440,7 @@ k += 1
     (',' ss_exp2=ss_expresion
 {
 if namespaceTable.argumentAgree($ID.text, k, $ss_exp2.text, $ss_exp2.type):
-    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp2.valor, None, None, False)
+    cuadruplos.addCuadruplo(currentFunctionName, PARAM, $ss_exp2.valor, namespaceTable.parameterReference($ID.text, k), None, False)
 else:
     error($ss_exp1.start.line, ": argumento #" + k + "no concuerda con el parametro esperado")
 k += 1

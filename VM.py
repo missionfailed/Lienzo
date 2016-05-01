@@ -55,14 +55,17 @@ def store(variable, respuesta):
         if Tipo(variable) == LOCAL_REGISTER:
             while len(pila[current][LOCALS]) <= variable.counter:
                 pila[current][LOCALS].append(None)
-            pila[current][LOCALS][variable.counter] = respuesta
+            registro = pila[current][LOCALS][variable.counter]
+            if isinstance(registro, tuple) and isinstance(registro[0], int):
+                pila[registro[0]][0][registro[1]] = respuesta
+            else:
+                pila[current][LOCALS][variable.counter] = respuesta
         elif Tipo(variable) == TEMPORAL_REGISTER:
             while len(pila[current][TEMPORALS]) <= variable.counter:
                 pila[current][TEMPORALS].append(None)          
             pila[current][TEMPORALS][variable.counter] = respuesta
 
 def executeVM(dirProc, listaCuadruplos):
-
     global pila
     
     functionRegisters = []
@@ -72,15 +75,12 @@ def executeVM(dirProc, listaCuadruplos):
     screen = turtle.Screen()
     tortuga = turtle.Turtle()
     
-    #for i, c in enumerate(listaCuadruplos):
-    #    print(i, c)
-    
     i = 0
     c = listaCuadruplos[i]
     op = c[0]
     while op != END:
         
-        #print (i,c)
+        #print(i, c)
         valor1 = c[1]
         valor2 = c[2]
         variable = c[3]
@@ -220,7 +220,12 @@ def executeVM(dirProc, listaCuadruplos):
                 nextContext = ([], [])
             
             elif op == PARAM:
-                nextContext[0].append(Valor(valor1))
+                if not valor2:
+                    nextContext[0].append(Valor(valor1))
+                elif Tipo(valor1) == LOCAL_REGISTER:
+                    nextContext[0].append((len(pila)-1, valor1.counter, Valor(valor1)))
+                else:
+                    nextContext[0].append((0, valor1.counter, Valor(valor1)))
             
             elif op == RETURN:
                 store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
@@ -249,6 +254,8 @@ def Tipo(valor1):
         return GLOBAL_REGISTER
     elif isinstance(valor1, LocalRegister):
         return LOCAL_REGISTER
+    #elif isinstance(valor1, tuple) and isinstance(valor1[0], int):
+    #    return Tipo(valor1[2])
     else:
         return Tipo(valor1[0][Valor(valor1[1])])
 
@@ -261,10 +268,14 @@ def Valor(valor1):
         aux = Tipo(valor1)
         if aux == GLOBAL_REGISTER:
             return pila[GLOBAL][GLOBALS][valor1.counter]
-        else:   
+        else:
             current = len(pila) - 1
             if aux == LOCAL_REGISTER:
-                return pila[current][LOCALS][valor1.counter]
+                registro = pila[current][LOCALS][valor1.counter]
+                if isinstance(registro, tuple) and isinstance(registro[0], int):
+                    return registro[2]
+                else:
+                    return registro
             elif aux == TEMPORAL_REGISTER:
                 return pila[current][TEMPORALS][valor1.counter]
             else:
