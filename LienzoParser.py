@@ -1489,6 +1489,7 @@ class LienzoParser ( Parser ):
             elif localctx._ss_expresion.type != currentTipoFunc:
                 error((0 if localctx._REGRESAR is None else localctx._REGRESAR.line), "Funcion " + currentFunctionName + " tiene valor de retorno de tipo incorrecto. Se esperaba un " + currentTipoFunc)
             else:
+                
                 cuadruplos.addCuadruplo(currentFunctionName, RETURN, localctx._ss_expresion.valor, None, None, False)
                 cuadruplos.addCuadruplo(currentFunctionName, RET, None, None, None, False)
 
@@ -2965,7 +2966,7 @@ class LienzoParser ( Parser ):
                 localctx.type = NUMERO
 
                 if (None if localctx.neg is None else localctx.neg.text):
-                    localctx.valor = cuadruplos.addCuadruplo(currentFunctionName, (None if localctx.neg is None else localctx.neg.text), num((None if localctx.n is None else localctx.n.text)), None)
+                    localctx.valor = cuadruplos.addCuadruplo(currentFunctionName, MINUS, 0, num((None if localctx.n is None else localctx.n.text)))
                     namespaceTable.addTemporal(currentFunctionName, localctx.type)
                 else:
                     localctx.valor = num((None if localctx.n is None else localctx.n.text))

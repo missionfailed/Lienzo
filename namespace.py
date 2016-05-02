@@ -141,7 +141,10 @@ class NamespaceTable:
             return False;
      
     def getArrayLength(self, nameOfArray, nameOfFunction):
-        return self.tabla[nameOfFunction].getArrayLength(nameOfArray)
+        answer = self.tabla[nameOfFunction].getArrayLength(nameOfArray)
+        if answer == 0:
+            answer = self.tabla[""].getArrayLength(nameOfArray)
+        return answer
         
     """Regresa true si la variable ya fue declarada (si ya existe dentro de la tabla de variables en el ambito de la funcion dada)"""
     def idAlreadyTaken(self, nameOfVariable, nameOfFunction):

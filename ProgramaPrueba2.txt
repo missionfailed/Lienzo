@@ -1,13 +1,42 @@
-numero fibonacci(numero i) {
+numero fibonacciIterativo(numero x) {
+    
+    numero[100] aux;
+    numero i = 2;
+    
+    aux[0] = 1;
+    aux[1] = 1;
+    
+    mientras que (i <= x) {
+        aux[i] = aux[i - 1] + aux[i - 2];
+        i = i + 1;
+    }
+    regresar aux[x];
+}
+
+numero factorialIterativo(numero x) {
+    numero acum = 1;
+    numero i = 2;
+    
+    mientras que (i <= x) {
+        acum = acum * i;
+        i = i + 1;
+    }
+    regresar acum;
+}
+
+numero fibonacciRecursivo(numero i) {
     si i < 2
         regresar 1;
-    regresar fibonacci(i - 1) + fibonacci(i - 2);
+    regresar fibonacciRecursivo(i - 1) + fibonacciRecursivo(i - 2);
 }
 
-numero factorial(numero k) {
+numero factorialRecursivo(numero k) {
     si k < 2
         regresar 1;
-    regresar k * factorial(k - 1);
+    regresar k * factorialRecursivo(k - 1);
 }
 
-imprimir factorial(4);
+imprimir fibonacciRecursivo(8);
+imprimir factorialRecursivo(6);
+imprimir fibonacciIterativo(8);
+imprimir factorialIterativo(6);

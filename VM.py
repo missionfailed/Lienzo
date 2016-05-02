@@ -46,7 +46,7 @@ def translateColor(color):
 def store(variable, respuesta):
     if isinstance(variable, tuple):
         store(variable[0][Valor(variable[1])], respuesta)
-    if Tipo(variable) == GLOBAL_REGISTER:
+    elif Tipo(variable) == GLOBAL_REGISTER:
         while len(pila[GLOBAL][GLOBALS]) <= variable.counter:
             pila[GLOBAL][GLOBALS].append(None)
         pila[GLOBAL][GLOBALS][variable.counter] = respuesta
@@ -81,7 +81,6 @@ def executeVM(dirProc, listaCuadruplos):
     op = c[0]
     while op != END:
         
-        #print(i, c)
         valor1 = c[1]
         valor2 = c[2]
         variable = c[3]
@@ -115,6 +114,7 @@ def executeVM(dirProc, listaCuadruplos):
 
             elif op == MINUS:
                 store(variable, Valor(valor1) - Valor(valor2))
+               
 
             elif op == TIMES:
                 store(variable, Valor(valor1) * Valor(valor2))
@@ -232,9 +232,9 @@ def executeVM(dirProc, listaCuadruplos):
                 store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
                 
             i += 1
-            
         c = listaCuadruplos[i]
         op = c[0]
+        #input()
             
 
     screen.mainloop()

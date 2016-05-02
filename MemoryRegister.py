@@ -31,7 +31,7 @@ class MemoryRegisters:
             for i in range(0, length):
                 registers.append(GlobalRegister(typeOfArray))
         else:
-            for i in range(0, len):
+            for i in range(0, length):
                 registers.append(LocalRegister(self.nextLocalCounter[nameOfFunction], typeOfArray))
                 self.nextLocalCounter[nameOfFunction] += 1
         self.registers[nameOfFunction][nameOfArray] = registers

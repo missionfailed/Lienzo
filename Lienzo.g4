@@ -249,6 +249,7 @@ if currentTipoFunc == "nada":
 elif $ss_expresion.type != currentTipoFunc:
     error($REGRESAR.line, "Funcion " + currentFunctionName + " tiene valor de retorno de tipo incorrecto. Se esperaba un " + currentTipoFunc)
 else:
+    
     cuadruplos.addCuadruplo(currentFunctionName, RETURN, $ss_expresion.valor, None, None, False)
     cuadruplos.addCuadruplo(currentFunctionName, RET, None, None, None, False)
 }
@@ -553,7 +554,7 @@ else:
 $type = NUMERO
 
 if $neg.text:
-    $valor = cuadruplos.addCuadruplo(currentFunctionName, $neg.text, num($n.text), None)
+    $valor = cuadruplos.addCuadruplo(currentFunctionName, MINUS, 0, num($n.text))
     namespaceTable.addTemporal(currentFunctionName, $type)
 else:
     $valor = num($n.text)

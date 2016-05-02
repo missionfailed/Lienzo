@@ -1,15 +1,56 @@
-nada sixtiplicar(numero modificable x) {
-    x = x * 3;
-    x = x * 2;
+numero[10] arreglo;
+
+nada imprimirArreglo() {
+    numero i = 0;
+    mientras que (i < 10) {
+        imprimir arreglo[i];
+        i = i + 1;
+    }
+    imprimir "";
 }
 
-nada main() {
-    numero p = 2;
-    imprimir p;
-    sixtiplicar(p);
-    imprimir(p);
-    sixtiplicar(p);
-    imprimir(p);
+nada llenarArreglo() {
+    numero i = 0;
+    mientras que (i < 10) {
+        arreglo[i] = 10 - i;
+        i = i + 1;
+    }
 }
 
-main();
+nada ordenarArreglo() {
+    numero i = 0;
+    numero j = 1;
+    numero temp = 0;
+    
+    mientras que (i < 10) {
+        j = i + 1;
+        mientras que (j < 10) {
+            si (arreglo[i] > arreglo[j]) {
+                temp = arreglo[i];
+                arreglo[i] = arreglo[j];
+                arreglo[j] = temp;
+            }
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+}
+
+numero buscar(numero x) {
+    numero i = 0;
+    boleano encontrado = falso;
+    mientras que (!encontrado & i < 10) {
+        si (arreglo[i] == x) {
+            regresar i;
+        }
+        i = i + 1;
+    }
+    regresar -1;
+}
+
+llenarArreglo();
+imprimirArreglo();
+ordenarArreglo();
+imprimirArreglo();
+imprimir(buscar(5));
+imprimir(buscar(11));
