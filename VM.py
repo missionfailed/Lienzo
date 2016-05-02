@@ -56,8 +56,9 @@ def store(variable, respuesta):
             while len(pila[current][LOCALS]) <= variable.counter:
                 pila[current][LOCALS].append(None)
             registro = pila[current][LOCALS][variable.counter]
-            if isinstance(registro, tuple) and isinstance(registro[0], int):
+            if isinstance(registro, list) and isinstance(registro[0], int):
                 pila[registro[0]][0][registro[1]] = respuesta
+                pila[current][LOCALS][variable.counter][2] = respuesta
             else:
                 pila[current][LOCALS][variable.counter] = respuesta
         elif Tipo(variable) == TEMPORAL_REGISTER:
@@ -223,9 +224,9 @@ def executeVM(dirProc, listaCuadruplos):
                 if not valor2:
                     nextContext[0].append(Valor(valor1))
                 elif Tipo(valor1) == LOCAL_REGISTER:
-                    nextContext[0].append((len(pila)-1, valor1.counter, Valor(valor1)))
+                    nextContext[0].append([len(pila)-1, valor1.counter, Valor(valor1), valor1])
                 else:
-                    nextContext[0].append((0, valor1.counter, Valor(valor1)))
+                    nextContext[0].append([0, valor1.counter, Valor(valor1), valor1])
             
             elif op == RETURN:
                 store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
@@ -254,8 +255,8 @@ def Tipo(valor1):
         return GLOBAL_REGISTER
     elif isinstance(valor1, LocalRegister):
         return LOCAL_REGISTER
-    #elif isinstance(valor1, tuple) and isinstance(valor1[0], int):
-    #    return Tipo(valor1[2])
+    elif isinstance(valor1, list) and isinstance(valor1[0], int):
+        return Tipo(valor1[3])
     else:
         return Tipo(valor1[0][Valor(valor1[1])])
 
@@ -272,7 +273,7 @@ def Valor(valor1):
             current = len(pila) - 1
             if aux == LOCAL_REGISTER:
                 registro = pila[current][LOCALS][valor1.counter]
-                if isinstance(registro, tuple) and isinstance(registro[0], int):
+                if isinstance(registro, list) and isinstance(registro[0], int):
                     return registro[2]
                 else:
                     return registro

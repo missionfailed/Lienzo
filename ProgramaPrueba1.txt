@@ -1,11 +1,14 @@
-nada triplicar(numero modificable x) {
+nada sixtiplicar(numero modificable x) {
     x = x * 3;
+    x = x * 2;
 }
 
 nada main() {
     numero p = 2;
     imprimir p;
-    triplicar(p);
+    sixtiplicar(p);
+    imprimir(p);
+    sixtiplicar(p);
     imprimir(p);
 }
 

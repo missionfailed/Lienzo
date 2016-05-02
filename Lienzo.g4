@@ -9,6 +9,7 @@ from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
 from cuadruplos import *
+import sys
 import VM
 
 namespaceTable = NamespaceTable()
@@ -81,6 +82,7 @@ def num(s):
 
 def error(linea, mensaje):
     print("Error: linea", linea, ":", mensaje)
+    sys.exit(0)
 }
 
 program:
@@ -417,7 +419,7 @@ llamadaFuncion returns [valor,type]:
 {
 functionType = namespaceTable.getFunctionType($ID.text)
 if not functionType:
-    print("Error: linea", $ID.line, ": llamada a funcion", $ID.text, "inexistente")
+    error($ID.line, ": llamada a funcion " + $ID.text + " inexistente")
     $valor = None
 else:
     $type = None if functionType == "nada" else functionType
@@ -465,7 +467,7 @@ $valor = $s_exp1.valor
 {
 tipo = cubo[$type][$op.text][$s_exp2.type]
 if not tipo:
-    print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $s_exp2.type)
+    error(op.line, ": operador " + $op.text + " no puede ser aplicado a " + $type +" y a " + $s_exp2.type)
 else:
     namespaceTable.addTemporal(currentFunctionName, tipo)
     $valor = cuadruplos.addCuadruplo(currentFunctionName, $op.text,$valor,$s_exp2.valor)
@@ -485,7 +487,7 @@ $valor = $exp1.valor
 {
 tipo = cubo[$type][$op.text][$exp2.type]
 if not tipo:
-    print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $exp2.type)
+    error($op.line, ": operador " + $op.text + " no puede ser aplicado a " + $type + " y a " + $exp2.type)
 else:
     $valor = cuadruplos.addCuadruplo(currentFunctionName, $op.text,$valor,$exp2.valor)
     namespaceTable.addTemporal(currentFunctionName, tipo)
@@ -505,7 +507,7 @@ $valor = $term1.valor
 {
 tipo = cubo[$type][$op.text][$term2.type]
 if not tipo:
-    print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $term2.type)
+    error($op.line, ": operador " + $op.text + " no puede ser aplicado a " + $type + " y a " + $term2.type)
 else:
     $valor = cuadruplos.addCuadruplo(currentFunctionName, $op.text,$valor,$term2.valor)
     namespaceTable.addTemporal(currentFunctionName, tipo)
@@ -524,7 +526,7 @@ $valor = $factor1.valor
 {
 tipo = cubo[$type][$op.text][$factor2.type]
 if not tipo:
-    print("Error: linea", $op.line, ": operador", $op.text, "no puede ser aplicado a", $type, "y a", $factor2.type)
+    error($op.line, ": operador " + $op.text + " no puede ser aplicado a " + $type + " y a " + $factor2.type)
 else:
     $valor = cuadruplos.addCuadruplo(currentFunctionName, $op.text,$valor,$factor2.valor)
     namespaceTable.addTemporal(currentFunctionName, tipo)

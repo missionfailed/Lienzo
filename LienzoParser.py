@@ -8,6 +8,7 @@ from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
 from cuadruplos import *
+import sys
 import VM
 
 namespaceTable = NamespaceTable()
@@ -80,6 +81,7 @@ def num(s):
 
 def error(linea, mensaje):
     print("Error: linea", linea, ":", mensaje)
+    sys.exit(0)
 
 def serializedATN():
     with StringIO() as buf:
@@ -2494,7 +2496,7 @@ class LienzoParser ( Parser ):
 
             functionType = namespaceTable.getFunctionType((None if localctx._ID is None else localctx._ID.text))
             if not functionType:
-                print("Error: linea", (0 if localctx._ID is None else localctx._ID.line), ": llamada a funcion", (None if localctx._ID is None else localctx._ID.text), "inexistente")
+                error((0 if localctx._ID is None else localctx._ID.line), ": llamada a funcion " + (None if localctx._ID is None else localctx._ID.text) + " inexistente")
                 localctx.valor = None
             else:
                 localctx.type = None if functionType == "nada" else functionType
@@ -2617,7 +2619,7 @@ class LienzoParser ( Parser ):
 
                 tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.s_exp2.type]
                 if not tipo:
-                    print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.s_exp2.type)
+                    error(op.line, ": operador " + (None if localctx.op is None else localctx.op.text) + " no puede ser aplicado a " + localctx.type +" y a " + localctx.s_exp2.type)
                 else:
                     namespaceTable.addTemporal(currentFunctionName, tipo)
                     localctx.valor = cuadruplos.addCuadruplo(currentFunctionName, (None if localctx.op is None else localctx.op.text),localctx.valor,localctx.s_exp2.valor)
@@ -2696,7 +2698,7 @@ class LienzoParser ( Parser ):
 
                 tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.exp2.type]
                 if not tipo:
-                    print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.exp2.type)
+                    error((0 if localctx.op is None else localctx.op.line), ": operador " + (None if localctx.op is None else localctx.op.text) + " no puede ser aplicado a " + localctx.type + " y a " + localctx.exp2.type)
                 else:
                     localctx.valor = cuadruplos.addCuadruplo(currentFunctionName, (None if localctx.op is None else localctx.op.text),localctx.valor,localctx.exp2.valor)
                     namespaceTable.addTemporal(currentFunctionName, tipo)
@@ -2775,7 +2777,7 @@ class LienzoParser ( Parser ):
 
                 tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.term2.type]
                 if not tipo:
-                    print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.term2.type)
+                    error((0 if localctx.op is None else localctx.op.line), ": operador " + (None if localctx.op is None else localctx.op.text) + " no puede ser aplicado a " + localctx.type + " y a " + localctx.term2.type)
                 else:
                     localctx.valor = cuadruplos.addCuadruplo(currentFunctionName, (None if localctx.op is None else localctx.op.text),localctx.valor,localctx.term2.valor)
                     namespaceTable.addTemporal(currentFunctionName, tipo)
@@ -2854,7 +2856,7 @@ class LienzoParser ( Parser ):
 
                 tipo = cubo[localctx.type][(None if localctx.op is None else localctx.op.text)][localctx.factor2.type]
                 if not tipo:
-                    print("Error: linea", (0 if localctx.op is None else localctx.op.line), ": operador", (None if localctx.op is None else localctx.op.text), "no puede ser aplicado a", localctx.type, "y a", localctx.factor2.type)
+                    error((0 if localctx.op is None else localctx.op.line), ": operador " + (None if localctx.op is None else localctx.op.text) + " no puede ser aplicado a " + localctx.type + " y a " + localctx.factor2.type)
                 else:
                     localctx.valor = cuadruplos.addCuadruplo(currentFunctionName, (None if localctx.op is None else localctx.op.text),localctx.valor,localctx.factor2.valor)
                     namespaceTable.addTemporal(currentFunctionName, tipo)

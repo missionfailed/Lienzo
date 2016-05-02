@@ -9,6 +9,7 @@ from namespace import NamespaceTable
 from collections import defaultdict
 from MemoryRegister import MemoryRegisters
 from cuadruplos import *
+import sys
 import VM
 
 namespaceTable = NamespaceTable()
@@ -81,6 +82,7 @@ def num(s):
 
 def error(linea, mensaje):
     print("Error: linea", linea, ":", mensaje)
+    sys.exit(0)
 
 
 # This class defines a complete listener for a parse tree produced by LienzoParser.
