@@ -1,0 +1,4 @@
+'rojo' , 'verde' , 'amarillo' , 'azul' , 'blanco' , 'negro' , 'morado' , 'naranja' , 'cafe' , 'gris' , 'color' , 'lienzo' ,
+'tamano' , 'por' , 'de' , 'en' , 'mover' , 'adelante' , 'atras' , 'girar' , 'derecha' , 'izquierda' , 'levantar' ,
+'bajar' , 'pluma' , 'dibujo' , 'dormir' , 'mientras' , 'regresar', 'que' , 'si' , 'sino' , 'texto' , 'leer', 'boleano' ,
+'numero' , 'escribir' , 'imprimir' , 'nada' , 'verdadero' , 'falso' , 'modificable'
