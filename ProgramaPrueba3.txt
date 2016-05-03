@@ -1,29 +1,8 @@
-boleano x = verdadero & !falso;
-numero y = 3 * 2 * 4;
-texto p = "hola" * 3;
-numero b = 12;
-
+color de lienzo = amarillo;
 tamano de lienzo = 800 por 600;
-color de lienzo = verde;
-imprimir "teclea un numero";
-imprimir b;
 
-si (b<10)
-{
-	imprimir "if";
-}
-sino
-{
-	imprimir "else";
-}
-
-mientras que(b>5)
-{
-	b=b-1;
-	imprimir b;
-}
-
-color de pluma = morado;
+velocidad de pluma = 10;
+color de pluma = azul;
 mover adelante 100;
 girar izquierda 45;
 mover adelante 100;

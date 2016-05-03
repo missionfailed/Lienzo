@@ -36,7 +36,7 @@ numero factorialRecursivo(numero k) {
     regresar k * factorialRecursivo(k - 1);
 }
 
-imprimir fibonacciRecursivo(8);
-imprimir factorialRecursivo(6);
+imprimir fibonacciRecursivo(20);
+imprimir factorialRecursivo(10);
 imprimir fibonacciIterativo(8);
 imprimir factorialIterativo(6);

@@ -1,0 +1,10 @@
+numero i = 0;
+
+color de lienzo = rojo;
+color de pluma = blanco;
+
+mientras que (i < 20) {
+    mover adelante i * 30;
+    girar derecha 144;
+    i = i + 1;
+}

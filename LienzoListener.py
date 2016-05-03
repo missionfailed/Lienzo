@@ -241,6 +241,15 @@ class LienzoListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LienzoParser#imprimir_no_ln.
+    def enterImprimir_no_ln(self, ctx:LienzoParser.Imprimir_no_lnContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#imprimir_no_ln.
+    def exitImprimir_no_ln(self, ctx:LienzoParser.Imprimir_no_lnContext):
+        pass
+
+
     # Enter a parse tree produced by LienzoParser#imprimir.
     def enterImprimir(self, ctx:LienzoParser.ImprimirContext):
         pass
@@ -310,6 +319,33 @@ class LienzoListener(ParseTreeListener):
 
     # Exit a parse tree produced by LienzoParser#cambio_color.
     def exitCambio_color(self, ctx:LienzoParser.Cambio_colorContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#velocidad_pluma.
+    def enterVelocidad_pluma(self, ctx:LienzoParser.Velocidad_plumaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#velocidad_pluma.
+    def exitVelocidad_pluma(self, ctx:LienzoParser.Velocidad_plumaContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#posicion_x_pluma.
+    def enterPosicion_x_pluma(self, ctx:LienzoParser.Posicion_x_plumaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#posicion_x_pluma.
+    def exitPosicion_x_pluma(self, ctx:LienzoParser.Posicion_x_plumaContext):
+        pass
+
+
+    # Enter a parse tree produced by LienzoParser#posicion_y_pluma.
+    def enterPosicion_y_pluma(self, ctx:LienzoParser.Posicion_y_plumaContext):
+        pass
+
+    # Exit a parse tree produced by LienzoParser#posicion_y_pluma.
+    def exitPosicion_y_pluma(self, ctx:LienzoParser.Posicion_y_plumaContext):
         pass
 
 

@@ -2,8 +2,10 @@ from MemoryRegister import *
 
 CANVAS_SIZE = "CANVAS_SIZE"
 CANVAS_COLOR = "CANVAS_COLOR"
+SETSPEED = "SET_SPEED"
 READ = "READ"
 WRITE = "WRITE"
+PRINTLN = "PRINTLN"
 PRINT = "PRINT"
 PENUP = "PENUP"
 PENDOWN = "PENDOWN"
@@ -37,6 +39,8 @@ AND = "&"
 OR = "|"
 NOT = "!"
 CHECK_BOUNDS = "CHB"
+PEN_POSX = "PEN_POSX"
+PEN_POSY = "PEN_POSY"
 END = "END"
 
 class Cuadruplos:

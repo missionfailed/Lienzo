@@ -86,7 +86,7 @@ def error(linea, mensaje):
 }
 
 program:
-	declaracion* (tamanoLienzo colorLienzo)?
+	declaracion* ((tamanoLienzo)? (colorLienzo)? | (colorLienzo)? (tamanoLienzo)?)
 {
 cuadruplos.addCuadruplo("", GOTO, None, None, None, False)
 cuadruplos.pushPilaSaltos(cuadruplos.last())
@@ -259,6 +259,7 @@ llamadaFuncionPredefinida:
     lectura
     | escritura
     | imprimir
+    | imprimir_no_ln
     | mover_adelante
     | mover_atras
     | girar_izquierda
@@ -266,6 +267,9 @@ llamadaFuncionPredefinida:
     | cambio_color
     | subir_pluma
     | bajar_pluma
+    | velocidad_pluma
+    | posicion_x_pluma
+    | posicion_y_pluma
     ;
     
 lectura:
@@ -283,13 +287,20 @@ cuadruplos.addCuadruplo(currentFunctionName, WRITE, $ss_expresion.valor, None, N
 }
 	;
     
-imprimir:
-    IMPRIMIR ss_expresion
+imprimir_no_ln:
+    IMPRIMIR SIN SALTO ss_expresion
 {
 cuadruplos.addCuadruplo(currentFunctionName, PRINT, $ss_expresion.valor, None, None, False)
 }
     ;
-
+    
+imprimir:
+    IMPRIMIR ss_expresion
+{
+cuadruplos.addCuadruplo(currentFunctionName, PRINTLN, $ss_expresion.valor, None, None, False)
+}
+    ;
+    
 mover_adelante:
     MOVER ADELANTE ss_expresion
 {
@@ -336,6 +347,36 @@ cambio_color:
     COLOR DE PLUMA '=' color
 {
 cuadruplos.addCuadruplo(currentFunctionName, COLOR_CHANGE, $color.text, None, None, False)
+}
+    ;
+
+velocidad_pluma:
+    VELOCIDAD DE PLUMA '=' ss_expresion
+{
+if $ss_expresion.type == NUMERO:
+    cuadruplos.addCuadruplo(currentFunctionName, SETSPEED, $ss_expresion.valor, None, None, False)
+else:
+    error($ss_expresion.start.line, "La velocidad debe ser un numero")
+}
+    ;
+    
+posicion_x_pluma:
+    POSICION_X DE PLUMA '=' ss_expresion
+{
+if $ss_expresion.type == NUMERO:
+    cuadruplos.addCuadruplo(currentFunctionName, PEN_POSX, $ss_expresion.valor, None, None, False)
+else:
+    error($ss_expresion.start.line, "La coordenada x debe ser un numero")
+}
+    ;
+
+posicion_y_pluma:
+    POSICION_Y DE PLUMA '=' ss_expresion
+{
+if $ss_expresion.type == NUMERO:
+    cuadruplos.addCuadruplo(currentFunctionName, PEN_POSY, $ss_expresion.valor, None, None, False)
+else:
+    error($ss_expresion.start.line, "La coordenada y debe ser un numero")
 }
     ;
 
@@ -471,7 +512,7 @@ if not tipo:
     error(op.line, ": operador " + $op.text + " no puede ser aplicado a " + $type +" y a " + $s_exp2.type)
 else:
     namespaceTable.addTemporal(currentFunctionName, tipo)
-    $valor = cuadruplos.addCuadruplo(currentFunctionName, $op.text,$valor,$s_exp2.valor)
+    $valor = cuadruplos.addCuadruplo(currentFunctionName, $op.text, $valor, $s_exp2.valor)
 $type = tipo
 }
     )*
@@ -602,7 +643,9 @@ else:
 }
     ;
 
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newline
+WS : ('//' ~('\n'|'\r')* '\r'? '\n'
+        |   '/' '*' ~ '*' '/'
+        | [ \t\r\n]+) -> skip ; // skip spaces, tabs, newline
 
 ROJO : 'rojo' ;
 VERDE : 'verde' ;
@@ -615,6 +658,7 @@ NARANJA : 'naranja' ;
 CAFE : 'cafe' ;
 GRIS : 'gris' ;
 COLOR : 'color' ;
+VELOCIDAD : 'velocidad' ;
 LIENZO : 'lienzo' ;
 EQUALS : '=' ;
 TAMANO : 'tamano' ;
@@ -630,15 +674,17 @@ IZQUIERDA : 'izquierda' ;
 LEVANTAR : 'levantar' ;
 BAJAR : 'bajar' ;
 PLUMA : 'pluma' ;
-DIBUJO : 'dibujo' ;
-DORMIR : 'dormir' ;
 MIENTRAS : 'mientras' ;
 REGRESAR: 'regresar';
 QUE : 'que' ;
+SIN : 'sin' ;
+SALTO : 'salto' ;
 SI : 'si' ;
 SINO : 'sino' ;
 TEXTO : 'texto' ;
-LEER : 'leer';
+LEER : 'leer' ;
+POSICION_X : 'posicionX' ;
+POSICION_Y : 'posicionY' ;
 BOLEANO : 'boleano' ;
 NUMERO : 'numero' ;
 ESCRIBIR : 'escribir' ;

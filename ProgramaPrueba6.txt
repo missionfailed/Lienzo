@@ -1,0 +1,20 @@
+numero i = 0;
+
+color de lienzo = verde;
+
+velocidad de pluma = 10;
+color de pluma = azul;
+
+mientras que (i < 50) {
+    mover adelante 50;
+    girar izquierda 123;
+    i = i + 1;
+}
+
+color de pluma = rojo;
+i = 0;
+mientras que (i < 50) {
+    mover adelante 100;
+    girar izquierda 123;
+    i = i + 1;
+}

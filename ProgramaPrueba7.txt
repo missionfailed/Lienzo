@@ -1,0 +1,22 @@
+numero i = 0;
+
+color de lienzo = amarillo;
+
+velocidad de pluma = 0;
+
+mientras que (i < 180) {
+    mover adelante 100;
+    girar derecha 30;
+    mover adelante 20;
+    girar izquierda 60;
+    mover adelante 50;
+    girar derecha 30;
+    
+    levantar pluma;
+    posicionX de pluma = 0;
+    posicionY de pluma = 0;
+    bajar pluma;
+    
+    girar derecha 2;
+    i = i + 1;   
+}

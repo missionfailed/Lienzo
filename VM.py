@@ -72,6 +72,7 @@ def executeVM(dirProc, listaCuadruplos):
     functionRegisters = []
     nextContext = None
     jumpStack = []
+    showScreen = False
     
     screen = turtle.Screen()
     tortuga = turtle.Turtle()
@@ -115,7 +116,6 @@ def executeVM(dirProc, listaCuadruplos):
             elif op == MINUS:
                 store(variable, Valor(valor1) - Valor(valor2))
                
-
             elif op == TIMES:
                 store(variable, Valor(valor1) * Valor(valor2))
                     
@@ -151,27 +151,7 @@ def executeVM(dirProc, listaCuadruplos):
                 
             elif op == GREATER_THAN_EQUAL:
                 store(variable, Valor(valor1) >= Valor(valor2))         
-                    
-            elif op == CANVAS_SIZE:
-                screen.setup(Valor(valor1), Valor(valor2))
-            
-            elif op == CANVAS_COLOR:
-                translatedcolor = translateColor(Valor(valor1))
-                #valor1 es el color en string, pero esta en espanol, cambiar a ingles
-                screen.bgcolor(translatedcolor)
-            
-            elif op == FORWARD:
-                tortuga.forward(Valor(valor1))
-                
-            elif op == BACKWARD:
-                tortuga.backward(Valor(valor1))
-            
-            elif op == LEFT:
-                tortuga.left(Valor(valor1))
-            
-            elif op == RIGHT:
-                tortuga.right(Valor(valor1))
-     
+
             elif op == READ:
                 aux = input()
                 if variable.tipo == "texto":
@@ -197,19 +177,12 @@ def executeVM(dirProc, listaCuadruplos):
             elif op == WRITE:
                 tortuga.write(Valor(valor1),True)
             
-            elif op == PRINT:
+            elif op == PRINTLN:
                 print(Valor(valor1))
-            
-            elif op == PENUP:
-                tortuga.penup()
-            
-            elif op == PENDOWN:
-                tortuga.pendown()
                 
-            elif op == COLOR_CHANGE:
-                translatedcolor = translateColor(Valor(valor1))
-                tortuga.pencolor(translatedcolor)
-                
+            elif op == PRINT:
+                print(Valor(valor1), end="")
+            
             elif op == CHECK_BOUNDS:
                 v1 = Valor(valor1)
                 v2 = Valor(valor2)
@@ -231,13 +204,59 @@ def executeVM(dirProc, listaCuadruplos):
             elif op == RETURN:
                 store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
                 
+            else:
+                showScreen = True
+                
+                if op == CANVAS_SIZE:
+                    screen.setup(Valor(valor1), Valor(valor2))
+            
+                elif op == CANVAS_COLOR:
+                    translatedcolor = translateColor(Valor(valor1))
+                    #valor1 es el color en string, pero esta en espanol, cambiar a ingles
+                    screen.bgcolor(translatedcolor)
+                
+                elif op == FORWARD:
+                    tortuga.forward(Valor(valor1))
+                    
+                elif op == BACKWARD:
+                    tortuga.backward(Valor(valor1))
+                
+                elif op == LEFT:
+                    tortuga.left(Valor(valor1))
+                
+                elif op == RIGHT:
+                    tortuga.right(Valor(valor1))
+                
+                elif op == PENUP:
+                    tortuga.penup()
+                
+                elif op == PENDOWN:
+                    tortuga.pendown()
+                    
+                elif op == COLOR_CHANGE:
+                    translatedcolor = translateColor(Valor(valor1))
+                    tortuga.pencolor(translatedcolor)
+                
+                elif op == SETSPEED:
+                    velocidad = Valor(valor1)
+                    if 0 > velocidad or velocidad > 10:
+                        print("Error: intentando poner velocidad de", velocidad, ": la velocidad solo puede ser entre 0 y 10")
+                    tortuga.speed(velocidad)
+                
+                elif op == PEN_POSX:
+                    tortuga.setx(Valor(valor1))
+                
+                elif op == PEN_POSY:
+                    tortuga.sety(Valor(valor1))
+                
             i += 1
+            
         c = listaCuadruplos[i]
         op = c[0]
         #input()
             
-
-    screen.mainloop()
+    if showScreen:
+        screen.mainloop()
     
 
 def Tipo(valor1):
