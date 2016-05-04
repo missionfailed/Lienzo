@@ -41,8 +41,9 @@ nada ordenarArreglo() {
     }
 }
 
-// HOLA
-// BYE
+//hola
+/* bye */
+
 numero buscar(numero x) {
     numero i = 0;
     boleano encontrado = falso;

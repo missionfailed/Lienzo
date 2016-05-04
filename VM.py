@@ -94,7 +94,7 @@ def executeVM(dirProc, listaCuadruplos):
         variable = c[3]
         
         if op == GOTOF and not Valor(valor1):
-            i = Valor(variable);
+            i = Valor(variable)
 
         elif op == GOTO:
             i = Valor(variable)
@@ -113,7 +113,7 @@ def executeVM(dirProc, listaCuadruplos):
             if op == ASSIGN:
                 store(variable, Valor(valor1))
             
-            if op == ASSIGNFUNC:
+            elif op == ASSIGNFUNC:
                 functionRegisters.append(variable)
                 store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
                     
@@ -212,7 +212,8 @@ def executeVM(dirProc, listaCuadruplos):
                 store(functionRegisters[len(functionRegisters)-1], Valor(valor1))
                 
             else:
-                showScreen = True
+                if op != GOTOF:
+                    showScreen = True
                 
                 if op == CANVAS_SIZE:
                     screen.setup(Valor(valor1), Valor(valor2))

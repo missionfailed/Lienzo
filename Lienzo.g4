@@ -644,7 +644,7 @@ else:
     ;
 
 WS : ('//' ~('\n'|'\r')* '\r'? '\n'
-        |   '/' '*' ~ '*' '/'
+        |   '/*' (.)*? '*/'
         | [ \t\r\n]+) -> skip ; // skip spaces, tabs, newline
 
 ROJO : 'rojo' ;
